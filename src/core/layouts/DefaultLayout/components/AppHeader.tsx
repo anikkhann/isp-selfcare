@@ -41,10 +41,13 @@ function AppHeader() {
           alignItems: "center",
           background: "#fff",
           justifyContent: "space-between",
-          padding: "0 40px",
-          boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-          position: "fixed",
-          width: "100%"
+          padding: "0px 40px",
+          width: "100%",
+          top: 0,
+          left: 0,
+          height: "64px",
+          paddingTop: "20px",
+          marginBottom: "20px"
         }}
       >
         <LogoTitle />

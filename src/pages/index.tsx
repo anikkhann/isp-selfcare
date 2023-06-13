@@ -1,9 +1,9 @@
+import HomePage from "@/modules/pages/HomePage";
+
 const Home = () => {
   return (
     <>
-      <div className="font-bold">
-        <h1 className="text-4xl">Hello World</h1>
-      </div>
+      <HomePage />
     </>
   );
 };

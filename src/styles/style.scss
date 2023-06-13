@@ -1,0 +1,80 @@
+// sass-utils
+@import './_fonts';
+
+// vendors
+@import './_tailwind';
+@import './_antd';
+
+// base
+html,
+body {
+  padding: 0;
+  margin: 0;
+  
+}
+
+* {
+  box-sizing: border-box;
+  @apply font-hind_Siliguri;
+}
+*{
+  font-family: 'Hind Siliguri', 'Barlow', 'Noto Sans Bengali', 'Poppins', 'Roboto', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+ @import './_button';
+
+
+/* common */
+#root {
+  overflow: hidden;
+}
+
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ant-layout {
+  background: #fff;
+}
+
+.ant-btn-primary {
+  background: #27c4ff;
+  border-color: #27c4ff;
+}
+
+
+/* layout */
+.mobileHidden{
+  display: block;
+}
+
+.mobileVisible{
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .mobileVisible {
+    display: block;
+  }
+  .mobileHidden {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mobileVisible {
+    display: none;
+  }
+  .mobileHidden {
+    display: block;
+  }
+}

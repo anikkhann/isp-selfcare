@@ -1,4 +1,4 @@
-import { Button, Card, DatePicker, Form, Grid, Input, Select } from "antd";
+import { Button, Card, DatePicker, Form, Input, Select } from "antd";
 import React from "react";
 import type { SelectProps } from "antd";
 import type { DatePickerProps } from "antd";
@@ -13,12 +13,6 @@ for (let i = 10; i < 36; i++) {
 }
 
 const SearchSection: React.FC = () => {
-  const { useBreakpoint } = Grid;
-
-  const { lg } = useBreakpoint();
-
-  const marginSizes = lg ? "40px" : "10px";
-
   const handleChange = (value: string[]) => {
     console.log(`selected ${value}`);
   };
@@ -41,9 +35,7 @@ const SearchSection: React.FC = () => {
         <Card
           style={{
             display: "flex",
-            justifyContent: "center",
-            marginLeft: marginSizes,
-            marginRight: marginSizes
+            justifyContent: "center"
           }}
         >
           <Form
@@ -99,7 +91,7 @@ const SearchSection: React.FC = () => {
                 placeholder="তারিখ নির্বাচন করুন"
                 onChange={onChange}
                 style={{
-                  minWidth: "150px",
+                  minWidth: "180px",
                   margin: "10px 0px"
                 }}
               />

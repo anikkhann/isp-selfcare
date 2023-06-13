@@ -15,7 +15,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
       <Layout
-        className="layout"
+        className="layout container"
         style={{
           background: "#fff"
         }}
@@ -23,14 +23,19 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <AppHeader />
 
         <Content
-          className="min-h-fit min-w-screen"
+          className="site-layout"
           style={{
             margin: "20px 16px 15px 16px"
           }}
         >
           {children}
         </Content>
-        <Footer>
+        <Footer
+          className="container"
+          style={{
+            margin: "20px 16px 15px 16px"
+          }}
+        >
           <FooterWidget />
           <FooterCopyright />
         </Footer>

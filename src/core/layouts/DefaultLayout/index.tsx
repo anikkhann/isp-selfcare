@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Layout } from "antd";
 import AppHeader from "./components/AppHeader";
 
 import FooterWidget from "./components/footerWidget";
 import FooterCopyright from "./components/FooterCopyRight";
+import { useAppDispatch } from "@/store/hooks";
+import { getCategories } from "@/store/features/category/categorySlice";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -11,6 +13,14 @@ interface DefaultLayoutProps {
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const { Content, Footer } = Layout;
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // console.log("DefaultLayout useEffect")
+
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <>

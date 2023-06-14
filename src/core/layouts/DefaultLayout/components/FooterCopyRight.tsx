@@ -1,8 +1,11 @@
 import { FloatButton } from "antd";
+import React from "react";
 
 function FooterCopyright() {
+  const nodeRef = React.useRef(null);
+
   return (
-    <div className="footerCopyright">
+    <>
       <div className="container">
         <div
           style={{
@@ -15,8 +18,10 @@ function FooterCopyright() {
           {new Date().getFullYear()} &copy; All Rights Reserved.
         </div>
       </div>
-      <FloatButton.BackTop visibilityHeight={0} type="primary" />
-    </div>
+      <div ref={nodeRef}>
+        <FloatButton.BackTop type="primary" tooltip="Back to Top" />
+      </div>
+    </>
   );
 }
 

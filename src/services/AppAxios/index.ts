@@ -7,6 +7,7 @@ const AppAxios = axios.create({
     "Access-Control-Allow-Origin": "*"
   },
 
+  // baseURL: "http://api.sqft.test/api/v2"
   baseURL: process.env.NEXT_PUBLIC_BACKEND_URL
 });
 

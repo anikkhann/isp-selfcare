@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./features/auth/AuthSlice";
+import PlaceReducer from "./features/booking/PlaceSlice";
+import SearchReducer from "./features/booking/SearchSlice";
+import CategoryReducer from "./features/category/categorySlice";
 
 export const store = configureStore({
   reducer: {
     // reference reducers here
-    auth: AuthReducer
+    auth: AuthReducer,
+    place: PlaceReducer,
+    search: SearchReducer,
+    category: CategoryReducer
   }
 });
 

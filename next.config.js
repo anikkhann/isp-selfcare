@@ -3,8 +3,16 @@
 /** @type {import('next').NextConfig} */
 
 const path = require('path');
+const baseUrl = process.env.NEXT_PUBLIC_IMAGE_URL
 const nextConfig = {
   reactStrictMode: true,
+
+  images: {
+    domains: [
+      baseUrl
+    ],
+  },
+
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')]
   },

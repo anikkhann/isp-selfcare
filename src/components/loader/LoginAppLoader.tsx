@@ -27,8 +27,7 @@ const LoginAppLoader = () => {
         <Spin
           size="large"
           style={{
-            marginTop: 10,
-            marginBottom: 20,
+            margin: "20px auto",
             padding: "10px 20px"
           }}
         />

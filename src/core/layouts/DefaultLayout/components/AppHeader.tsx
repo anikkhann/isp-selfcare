@@ -47,9 +47,6 @@ function AppHeader() {
           top: 0,
           left: 0,
           height: "64px"
-
-          /*  paddingTop: "20px",
-           marginBottom: "20px" */
         }}
       >
         <LogoTitle />
@@ -80,6 +77,9 @@ function AppHeader() {
                 background: "#fff",
                 color: "#000",
                 width: "100%"
+              }}
+              onClick={({ key }) => {
+                router.push(key);
               }}
               items={routes}
             />
@@ -143,6 +143,10 @@ function AppHeader() {
                 background: "#fff",
                 color: "#000",
                 maxWidth: "100%"
+              }}
+              onClick={({ key }) => {
+                onClose();
+                router.push(key);
               }}
               items={routes}
             ></Menu>

@@ -1,15 +1,14 @@
 import AuthLayout from "@/core/layouts/AuthLayout";
 import AppLoader from "@/lib/AppLoader";
-import RegisterComponent from "@/modules/auth/RegisterComponent";
+import SendOtpComponent from "@/modules/auth/SendOtpComponent";
 import { useAppSelector } from "@/store/hooks";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import React, { ReactNode, useEffect, useState } from "react";
 
-const LoginPage = () => {
+const OptCheckPage = () => {
   const router = useRouter();
   const token = Cookies.get("token");
-
   const [loading, setLoading] = useState(true);
 
   const isVerified = useAppSelector(state => state.auth.isVerified);
@@ -21,7 +20,7 @@ const LoginPage = () => {
       router.replace("/");
       setLoading(false);
     } else {
-      !isVerified && SendOtp && router.replace("/otp-check");
+      isVerified && router.replace("/register");
       !SendOtp && !isVerified && router.replace("/otp");
     }
 
@@ -31,10 +30,10 @@ const LoginPage = () => {
   return (
     <>
       {loading && <AppLoader />}
-      <RegisterComponent />
+      <SendOtpComponent />
     </>
   );
 };
 
-LoginPage.getLayout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>;
-export default LoginPage;
+OptCheckPage.getLayout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>;
+export default OptCheckPage;

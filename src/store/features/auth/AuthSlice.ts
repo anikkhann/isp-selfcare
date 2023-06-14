@@ -7,6 +7,9 @@ import Cookies from "js-cookie";
 interface AuthState {
   isLoading: boolean;
   isInitialized: boolean;
+  isVerified: boolean;
+  SendOtp: boolean;
+  phone: string | null;
   isLoggedIn: boolean;
   user: object | null;
   error: any;
@@ -25,6 +28,9 @@ export const getUserInfo = createAsyncThunk("auth/getUserInfo", async () => {
 const initialState: AuthState = {
   isLoading: true,
   isInitialized: false,
+  isVerified: false,
+  SendOtp: false,
+  phone: null,
   isLoggedIn: false,
   user: null,
   error: null
@@ -42,6 +48,15 @@ const authSlice = createSlice({
     },
     setInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload;
+    },
+    setIsVerified: (state, action: PayloadAction<boolean>) => {
+      state.isVerified = action.payload;
+    },
+    setSendOtp: (state, action: PayloadAction<boolean>) => {
+      state.SendOtp = action.payload;
+    },
+    setPhone: (state, action: PayloadAction<string>) => {
+      state.phone = action.payload;
     },
 
     logout: state => {

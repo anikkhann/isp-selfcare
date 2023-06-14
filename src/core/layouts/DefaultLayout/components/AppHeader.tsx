@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import type { MenuProps } from "antd";
 import {
   // ControlOutlined,
-  LogoutOutlined,
-  MenuOutlined
   // UserOutlined
+  LogoutOutlined,
+  MenuOutlined,
+  UnorderedListOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
 import LogoTitle from "./LogoTitle";
@@ -50,22 +51,22 @@ const routes: MenuProps["items"] = [
 ];
 
 const items: MenuProps["items"] = [
-  /*  {
-     key: "1",
-     label: (
-       <Link href="/">
-         <Space>
-           <UserOutlined />
-           Profile
-         </Space>
-       </Link>
-     )
-   },
-   {
-     type: "divider"
-   }, */
   // {
-  //   key: "2",
+  //   key: "profile",
+  //   label: (
+  //     <Link href="/">
+  //       <Space>
+  //         <UserOutlined />
+  //         Profile
+  //       </Space>
+  //     </Link>
+  //   )
+  // },
+  // {
+  //   type: "divider"
+  // },
+  // {
+  //   key: "change-password",
   //   label: (
   //     <Link href="/">
   //       <Space>
@@ -75,15 +76,44 @@ const items: MenuProps["items"] = [
   //     </Link>
   //   )
   // },
-  // {
-  //   type: "divider"
-  // },
+
   {
-    key: "3",
+    type: "divider"
+  },
+  {
+    key: "booking",
+    label: (
+      <Link href="/user/booking">
+        <Space>
+          <UnorderedListOutlined />
+          বুকিং
+        </Space>
+      </Link>
+    )
+  },
+  {
+    type: "divider"
+  },
+  {
+    key: "payment",
+    label: (
+      <Link href="/user/invoice">
+        <Space>
+          <UnorderedListOutlined />
+          পেমেন্ট
+        </Space>
+      </Link>
+    )
+  },
+  {
+    type: "divider"
+  },
+  {
+    key: "logout",
     label: (
       <Space>
         <LogoutOutlined />
-        Logout
+        লগ আউট
       </Space>
     )
   },
@@ -126,7 +156,7 @@ function AppHeader() {
             label: "লগইন"
           },
           {
-            key: "/register",
+            key: "/otp",
             label: "রেজিস্টার"
           }
         ];
@@ -149,7 +179,7 @@ function AppHeader() {
   const currentPath = router.route;
 
   const handleMenuClick: MenuProps["onClick"] = e => {
-    if (e.key === "3") {
+    if (e.key === "logout") {
       setOpen(false);
       logout();
     }
@@ -246,7 +276,7 @@ function AppHeader() {
                     Login
                   </Button>
                 </Link>
-                <Link href="/register">
+                <Link href="/otp">
                   <Button type="primary" danger>
                     Register
                   </Button>
@@ -271,7 +301,7 @@ function AppHeader() {
                   <HeaderBlock className="">
                     <a onClick={e => e.preventDefault()}>
                       <Space className="rounded-full">
-                        <StyledCrUserInfoAvatar src="/assets/images/avatar/A11.jpg" />
+                        <StyledCrUserInfoAvatar src="/assets/images/avatar/profile.png" />
                       </Space>
                     </a>
                   </HeaderBlock>

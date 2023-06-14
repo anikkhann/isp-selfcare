@@ -10,9 +10,10 @@ import {
 } from "./index.styled";
 import { useRouter } from "next/router";
 import AppAxios from "@/services/AppAxios";
-import Cookies from "js-cookie";
 import LoginAppLoader from "@/components/loader/LoginAppLoader";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const RegisterComponent = () => {
   const router = useRouter();
@@ -23,17 +24,21 @@ const RegisterComponent = () => {
 
   const [errorMessage, setErrorMessage] = React.useState([]);
 
-  const { returnUrl } = router.query;
-
   const dispatch = useAppDispatch();
 
+  const MySwal = withReactContent(Swal);
+
+  const phone = useAppSelector(state => state.auth.phone);
+
   const signInUser = async (values: any) => {
-    const { email, password } = values;
+    const { name, email, password } = values;
     setLoading(true);
 
     try {
-      AppAxios.post("/api/auth/login", {
-        username: email,
+      AppAxios.post("/web-register", {
+        name: name,
+        phone: phone,
+        email: email,
         password: password
       })
         .then(async response => {
@@ -44,20 +49,21 @@ const RegisterComponent = () => {
             setErrorMessage(data.message);
             return;
           }
-
-          Cookies.set("token", data.data.access_token);
-
-          dispatch({ type: "auth/setIsLoggedIn", payload: true });
+          dispatch({ type: "auth/setIsVerified", payload: false });
+          dispatch({ type: "auth/setPhone", payload: null });
 
           setLoading(false);
-          if (returnUrl) {
-            router.replace(returnUrl as string);
-          } else {
-            router.replace("/admin");
-          }
+          MySwal.fire({
+            title: "Success",
+            text: data.message,
+            icon: "success"
+          }).then(() => {
+            router.push("/login");
+          });
         })
         .catch(err => {
           console.log(err);
+          setLoading(false);
           setShowError(true);
           setErrorMessage(err.response.data.message);
 
@@ -72,9 +78,6 @@ const RegisterComponent = () => {
       /*  setShowError(true)
        setErrorMessage(err) */
     }
-
-    console.log("Success:");
-
     return false;
   };
 
@@ -109,17 +112,30 @@ const RegisterComponent = () => {
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label="মোবাইল"
+            label="নাম"
+            name="name"
+            className="form-field"
+            rules={[
+              {
+                required: true,
+                message: "Please Enter Your Full Name!"
+              }
+            ]}
+          >
+            <Input placeholder="Please Enter Your Full Name" />
+          </Form.Item>
+          <Form.Item
+            label="Email"
             name="email"
             className="form-field"
             rules={[
               {
                 required: true,
-                message: "Please enter your mobile!"
+                message: "Please enter your email!"
               }
             ]}
           >
-            <Input placeholder="Please enter your mobile" />
+            <Input placeholder="Please enter your email" />
           </Form.Item>
 
           <Form.Item

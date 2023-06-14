@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { Alert, Button, Form, Input, Space } from "antd";
+import { Alert, Form, Input } from "antd";
 
 import {
   SignInButton,
@@ -10,17 +10,10 @@ import {
 } from "./index.styled";
 import { useRouter } from "next/router";
 import AppAxios from "@/services/AppAxios";
-import Cookies from "js-cookie";
 import LoginAppLoader from "@/components/loader/LoginAppLoader";
-import { useAppDispatch } from "@/store/hooks";
-import Link from "next/link";
-import { getUserInfo } from "@/store/features/auth/AuthSlice";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
-const LoginComponent = () => {
-  const MySwal = withReactContent(Swal);
-
+const SendOtpComponent = () => {
   const router = useRouter();
 
   const [loading, setLoading] = React.useState(false);
@@ -29,16 +22,18 @@ const LoginComponent = () => {
 
   const [errorMessage, setErrorMessage] = React.useState([]);
 
+  const phone = useAppSelector(state => state.auth.phone);
+
   const dispatch = useAppDispatch();
 
   const signInUser = async (values: any) => {
-    const { email, password } = values;
+    const { otp } = values;
     setLoading(true);
 
     try {
-      AppAxios.post("/web-login", {
-        username: email,
-        password: password
+      AppAxios.post("/web-otp-check", {
+        otp: otp,
+        phone: phone
       })
         .then(async response => {
           const { data } = response;
@@ -46,25 +41,14 @@ const LoginComponent = () => {
           if (data.success === false) {
             setShowError(true);
             setErrorMessage(data.message);
-            setLoading(false);
             return;
           }
 
-          Cookies.set("token", data.data.token);
+          dispatch({ type: "auth/setSendOtp", payload: false });
+          dispatch({ type: "auth/setIsVerified", payload: true });
 
-          dispatch({ type: "auth/setIsLoggedIn", payload: true });
-
-          dispatch(getUserInfo());
-
+          router.push("/register");
           setLoading(false);
-
-          MySwal.fire({
-            title: "Success",
-            text: data.message,
-            icon: "success"
-          }).then(() => {
-            router.push("/");
-          });
         })
         .catch(err => {
           console.log(err);
@@ -113,69 +97,34 @@ const LoginComponent = () => {
           name="basic"
           layout="vertical"
           initialValues={{
-            remember: false,
-            email: "",
-            password: ""
+            remember: true
           }}
           onFinish={signInUser}
           onFinishFailed={onFinishFailed}
         >
           <Form.Item
-            label="মোবাইল"
-            name="email"
+            label="OTP Code"
+            name="otp"
             className="form-field"
             rules={[
               {
                 required: true,
-                message: "Please enter your mobile!"
+                message: "Please enter your otp!"
               }
             ]}
           >
-            <Input placeholder="Please enter your mobile" />
-          </Form.Item>
-
-          <Form.Item
-            name="password"
-            label="পাসওয়ার্ড"
-            className="form-field"
-            rules={[
-              {
-                required: true,
-                message: "Please enter your Password!"
-              }
-            ]}
-          >
-            <Input.Password placeholder="Please enter your Password" />
+            <Input placeholder="Please enter your otp" />
           </Form.Item>
 
           <div className="form-btn-field">
-            <SignInButton type="primary" block htmlType="submit">
-              Login
+            <SignInButton type="primary" htmlType="submit">
+              Verify
             </SignInButton>
           </div>
-
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginBottom: "10px"
-            }}
-          >
-            OR
-          </div>
-
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Link href="/otp">
-              <Button type="primary" block danger>
-                Register
-              </Button>
-            </Link>
-          </Space>
         </StyledSignForm>
       </StyledSignContent>
     </StyledSign>
   );
 };
 
-export default LoginComponent;
+export default SendOtpComponent;

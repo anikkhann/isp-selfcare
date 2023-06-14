@@ -6,15 +6,9 @@ import type { DatePickerProps } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { format } from "date-fns";
 import { getPlacesList } from "@/store/features/booking/PlaceSlice";
-import dayjs from "dayjs";
-import weekday from "dayjs/plugin/weekday";
-import localeData from "dayjs/plugin/localeData";
 
 const SearchSection: React.FC = () => {
   const dispatch = useAppDispatch();
-
-  dayjs.extend(weekday);
-  dayjs.extend(localeData);
 
   const categories: SelectProps["options"] = useAppSelector(
     state => state.category.categories
@@ -23,6 +17,8 @@ const SearchSection: React.FC = () => {
   const SearchName = useAppSelector(state => state.search.name);
   const SearchLocation = useAppSelector(state => state.search.location);
   const searchDate = useAppSelector(state => state.search.date);
+
+  console.log(searchDate);
 
   useEffect(() => {
     const date = new Date();
@@ -182,11 +178,8 @@ const SearchSection: React.FC = () => {
             </Form.Item>
             <Form.Item name="date">
               <DatePicker
-                value={dayjs(searchDate, "YYYY-MM-DD")}
                 placeholder="তারিখ নির্বাচন করুন"
                 onChange={onChange}
-                defaultValue={dayjs(searchDate, "YYYY-MM-DD")}
-                format={"YYYY-MM-DD"}
                 style={{
                   minWidth: "180px",
                   margin: "10px 0px"

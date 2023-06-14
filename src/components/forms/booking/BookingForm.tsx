@@ -4,18 +4,11 @@ import React, { useEffect, useState } from "react";
 import type { DatePickerProps } from "antd";
 import type { RadioChangeEvent } from "antd";
 import { format } from "date-fns";
-import dayjs from "dayjs";
-import weekday from "dayjs/plugin/weekday";
-import localeData from "dayjs/plugin/localeData";
-
 interface ItemProps {
   item: any;
 }
 
 const BookingForm = ({ item }: ItemProps) => {
-  dayjs.extend(weekday);
-  dayjs.extend(localeData);
-
   const [value4, setValue4] = useState("Apple");
 
   const [slots, setSlots] = useState<any[]>([]);

@@ -90,6 +90,7 @@ export const StyledAuthWellAction = styled.div`
   color: white;
   font-size: ${({ theme }) => theme.font.size.base};
   width: 100%;
+  margin: 0 auto;
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.sm}px) {
     padding: 20px;
@@ -107,12 +108,13 @@ export const StyledAuthWellAction = styled.div`
 
   & h2 {
     color: white;
-    font-size: 30px;
-    font-weight: ${({ theme }) => theme.font.weight.bold};
+    font-size: 20px;
+    font-weight: 800;
   }
 
   & p {
     line-height: 1.6;
+    margin-top: 12px;
 
     &:last-child {
       margin-bottom: 0;

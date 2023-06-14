@@ -102,22 +102,23 @@ const SearchSection: React.FC = () => {
         <Card
           style={{
             display: "flex",
-            justifyContent: "center"
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            margin: "0 auto"
           }}
         >
           <Form
             layout="inline"
             // labelCol={{ span: 16 }}
             // wrapperCol={{ span: 24 }}
-            style={
-              {
-                // maxWidth: "100%",
-                /* margin: "0",
+            style={{
               display: "flex",
               justifyContent: "center",
-              alignItems: "center" */
-              }
-            }
+              alignItems: "center",
+              width: "100%",
+              margin: "0 auto"
+            }}
             initialValues={{ remember: true }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
@@ -126,21 +127,19 @@ const SearchSection: React.FC = () => {
             <Form.Item
               name="category"
               rules={[{ required: true, message: "Please select category!" }]}
-              style={
-                {
-                  /*  minWidth: "150px",
-                 margin: "10px 0px",
-                 display: "flex",
-                 justifyContent: "center", */
-                }
-              }
+              style={{
+                minWidth: 180,
+                margin: "20px",
+
+                display: "flex",
+                justifyContent: "center"
+              }}
             >
               <Select
                 allowClear
                 style={{
                   width: 180,
-                  minWidth: 180,
-                  margin: "10px 0px"
+                  minWidth: 180
                 }}
                 placeholder="Please Select Category"
                 onChange={handleChange}
@@ -150,39 +149,54 @@ const SearchSection: React.FC = () => {
             <Form.Item
               name="name"
               style={{
-                minWidth: "150px",
-                margin: "10px 0px",
+                minWidth: 180,
+                margin: "20px",
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                alignItems: "center"
               }}
             >
               <Input
                 placeholder="Search by name"
                 style={{
-                  width: 180,
-                  minWidth: 180,
-                  margin: "0px 10px"
+                  minWidth: 180
                 }}
                 value={SearchName}
               />
             </Form.Item>
-            <Form.Item name="location">
+            <Form.Item
+              name="location"
+              style={{
+                minWidth: 180,
+                margin: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
               <Input
                 placeholder="Search by location"
                 style={{
-                  minWidth: "150px",
-                  margin: "10px 0px"
+                  minWidth: 180
                 }}
                 value={SearchLocation}
               />
             </Form.Item>
-            <Form.Item name="date">
+            <Form.Item
+              name="date"
+              style={{
+                minWidth: 180,
+                margin: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
               <DatePicker
                 placeholder="তারিখ নির্বাচন করুন"
                 onChange={onChange}
                 style={{
-                  minWidth: "180px",
-                  margin: "10px 0px"
+                  minWidth: 180
                 }}
               />
             </Form.Item>
@@ -192,7 +206,7 @@ const SearchSection: React.FC = () => {
                 htmlType="submit"
                 danger
                 style={{
-                  minWidth: "150px",
+                  minWidth: 180,
                   margin: "10px 0px"
                 }}
               >

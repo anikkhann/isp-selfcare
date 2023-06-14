@@ -2,22 +2,25 @@ import React, { useEffect } from "react";
 import { Layout } from "antd";
 import AppHeader from "./components/AppHeader";
 
-import FooterWidget from "./components/footerWidget";
-import FooterCopyright from "./components/FooterCopyRight";
 import { useAppDispatch } from "@/store/hooks";
 import { getCategories } from "@/store/features/category/categorySlice";
+import AppFooter from "./AppFooter";
+import Cookies from "js-cookie";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
 }
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
-  const { Content, Footer } = Layout;
+  const { Content } = Layout;
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // console.log("DefaultLayout useEffect")
+    const token = Cookies.get("token");
+    if (token) {
+      dispatch({ type: "auth/setIsLoggedIn", payload: true });
+    }
 
     dispatch(getCategories());
   }, [dispatch]);
@@ -40,15 +43,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         >
           {children}
         </Content>
-        <Footer
-          className="container"
-          style={{
-            margin: "20px 16px 15px 16px"
-          }}
-        >
-          <FooterWidget />
-          <FooterCopyright />
-        </Footer>
+        <AppFooter />
       </Layout>
     </>
   );

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { Alert, Button, Form, Input, Space } from "antd";
+import { Alert, Form, Input } from "antd";
 
 import {
   SignInButton,
@@ -13,14 +13,8 @@ import AppAxios from "@/services/AppAxios";
 import Cookies from "js-cookie";
 import LoginAppLoader from "@/components/loader/LoginAppLoader";
 import { useAppDispatch } from "@/store/hooks";
-import Link from "next/link";
-import { getUserInfo } from "@/store/features/auth/AuthSlice";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
-const LoginComponent = () => {
-  const MySwal = withReactContent(Swal);
-
+const RegisterComponent = () => {
   const router = useRouter();
 
   const [loading, setLoading] = React.useState(false);
@@ -29,6 +23,8 @@ const LoginComponent = () => {
 
   const [errorMessage, setErrorMessage] = React.useState([]);
 
+  const { returnUrl } = router.query;
+
   const dispatch = useAppDispatch();
 
   const signInUser = async (values: any) => {
@@ -36,7 +32,7 @@ const LoginComponent = () => {
     setLoading(true);
 
     try {
-      AppAxios.post("/web-login", {
+      AppAxios.post("/api/auth/login", {
         username: email,
         password: password
       })
@@ -46,29 +42,22 @@ const LoginComponent = () => {
           if (data.success === false) {
             setShowError(true);
             setErrorMessage(data.message);
-            setLoading(false);
             return;
           }
 
-          Cookies.set("token", data.data.token);
+          Cookies.set("token", data.data.access_token);
 
           dispatch({ type: "auth/setIsLoggedIn", payload: true });
 
-          dispatch(getUserInfo());
-
           setLoading(false);
-
-          MySwal.fire({
-            title: "Success",
-            text: data.message,
-            icon: "success"
-          }).then(() => {
-            router.push("/");
-          });
+          if (returnUrl) {
+            router.replace(returnUrl as string);
+          } else {
+            router.replace("/admin");
+          }
         })
         .catch(err => {
           console.log(err);
-          setLoading(false);
           setShowError(true);
           setErrorMessage(err.response.data.message);
 
@@ -113,7 +102,6 @@ const LoginComponent = () => {
           name="basic"
           layout="vertical"
           initialValues={{
-            remember: false,
             email: "",
             password: ""
           }}
@@ -136,46 +124,27 @@ const LoginComponent = () => {
 
           <Form.Item
             name="password"
-            label="পাসওয়ার্ড"
+            label="Password"
             className="form-field"
             rules={[
               {
                 required: true,
-                message: "Please enter your Password!"
+                message: "Please input your Password!"
               }
             ]}
           >
-            <Input.Password placeholder="Please enter your Password" />
+            <Input.Password placeholder="password" />
           </Form.Item>
 
           <div className="form-btn-field">
-            <SignInButton type="primary" block htmlType="submit">
+            <SignInButton type="primary" htmlType="submit">
               Login
             </SignInButton>
           </div>
-
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginBottom: "10px"
-            }}
-          >
-            OR
-          </div>
-
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Link href="/register">
-              <Button type="primary" block danger>
-                Register
-              </Button>
-            </Link>
-          </Space>
         </StyledSignForm>
       </StyledSignContent>
     </StyledSign>
   );
 };
 
-export default LoginComponent;
+export default RegisterComponent;

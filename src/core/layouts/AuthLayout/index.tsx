@@ -10,6 +10,8 @@ import {
   StyledAuthWrap
 } from "./AuthLayout.styled";
 import AppLogo from "@/lib/AppLogo";
+import AppHeader from "../DefaultLayout/components/AppHeader";
+import AppFooter from "../DefaultLayout/AppFooter";
 
 interface IAuthLayoutProps {
   children: React.ReactNode;
@@ -17,29 +19,33 @@ interface IAuthLayoutProps {
 
 const AuthLayout = ({ children }: IAuthLayoutProps) => {
   return (
-    <StyledAuth>
-      <div>
-        <StyledAuthWrap key={"wrap"}>
-          <StyledAuthCard>
-            <StyledAuthWellAction>
-              <StyledAuthWelContent>
-                <h2>Welcome to Dashboard!</h2>
-                <p>
-                  lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </StyledAuthWelContent>
-            </StyledAuthWellAction>
-            <StyledAuthMainContent>
-              <StyledAuthCardHeader>
-                <AppLogo />
-              </StyledAuthCardHeader>
-              {children}
-            </StyledAuthMainContent>
-          </StyledAuthCard>
-        </StyledAuthWrap>
-      </div>
-    </StyledAuth>
+    <>
+      <AppHeader />
+      <StyledAuth>
+        <div>
+          <StyledAuthWrap key={"wrap"}>
+            <StyledAuthCard>
+              <StyledAuthWellAction>
+                <StyledAuthWelContent>
+                  <h2>Squarefeet Booking</h2>
+                  <p>
+                    Please Login or Register to your account to continue your
+                    booking
+                  </p>
+                </StyledAuthWelContent>
+              </StyledAuthWellAction>
+              <StyledAuthMainContent>
+                <StyledAuthCardHeader>
+                  <AppLogo />
+                </StyledAuthCardHeader>
+                {children}
+              </StyledAuthMainContent>
+            </StyledAuthCard>
+          </StyledAuthWrap>
+        </div>
+      </StyledAuth>
+      <AppFooter />
+    </>
   );
 };
 

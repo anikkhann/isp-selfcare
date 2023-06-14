@@ -31,10 +31,14 @@ const SearchCard = ({ item }: ItemProps) => {
             <div
               style={{
                 overflow: "hidden",
-                height: "150px"
+                height: "250px"
               }}
             >
-              <img alt="example" style={{ height: "100%" }} src={item?.image} />
+              <img
+                alt="image"
+                style={{ width: "100%", height: "100%" }}
+                src={item?.image}
+              />
             </div>
           }
         >

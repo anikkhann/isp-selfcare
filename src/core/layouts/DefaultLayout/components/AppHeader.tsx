@@ -132,6 +132,7 @@ function AppHeader() {
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
   const [routeList, setRouteList] = useState(routes);
+  const [webRoutesList, setWebRoutesList] = useState(routes);
 
   const MySwal = withReactContent(Swal);
 
@@ -146,6 +147,21 @@ function AppHeader() {
           }
         ];
         setRouteList(newRouteList);
+      }
+
+      if (webRoutesList) {
+        const newWebRouteList = [
+          ...webRoutesList,
+          {
+            key: "/user/booking",
+            label: "আমার বুকিং"
+          },
+          {
+            key: "/user/invoice",
+            label: "আমার পেমেন্ট"
+          }
+        ];
+        setWebRoutesList(newWebRouteList);
       }
     } else {
       if (routeList) {
@@ -250,7 +266,7 @@ function AppHeader() {
               onClick={({ key }) => {
                 router.push(key);
               }}
-              items={routes}
+              items={webRoutesList}
             />
             {!isLoggedIn && (
               <Space

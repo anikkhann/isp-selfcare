@@ -72,18 +72,19 @@ const BookingForm = () => {
   };
 
   const onPaymentChange = (e: RadioChangeEvent) => {
+    console.log("radio checked", e.target.value);
     setPayType(e.target.value);
     if (selectedSlot) {
-      calculatePrice(selectedSlot);
+      calculatePrice(selectedSlot, e.target.value);
     }
   };
 
   const onSlotChange = ({ target: { value } }: RadioChangeEvent) => {
     setSelectedSlot(value);
-    calculatePrice(value);
+    calculatePrice(value, payType);
   };
 
-  const calculatePrice = (slotId: number) => {
+  const calculatePrice = (slotId: number, payValueType: string) => {
     if (!item) return;
     const slot = item.slots.find(slot => slot.id == slotId);
     if (!slot) return;
@@ -92,12 +93,20 @@ const BookingForm = () => {
     setSlotTotalPrice(slot.price);
     setPriceAfterDiscount(slot.price_after_discount);
 
-    if (payType == "minimum") {
+    if (payValueType == "minimum") {
       setBookingAmount(slot.minimum_booking);
-    } else {
+    }
+
+    if (payValueType == "full") {
       setBookingAmount(slot.price_after_discount);
     }
   };
+
+  useEffect(() => {
+    if (payType) {
+      console.log(payType);
+    }
+  }, [payType]);
 
   useEffect(() => {
     console.log("item", item);

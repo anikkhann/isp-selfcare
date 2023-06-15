@@ -6,6 +6,7 @@ import { useAppDispatch } from "@/store/hooks";
 import { getCategories } from "@/store/features/category/categorySlice";
 import AppFooter from "./AppFooter";
 import Cookies from "js-cookie";
+import { getPopularPlaces } from "@/store/features/booking/PopularPlaceSlice";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -23,6 +24,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
     }
 
     dispatch(getCategories());
+    dispatch(getPopularPlaces({ page: 1, per_page: 10 }));
   }, [dispatch]);
 
   return (

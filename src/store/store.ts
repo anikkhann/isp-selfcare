@@ -4,6 +4,7 @@ import PlaceReducer from "./features/booking/PlaceSlice";
 import SearchReducer from "./features/booking/SearchSlice";
 import CategoryReducer from "./features/category/categorySlice";
 import PlaceDetailsReducer from "./features/booking/placeDetailsSlice";
+import PopularPlaceReducer from "./features/booking/PopularPlaceSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,7 +13,8 @@ export const store = configureStore({
     place: PlaceReducer,
     search: SearchReducer,
     category: CategoryReducer,
-    placeDetails: PlaceDetailsReducer
+    placeDetails: PlaceDetailsReducer,
+    popular: PopularPlaceReducer
   }
 });
 

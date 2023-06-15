@@ -4,20 +4,15 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 interface PopularState {
   isLoading: boolean;
-  items: object | null;
+  items: object[] | null;
   total: number;
   perPage: number;
   currentPage: number;
   lastPage: number;
+  error: any;
 }
 
 interface PopularParam {
-  category: string | number | null | undefined;
-  name: string | number | null | undefined;
-  date: string | null;
-  location: string | number | null | undefined;
-  latitude: number | null;
-  longitude: number | null;
   per_page: number;
   page: number;
 }
@@ -28,7 +23,8 @@ const initialState: PopularState = {
   total: 0,
   perPage: 0,
   currentPage: 0,
-  lastPage: 0
+  lastPage: 0,
+  error: null
 };
 
 export const getPopularPlaces = createAsyncThunk(
@@ -36,7 +32,7 @@ export const getPopularPlaces = createAsyncThunk(
   async (param: PopularParam) => {
     try {
       const { data } = await AppAxios.get(
-        `/search-web-booking?category_id=${param.category}&date=${param.date}&latitude=${param.latitude}&longitude=${param.longitude}&per_page=${param.per_page}&page=${param.page}`
+        `/web-popular-booking?&per_page=${param.per_page}&page=${param.page}`
       );
       return data;
     } catch (error: any) {
@@ -52,17 +48,32 @@ const PopularPlaceSlice = createSlice({
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
-    },
-    setData(state, action: PayloadAction<any>) {
-      state.items = action.payload.data;
-      state.total = action.payload.total;
-      state.perPage = action.payload.per_page;
-      state.currentPage = action.payload.current_page;
-      state.lastPage = action.payload.last_page;
     }
+  },
+  extraReducers: builder => {
+    builder.addCase(getPopularPlaces.pending, state => {
+      state.isLoading = true;
+    });
+    builder.addCase(getPopularPlaces.fulfilled, (state, { payload }) => {
+      state.items = payload.data.places;
+      state.total = payload.meta.total;
+      state.perPage = payload.meta.per_page;
+      state.currentPage = payload.meta.current_page;
+      state.lastPage = payload.meta.last_page;
+      state.isLoading = false;
+    });
+    builder.addCase(getPopularPlaces.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      state.items = [];
+      state.total = 0;
+      state.perPage = 0;
+      state.currentPage = 0;
+      state.lastPage = 0;
+      state.error = payload;
+    });
   }
 });
 
-export const { setIsLoading, setData } = PopularPlaceSlice.actions;
+export const { setIsLoading } = PopularPlaceSlice.actions;
 
 export default PopularPlaceSlice.reducer;

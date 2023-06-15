@@ -188,14 +188,16 @@ const InvoiceList: React.FC = () => {
         return (
           <>
             <Space size="middle" align="center">
-              <Space size="middle" align="center" wrap>
-                <Button
-                  type="primary"
-                  danger
-                  icon={<PayCircleOutlined />}
-                  onClick={() => handlePendingDueItem(record.id)}
-                />
-              </Space>
+              {record.is_paid == 0 && (
+                <Space size="middle" align="center" wrap>
+                  <Button
+                    type="primary"
+                    danger
+                    icon={<PayCircleOutlined />}
+                    onClick={() => handlePendingDueItem(record.id)}
+                  />
+                </Space>
+              )}
               <Space size="middle" align="center" wrap>
                 <Button
                   type="primary"

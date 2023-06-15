@@ -1,9 +1,9 @@
-import HomePage from "@/modules/pages/HomePage";
+import PopularPage from "@/modules/pages/PopularPage";
 
 const Home = () => {
   return (
     <>
-      <HomePage />
+      <PopularPage />
     </>
   );
 };

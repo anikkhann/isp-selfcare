@@ -46,14 +46,12 @@ const SearchSection: React.FC = () => {
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     if (date) {
-      const date = new Date(dateString);
-      const formatDate = format(date, "yyyy-MM-dd");
+      const newDate = new Date(dateString);
       // console.log('formatDate', formatDate)
-      dispatch({ type: "search/setDate", payload: formatDate });
+      dispatch({ type: "search/setDate", payload: newDate });
     } else {
-      const date = new Date();
-      const formatDate = format(date, "yyyy-MM-dd");
-      dispatch({ type: "search/setDate", payload: formatDate });
+      const newDate = new Date();
+      dispatch({ type: "search/setDate", payload: newDate });
     }
     // console.log(date, dateString);
   };

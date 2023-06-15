@@ -21,11 +21,11 @@ module.exports = {
       }
     },
     colors: {
-      primary: "#4B6BFB",
-      secondary: "#7B92B2",
+      primary: "#EE5921",
+      secondary: "#2DB48B",
       accent: "#67CBA0",
       violet: "#883677",
-      neutral: "#181A2A",
+      neutral: "#4B6BFB",
       "base-100": "#FFFFFF",
       info: "#3ABFF8",
       success: "#36D399",

@@ -6,7 +6,7 @@ interface SearchState {
   category: string | number | null | undefined;
   name: any;
   location: any;
-  date: string | null;
+  date: Date;
   latitude: number | null;
   longitude: number | null;
 }
@@ -16,7 +16,7 @@ const initialState: SearchState = {
   category: null,
   name: null,
   location: null,
-  date: new Date().toDateString(),
+  date: new Date(),
   latitude: null,
   longitude: null
 };
@@ -40,7 +40,7 @@ const SearchSlice = createSlice({
     setLocation(state, action: PayloadAction<string>) {
       state.location = action.payload;
     },
-    setDate(state, action: PayloadAction<string>) {
+    setDate(state, action: PayloadAction<Date>) {
       state.date = action.payload;
     },
     setLatitude(state, action: PayloadAction<number>) {

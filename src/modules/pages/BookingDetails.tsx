@@ -36,7 +36,7 @@ const BookingDetails = ({ item }: ItemProps) => {
             </Paragraph>
           </Typography>
 
-          <BookingForm item={item} />
+          <BookingForm />
         </>
       )}
     </>

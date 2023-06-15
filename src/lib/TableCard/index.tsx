@@ -16,8 +16,7 @@ interface CardProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   hasLink: boolean;
-  addLink: string;
-  permission: string;
+  addLink?: string | undefined;
 }
 
 const TableCard = ({ title, style, addLink, hasLink, children }: CardProps) => (
@@ -25,7 +24,8 @@ const TableCard = ({ title, style, addLink, hasLink, children }: CardProps) => (
     title={title}
     style={style}
     extra={
-      hasLink && (
+      hasLink &&
+      addLink && (
         <Link href={addLink}>
           <Button
             type="primary"

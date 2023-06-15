@@ -82,24 +82,25 @@ const FooterWidget = () => {
                 padding: "10px 30px"
               }}
             >
-              {socials.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{
-                    margin: "0 10px"
-                  }}
-                >
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    height={28}
-                    width={28}
-                  />
-                </a>
-              ))}
+              {socials &&
+                socials.map((item, index) => (
+                  <a
+                    key={index}
+                    href={item.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                      margin: "0 10px"
+                    }}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      height={28}
+                      width={28}
+                    />
+                  </a>
+                ))}
             </div>
           </Typography>
         </Col>
@@ -110,27 +111,28 @@ const FooterWidget = () => {
             <Title level={4}>যোগাযোগের তথ্য</Title>
             <Paragraph>
               <List>
-                {items.map((item, index) => (
-                  <List.Item key={index}>
-                    <Text
-                      style={{
-                        fontSize: "16px"
-                      }}
-                    >
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        height={14}
-                        width={14}
+                {items &&
+                  items.map((item, index) => (
+                    <List.Item key={index}>
+                      <Text
                         style={{
-                          marginRight: "10px"
+                          fontSize: "16px"
                         }}
-                      />
+                      >
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          height={14}
+                          width={14}
+                          style={{
+                            marginRight: "10px"
+                          }}
+                        />
 
-                      {item.text}
-                    </Text>
-                  </List.Item>
-                ))}
+                        {item.text}
+                      </Text>
+                    </List.Item>
+                  ))}
               </List>
             </Paragraph>
           </Typography>

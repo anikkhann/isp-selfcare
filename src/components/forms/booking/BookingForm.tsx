@@ -230,19 +230,19 @@ const BookingForm = () => {
                   </Form.Item>
 
                   <Card style={{ width: "100%" }}>
-                    <div className="flex justify-between p-4 text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
                       <span>Slot Price</span>
                       <span>{slotTotalPrice} BDT</span>
                     </div>
-                    <div className="flex justify-between p-4 text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
                       <span>Discount Price</span>
                       <span>{slotDiscountPrice} BDT</span>
                     </div>
-                    <div className="flex justify-between p-4 text-lg text-[#e60606] font-bold font-hind_Siliguri">
-                      <span>Price After Discount</span>
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                      <span className="">Price After Discount</span>
                       <span>{priceAfterDiscount} BDT</span>
                     </div>
-                    <div className="flex justify-between p-4 text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
                       <span>Booking Price</span>
                       <span>{bookingAmount} BDT</span>
                     </div>

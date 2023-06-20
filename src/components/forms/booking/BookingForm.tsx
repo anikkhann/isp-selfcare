@@ -72,7 +72,7 @@ const BookingForm = () => {
   };
 
   const onPaymentChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
+    // console.log("radio checked", e.target.value);
     setPayType(e.target.value);
     if (selectedSlot) {
       calculatePrice(selectedSlot, e.target.value);
@@ -104,40 +104,92 @@ const BookingForm = () => {
 
   useEffect(() => {
     if (payType) {
-      console.log(payType);
+      // console.log(payType);
     }
   }, [payType]);
 
   useEffect(() => {
-    console.log("item", item);
+    // console.log("item", item);
     if (item) {
       const { slots } = item;
 
       const filterSlots = slots.filter((slot: any) => {
-        if (slot.status == "available") {
+        // if slot is available and current time is greater than slot start time
+        // then show the slot
+        // covert slot start time to date with current date
+        const slotStartTime = slot.slot?.start_time;
+        // searchDate is the date selected by the user
+        // if searchDate is not selected then use current date
+        // convert to date
+        const selectedDate = new Date(searchDate);
+
+        const currentDateTime = new Date(); // current date time
+
+        const slotStartDateTimeString = `${selectedDate.toLocaleDateString()} ${slotStartTime}`;
+        const slotStartDateTime = new Date(slotStartDateTimeString);
+
+        const isSlotTimeFuture = currentDateTime < slotStartDateTime;
+
+        console.log("Slot Start Time", slotStartDateTimeString);
+        console.log("selectedDate Time", selectedDate.toLocaleDateString());
+        console.log("Is Slot Time in the Future?", isSlotTimeFuture);
+
+        if (isSlotTimeFuture && slot.status == "available") {
           return slot;
         }
       });
 
+      // sort slots based on start time
+      filterSlots.sort((a, b) => {
+        const timeA = new Date(`1970-01-01T${a.slot?.start_time}`);
+        const timeB = new Date(`1970-01-01T${b.slot?.start_time}`);
+
+        if (timeA < timeB) {
+          return -1;
+        } else if (timeA > timeB) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+
+      // format slots based on clock time 12 hour format
       const newSlots = filterSlots.map((slot: any) => {
         const timeString = slot.slot?.start_time;
         if (!timeString) return;
         const startTime = new Date(`1970-01-01T${timeString}`);
-        const startTimeWithFormat = format(startTime, "h:mm:ss a");
+        const startTimeWithFormat = format(startTime, "hh:mm a");
 
         const endTimeString = slot.slot?.end_time;
-        if (!timeString) return;
+        if (!endTimeString) return;
         const endTime = new Date(`1970-01-01T${endTimeString}`);
-        const endTimeWithFormat = format(endTime, "h:mm:ss a");
+        const endTimeWithFormat = format(endTime, "hh:mm a");
 
         return {
           label: startTimeWithFormat + " - " + endTimeWithFormat,
           value: slot.id
         };
       });
+
+      /* const newSlots = filterSlots.map((slot: any) => {
+        const timeString = slot.slot?.start_time;
+        if (!timeString) return;
+        const startTime = new Date(`1970-01-01T${timeString}`);
+        const startTimeWithFormat = format(startTime, "h:mm:ss a");
+ 
+        const endTimeString = slot.slot?.end_time;
+        if (!timeString) return;
+        const endTime = new Date(`1970-01-01T${endTimeString}`);
+        const endTimeWithFormat = format(endTime, "h:mm:ss a");
+ 
+        return {
+          label: startTimeWithFormat + " - " + endTimeWithFormat,
+          value: slot.id
+        };
+      }); */
       setSlots(newSlots);
     }
-  }, [item]);
+  }, [item, searchDate]);
 
   return (
     <>

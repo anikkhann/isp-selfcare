@@ -34,6 +34,7 @@ interface ItemDetails {
 }
 
 interface Slot {
+  slot: any;
   id: number;
   name: string;
   booking_partner_id: number;

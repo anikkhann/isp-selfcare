@@ -15,7 +15,11 @@ export const store = configureStore({
     category: CategoryReducer,
     placeDetails: PlaceDetailsReducer,
     popular: PopularPlaceReducer
-  }
+  },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 });
 
 // create types for state and dispatch

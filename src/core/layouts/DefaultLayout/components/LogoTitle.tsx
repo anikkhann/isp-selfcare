@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Logo = styled.img`
   display: inline-block;
-  height: 40px;
+  height: 50px;
   vertical-align: middle;
 `;
 

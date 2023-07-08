@@ -176,7 +176,10 @@ const BookingList: React.FC = () => {
               <Space size="middle" align="center" wrap>
                 <Button
                   type="primary"
-                  danger
+                  style={{
+                    color: "#fff",
+                    backgroundColor: "#EC4B15"
+                  }}
                   icon={<PayCircleOutlined />}
                   onClick={() => handlePendingDueItem(row.id)}
                 />

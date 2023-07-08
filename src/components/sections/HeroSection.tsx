@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
 
   const { lg } = useBreakpoint();
 
-  const fontSizes = lg ? "40px" : "20px";
+  const fontSizes = lg ? "30px" : "20px";
 
   return (
     <>

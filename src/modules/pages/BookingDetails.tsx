@@ -18,7 +18,7 @@ const BookingDetails = ({ item }: ItemProps) => {
         <>
           <TopCarousel item={item} />
           <Typography>
-            <Title level={4}>About {item?.name}</Title>
+            <Title level={4}>{item?.name}</Title>
             <Paragraph>
               <p
                 dangerouslySetInnerHTML={{

@@ -293,7 +293,13 @@ function AppHeader() {
                   </Button>
                 </Link>
                 <Link href="/otp">
-                  <Button type="primary" danger>
+                  <Button
+                    type="primary"
+                    style={{
+                      color: "#fff",
+                      backgroundColor: "#EC4B15"
+                    }}
+                  >
                     Register
                   </Button>
                 </Link>

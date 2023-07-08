@@ -130,9 +130,9 @@ const BookingForm = () => {
 
         const isSlotTimeFuture = currentDateTime < slotStartDateTime;
 
-        console.log("Slot Start Time", slotStartDateTimeString);
-        console.log("selectedDate Time", selectedDate.toLocaleDateString());
-        console.log("Is Slot Time in the Future?", isSlotTimeFuture);
+        /*  console.log("Slot Start Time", slotStartDateTimeString);
+         console.log("selectedDate Time", selectedDate.toLocaleDateString());
+         console.log("Is Slot Time in the Future?", isSlotTimeFuture); */
 
         if (isSlotTimeFuture && slot.status == "available") {
           return slot;
@@ -263,7 +263,7 @@ const BookingForm = () => {
                     background: "#f5f5f5"
                   }}
                 >
-                  <Form.Item label="পেমেন্ট মেথড" name="pay_type">
+                  <Form.Item label="পরিশোধের মাধ্যম" name="pay_type">
                     <Radio.Group
                       onChange={onPaymentChange}
                       style={{
@@ -282,19 +282,19 @@ const BookingForm = () => {
                   </Form.Item>
 
                   <Card style={{ width: "100%" }}>
-                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#EC4B15] font-bold font-hind_Siliguri">
                       <span>Slot Price</span>
                       <span>{slotTotalPrice} BDT</span>
                     </div>
-                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#EC4B15] font-bold font-hind_Siliguri">
                       <span>Discount Price</span>
                       <span>{slotDiscountPrice} BDT</span>
                     </div>
-                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#EC4B15] font-bold font-hind_Siliguri">
                       <span className="">Price After Discount</span>
                       <span>{priceAfterDiscount} BDT</span>
                     </div>
-                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#e60606] font-bold font-hind_Siliguri">
+                    <div className="flex justify-between lg:p-4 lg:text-lg text-[#EC4B15] font-bold font-hind_Siliguri">
                       <span>Booking Price</span>
                       <span>{bookingAmount} BDT</span>
                     </div>
@@ -319,7 +319,7 @@ const BookingForm = () => {
                           type="primary"
                           block
                           style={{
-                            background: "#181A2A",
+                            background: "#34A476",
                             border: "none"
                           }}
                         >
@@ -328,7 +328,14 @@ const BookingForm = () => {
                       </Link>
                       <span>অথবা</span>
                       <Link href="/register">
-                        <Button type="primary" block danger>
+                        <Button
+                          type="primary"
+                          block
+                          style={{
+                            color: "#fff",
+                            backgroundColor: "#EC4B15"
+                          }}
+                        >
                           রেজিস্টার করুন
                         </Button>
                       </Link>

@@ -155,7 +155,7 @@ const SearchSection: React.FC = () => {
               }}
             >
               <Input
-                placeholder="Search by name"
+                placeholder="Search by Name"
                 style={{
                   minWidth: 180
                 }}
@@ -191,7 +191,7 @@ const SearchSection: React.FC = () => {
               }}
             >
               <DatePicker
-                placeholder="তারিখ নির্বাচন করুন"
+                placeholder="Search by Date"
                 onChange={onChange}
                 style={{
                   minWidth: 180
@@ -202,13 +202,14 @@ const SearchSection: React.FC = () => {
               <Button
                 type="primary"
                 htmlType="submit"
-                danger
                 style={{
                   minWidth: 180,
-                  margin: "10px 0px"
+                  margin: "10px 0px",
+                  color: "#fff",
+                  backgroundColor: "#EC4B15"
                 }}
               >
-                সার্চ করুন
+                Search
               </Button>
             </Form.Item>
           </Form>

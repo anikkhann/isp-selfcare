@@ -2,22 +2,67 @@ import { Button, Col, Row, Space, Typography } from "antd";
 import { List } from "antd";
 import Image from "next/image";
 import React from "react";
+import { FaMapLocation } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import {
+  AiFillFacebook,
+  AiFillLinkedin,
+  AiFillInstagram,
+  AiOutlineTwitter,
+  AiFillPhone
+} from "react-icons/ai";
 
 const items = [
   {
     name: "phone",
     text: "+8801940301000",
-    image: "/icons/phone.svg"
+    icon: (
+      <AiFillPhone
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+
+          fontWeight: "bold"
+        }}
+      />
+    )
   },
   {
     name: "email",
     text: "info@squarefeet.xyz",
-    image: "/icons/email.svg"
+    icon: (
+      <MdEmail
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+
+          fontWeight: "bold"
+        }}
+      />
+    )
   },
   {
     name: "address",
     text: "14 Rd 16/A, Gulshan, Dhaka 1212, Bangladesh",
-    image: "/icons/address.svg"
+    icon: (
+      <FaMapLocation
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+
+          fontWeight: "bold"
+        }}
+      />
+    )
   }
 ];
 
@@ -25,22 +70,66 @@ const socials = [
   {
     name: "facebook",
     link: "https://www.facebook.com/squarefeet.xyz",
-    image: "/icons/facebook.svg"
+    icon: (
+      <AiFillFacebook
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+          fontWeight: "bold"
+        }}
+      />
+    )
   },
   {
     name: "instagram",
     link: "https://www.instagram.com/squarefeet.xyz/",
-    image: "/icons/instagram.svg"
+    icon: (
+      <AiFillInstagram
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+          fontWeight: "bold"
+        }}
+      />
+    )
   },
   {
     name: "linkedin",
     link: "https://www.linkedin.com/company/squarefeetxyz",
-    image: "/icons/linkedin.svg"
+    icon: (
+      <AiFillLinkedin
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+          fontWeight: "bold"
+        }}
+      />
+    )
   },
   {
     name: "twitter",
     link: "https://twitter.com/squarefeetxyz",
-    image: "/icons/twitter.svg"
+    icon: (
+      <AiOutlineTwitter
+        style={{
+          alignItems: "center",
+          height: "20px",
+          width: "20px",
+          margin: "0 10px",
+          color: "#EC4B15",
+          fontWeight: "bold"
+        }}
+      />
+    )
   }
 ];
 
@@ -90,15 +179,13 @@ const FooterWidget = () => {
                     target="_blank"
                     rel="noreferrer"
                     style={{
-                      margin: "0 10px"
+                      margin: "0 10px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center"
                     }}
                   >
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      height={28}
-                      width={28}
-                    />
+                    {item.icon}
                   </a>
                 ))}
             </div>
@@ -116,18 +203,13 @@ const FooterWidget = () => {
                     <List.Item key={index}>
                       <Text
                         style={{
-                          fontSize: "16px"
+                          fontSize: "16px",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center"
                         }}
                       >
-                        <Image
-                          src={item.image}
-                          alt={item.name}
-                          height={14}
-                          width={14}
-                          style={{
-                            marginRight: "10px"
-                          }}
-                        />
+                        {item.icon}
 
                         {item.text}
                       </Text>
@@ -163,7 +245,11 @@ const FooterWidget = () => {
                   </Button>
                 </a>
 
-                <a href="#" rel="noreferrer">
+                <a
+                  href="https://apps.apple.com/us/app/squarefeet-platform/id1638789542"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Button
                     type="primary"
                     size="large"

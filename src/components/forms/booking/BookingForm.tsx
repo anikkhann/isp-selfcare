@@ -1,13 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Card, Col, Form, Radio, Row, Space } from "antd";
+import { Button, Card, Col, DatePicker, Form, Radio, Row, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import type { RadioChangeEvent } from "antd";
-import { format } from "date-fns";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Link from "next/link";
 import LoginAppLoader from "@/components/loader/LoginAppLoader";
-import AppDatePicker from "@/lib/AppDatePicker";
 import AppAxios from "@/services/AppAxios";
+import dayjs from "dayjs";
+import type { DatePickerProps } from "antd";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+import localeData from "dayjs/plugin/localeData";
+import weekday from "dayjs/plugin/weekday";
+import weekOfYear from "dayjs/plugin/weekOfYear";
+import weekYear from "dayjs/plugin/weekYear";
+
+dayjs.extend(customParseFormat);
+dayjs.extend(advancedFormat);
+dayjs.extend(weekday);
+dayjs.extend(localeData);
+dayjs.extend(weekOfYear);
+dayjs.extend(weekYear);
+
+const dateFormat = "YYYY-MM-DD";
 
 const BookingForm = () => {
   const [selectedSlot, setSelectedSlot] = useState(null);
@@ -29,13 +44,13 @@ const BookingForm = () => {
 
   const [bookingAmount, setBookingAmount] = useState(0);
 
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const onFinish = () => {
+    // console.log("Success:", values);
 
     try {
       AppAxios.post("/web-confirm-booking", {
         place_slot_id: selectedSlot ? selectedSlot : null,
-        date: searchDate ? format(searchDate, "yyyy-M-dd") : null,
+        date: searchDate ? dayjs(searchDate).format("YYYY-MM-DD") : null,
         price: bookingAmount ? bookingAmount : 0,
         discount: slotDiscountPrice ? slotDiscountPrice : 0,
         total_price: priceAfterDiscount ? priceAfterDiscount : 0
@@ -66,8 +81,8 @@ const BookingForm = () => {
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
-  const onDateChange: any = (date: Date) => {
-    const newDate = new Date(date);
+  const onDateChange: DatePickerProps["onChange"] = (date, dateString) => {
+    const newDate = dayjs(dateString);
     dispatch({ type: "search/setDate", payload: newDate });
   };
 
@@ -109,84 +124,54 @@ const BookingForm = () => {
   }, [payType]);
 
   useEffect(() => {
-    // console.log("item", item);
     if (item) {
       const { slots } = item;
 
       const filterSlots = slots.filter((slot: any) => {
-        // if slot is available and current time is greater than slot start time
-        // then show the slot
-        // covert slot start time to date with current date
         const slotStartTime = slot.slot?.start_time;
-        // searchDate is the date selected by the user
-        // if searchDate is not selected then use current date
-        // convert to date
-        const selectedDate = new Date(searchDate);
+        const selectedDate = dayjs(searchDate || new Date()); // Use searchDate if available, otherwise use current date
+        const currentDateTime = dayjs();
+        const slotStartDateTimeString = `${selectedDate.format(
+          "YYYY-MM-DD"
+        )} ${slotStartTime}`;
+        const slotStartDateTime = dayjs(slotStartDateTimeString);
 
-        const currentDateTime = new Date(); // current date time
+        const isSlotTimeFuture = currentDateTime.isBefore(slotStartDateTime);
 
-        const slotStartDateTimeString = `${selectedDate.toLocaleDateString()} ${slotStartTime}`;
-        const slotStartDateTime = new Date(slotStartDateTimeString);
-
-        const isSlotTimeFuture = currentDateTime < slotStartDateTime;
-
-        /*  console.log("Slot Start Time", slotStartDateTimeString);
-         console.log("selectedDate Time", selectedDate.toLocaleDateString());
-         console.log("Is Slot Time in the Future?", isSlotTimeFuture); */
-
-        if (isSlotTimeFuture && slot.status == "available") {
+        if (isSlotTimeFuture && slot.status === "available") {
           return slot;
         }
       });
 
-      // sort slots based on start time
       filterSlots.sort((a, b) => {
-        const timeA = new Date(`1970-01-01T${a.slot?.start_time}`);
-        const timeB = new Date(`1970-01-01T${b.slot?.start_time}`);
+        const timeA = dayjs(`1970-01-01T${a.slot?.start_time}`);
+        const timeB = dayjs(`1970-01-01T${b.slot?.start_time}`);
 
-        if (timeA < timeB) {
+        if (timeA.isBefore(timeB)) {
           return -1;
-        } else if (timeA > timeB) {
+        } else if (timeA.isAfter(timeB)) {
           return 1;
         } else {
           return 0;
         }
       });
 
-      // format slots based on clock time 12 hour format
       const newSlots = filterSlots.map((slot: any) => {
         const timeString = slot.slot?.start_time;
         if (!timeString) return;
-        const startTime = new Date(`1970-01-01T${timeString}`);
-        const startTimeWithFormat = format(startTime, "hh:mm a");
+        const startTime = dayjs(`1970-01-01T${timeString}`);
+        const startTimeWithFormat = startTime.format("hh:mm A");
 
         const endTimeString = slot.slot?.end_time;
         if (!endTimeString) return;
-        const endTime = new Date(`1970-01-01T${endTimeString}`);
-        const endTimeWithFormat = format(endTime, "hh:mm a");
+        const endTime = dayjs(`1970-01-01T${endTimeString}`);
+        const endTimeWithFormat = endTime.format("hh:mm A");
 
         return {
           label: startTimeWithFormat + " - " + endTimeWithFormat,
           value: slot.id
         };
       });
-
-      /* const newSlots = filterSlots.map((slot: any) => {
-        const timeString = slot.slot?.start_time;
-        if (!timeString) return;
-        const startTime = new Date(`1970-01-01T${timeString}`);
-        const startTimeWithFormat = format(startTime, "h:mm:ss a");
- 
-        const endTimeString = slot.slot?.end_time;
-        if (!timeString) return;
-        const endTime = new Date(`1970-01-01T${endTimeString}`);
-        const endTimeWithFormat = format(endTime, "h:mm:ss a");
- 
-        return {
-          label: startTimeWithFormat + " - " + endTimeWithFormat,
-          value: slot.id
-        };
-      }); */
       setSlots(newSlots);
     }
   }, [item, searchDate]);
@@ -221,9 +206,11 @@ const BookingForm = () => {
                   }}
                 >
                   <Form.Item label="বুকিং তারিখ" name="bookingDate">
-                    <AppDatePicker
-                      defaultValue={searchDate}
+                    <DatePicker
+                      defaultValue={dayjs(searchDate, dateFormat)}
                       onChange={onDateChange}
+                      value={searchDate}
+                      format={dateFormat}
                     />
                   </Form.Item>
 

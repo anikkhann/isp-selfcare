@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import dayjs from "dayjs";
 
 interface SearchState {
   isLoading: boolean;
   category: string | number | null | undefined;
   name: any;
   location: any;
-  date: Date;
+  date: dayjs.Dayjs;
   latitude: number | null;
   longitude: number | null;
 }
@@ -16,7 +17,7 @@ const initialState: SearchState = {
   category: null,
   name: null,
   location: null,
-  date: new Date(),
+  date: dayjs(),
   latitude: null,
   longitude: null
 };
@@ -40,7 +41,7 @@ const SearchSlice = createSlice({
     setLocation(state, action: PayloadAction<string>) {
       state.location = action.payload;
     },
-    setDate(state, action: PayloadAction<Date>) {
+    setDate(state, action: PayloadAction<dayjs.Dayjs>) {
       state.date = action.payload;
     },
     setLatitude(state, action: PayloadAction<number>) {

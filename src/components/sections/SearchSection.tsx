@@ -4,8 +4,11 @@ import React, { useEffect } from "react";
 import type { SelectProps } from "antd";
 import type { DatePickerProps } from "antd";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { format } from "date-fns";
 import { getPlacesList } from "@/store/features/booking/PlaceSlice";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+
+dayjs.extend(customParseFormat);
 
 const SearchSection: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,17 +21,14 @@ const SearchSection: React.FC = () => {
   const SearchLocation = useAppSelector(state => state.search.location);
   const searchDate = useAppSelector(state => state.search.date);
 
-  console.log(searchDate);
-
   useEffect(() => {
-    const date = new Date();
-    const formatDate = format(date, "yyyy-MM-dd");
+    const formattedDate = dayjs(searchDate).format("YYYY-MM-DD");
 
     const data = {
       category:
         categories && categories.length > 0 ? categories[0].value : null,
       name: null,
-      date: formatDate,
+      date: formattedDate,
       location: null,
       latitude: null,
       longitude: null,
@@ -37,7 +37,7 @@ const SearchSection: React.FC = () => {
     };
 
     dispatch(getPlacesList(data));
-  }, [categories, dispatch]);
+  }, [categories, dispatch, searchDate]);
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -46,14 +46,12 @@ const SearchSection: React.FC = () => {
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     if (date) {
-      const newDate = new Date(dateString);
-      // console.log('formatDate', formatDate)
+      const newDate = dayjs(dateString);
       dispatch({ type: "search/setDate", payload: newDate });
     } else {
-      const newDate = new Date();
+      const newDate = dayjs();
       dispatch({ type: "search/setDate", payload: newDate });
     }
-    // console.log(date, dateString);
   };
 
   const onFinish = (values: any) => {
@@ -68,10 +66,13 @@ const SearchSection: React.FC = () => {
       console.log("location", location);
     }
 
-    let formatDate = format(new Date(), "yyyy-MM-dd");
+    const formatDate = dayjs().format("YYYY-MM-DD");
 
     if (date) {
-      formatDate = format(new Date(date), "yyyy-MM-dd");
+      const formattedDate = dayjs(date, "YYYY-MM-DD").format("YYYY-MM-DD");
+      console.log(formattedDate);
+    } else {
+      console.log(formatDate);
     }
 
     const data = {
@@ -87,7 +88,7 @@ const SearchSection: React.FC = () => {
 
     dispatch(getPlacesList(data));
 
-    console.log("Success:", values);
+    // console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -196,6 +197,7 @@ const SearchSection: React.FC = () => {
                 style={{
                   minWidth: 180
                 }}
+                value={searchDate}
               />
             </Form.Item>
             <Form.Item>

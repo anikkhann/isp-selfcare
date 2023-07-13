@@ -3,7 +3,8 @@ import AppLoader from "@/lib/AppLoader";
 import BookingDetails from "@/modules/pages/BookingDetails";
 import { getPlaceDetails } from "@/store/features/booking/placeDetailsSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { format } from "date-fns";
+import dayjs from "dayjs";
+
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
@@ -23,7 +24,7 @@ const Details = () => {
   useEffect(() => {
     if (slug) {
       const data = {
-        date: format(searchDate, "yyyy-MM-dd"),
+        date: dayjs(searchDate).format("YYYY-MM-DD"),
         id: slug as string
       };
       dispatch(getPlaceDetails(data));

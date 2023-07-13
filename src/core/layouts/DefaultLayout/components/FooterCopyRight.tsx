@@ -1,5 +1,6 @@
 import { FloatButton } from "antd";
 import React from "react";
+import dayjs from "dayjs";
 
 function FooterCopyright() {
   const nodeRef = React.useRef(null);
@@ -15,7 +16,8 @@ function FooterCopyright() {
             fontWeight: 700
           }}
         >
-          {new Date().getFullYear()} &copy; All Rights Reserved.
+          {dayjs().year()}
+          &copy; All Rights Reserved.
         </div>
       </div>
       <div ref={nodeRef}>

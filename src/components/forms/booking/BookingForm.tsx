@@ -56,7 +56,7 @@ const BookingForm = () => {
         total_price: priceAfterDiscount ? priceAfterDiscount : 0
       })
         .then(res => {
-          console.log(res);
+          // console.log(res);
           if (res.data.success) {
             setSelectedSlot(null);
             setPriceAfterDiscount(0);

@@ -1,39 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import AppAxios from "@/services/AppAxios";
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import Cookies from "js-cookie";
 
 interface AuthState {
   isLoading: boolean;
   isInitialized: boolean;
-  isVerified: boolean;
-  SendOtp: boolean;
-  phone: string | null;
   isLoggedIn: boolean;
-  user: object | null;
-  error: any;
+  user: UserLoggedInData | null;
 }
 
-export const getUserInfo = createAsyncThunk("auth/getUserInfo", async () => {
-  try {
-    const { data } = await AppAxios.get("/user");
-    return data.data;
-  } catch (error: any) {
-    console.log(error);
-    return error.response;
-  }
-});
+interface UserLoggedInData {
+  userId: string;
+  name: string;
+  firstName: any;
+  userName: string;
+  lastName: any;
+  email: string;
+  phone: string;
+  profileImg: any;
+  roleId: any;
+  roleName: any;
+  roleCode: any;
+  designation: any;
+  userType: string;
+  partnerId: any;
+  parentPartnerId: any;
+  partnerUsername: string;
+  partnerIp: string;
+  credit: number;
+  lastLoginTime: number;
+  lastLoginIp: string;
+  token: string;
+}
 
 const initialState: AuthState = {
   isLoading: true,
   isInitialized: false,
-  isVerified: false,
-  SendOtp: false,
-  phone: null,
   isLoggedIn: false,
-  user: null,
-  error: null
+  user: null
 };
 
 const authSlice = createSlice({
@@ -49,36 +54,15 @@ const authSlice = createSlice({
     setInitialized: (state, action: PayloadAction<boolean>) => {
       state.isInitialized = action.payload;
     },
-    setIsVerified: (state, action: PayloadAction<boolean>) => {
-      state.isVerified = action.payload;
-    },
-    setSendOtp: (state, action: PayloadAction<boolean>) => {
-      state.SendOtp = action.payload;
-    },
-    setPhone: (state, action: PayloadAction<string>) => {
-      state.phone = action.payload;
+    setUser(state, action: PayloadAction<UserLoggedInData>) {
+      state.user = action.payload;
     },
 
     logout: state => {
       state.isLoggedIn = false;
-
       state.user = null;
       Cookies.remove("token");
     }
-  },
-  extraReducers: builder => {
-    builder.addCase(getUserInfo.pending, state => {
-      state.isLoading = true;
-    });
-    builder.addCase(getUserInfo.fulfilled, (state, { payload }) => {
-      state.isLoading = false;
-      state.user = payload;
-    });
-    builder.addCase(getUserInfo.rejected, (state, { payload }) => {
-      state.isLoading = false;
-      state.error = payload;
-      state.user = null;
-    });
   }
 });
 

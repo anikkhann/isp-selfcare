@@ -64,8 +64,8 @@ const App = (props: ExtendedAppProps) => {
   const getLayout =
     Component.getLayout ?? (page => <DefaultLayout>{page}</DefaultLayout>);
 
-  const authGuard = Component.authGuard ?? false;
-  const guestGuard = Component.guestGuard ?? true;
+  const authGuard = Component.authGuard ?? true;
+  const guestGuard = Component.guestGuard ?? false;
 
   return (
     <StyleProvider hashPriority="high">
@@ -74,7 +74,7 @@ const App = (props: ExtendedAppProps) => {
           <Provider store={store}>
             <>
               <Head>
-                <title>{`Squarefeet Booking`}</title>
+                <title>{`SelfCare`}</title>
                 <meta
                   name="viewport"
                   content="initial-scale=1, width=device-width"

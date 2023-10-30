@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 // import { useAuth } from './useAuth'
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import AppAxios from "@/services/AppAxios";
-// import AppLoader from "@/lib/AppLoader";
+import axios from "axios";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -18,7 +17,7 @@ const AuthGuard = (props: AuthGuardProps) => {
 
   const dispatch = useAppDispatch();
 
-  // console.log("auth", auth);
+  // // console.log("auth", auth);
   const router = useRouter();
   const token = Cookies.get("token");
 
@@ -34,20 +33,23 @@ const AuthGuard = (props: AuthGuardProps) => {
         dispatch({ type: "auth/setIsLoading", payload: false });
       }
       if (token) {
-        await AppAxios.get("/api/auth/verify", {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        await axios
+          .get("/api/api/v1/auth/get", {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
           .then(response => {
-            if (response.data.success === false) {
+            // console.log(response.data);
+            if (response.data.status == "401") {
               Cookies.remove("token");
               router.replace("/login");
             }
             dispatch({ type: "auth/setIsLoggedIn", payload: true });
+            dispatch({ type: "auth/setUser", payload: response.data });
           })
           .catch(error => {
-            // console.log(error);
+            // // console.log(error);
             if (error.response) {
               if (error.response.status === 401) {
                 Cookies.remove("token");
@@ -69,7 +71,7 @@ const AuthGuard = (props: AuthGuardProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
 
-  // console.log(auth.isLoading, auth.isInitialized);
+  // // console.log(auth.isLoading, auth.isInitialized);
 
   if (auth.isLoading || !auth.isInitialized) {
     return fallback;

@@ -28,4 +28,5 @@ const LoginPage = () => {
 };
 
 LoginPage.getLayout = (page: ReactNode) => <AuthLayout>{page}</AuthLayout>;
+LoginPage.guestGuard = true;
 export default LoginPage;

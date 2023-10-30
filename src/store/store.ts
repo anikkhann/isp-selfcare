@@ -1,20 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./features/auth/AuthSlice";
-import PlaceReducer from "./features/booking/PlaceSlice";
-import SearchReducer from "./features/booking/SearchSlice";
-import CategoryReducer from "./features/category/categorySlice";
-import PlaceDetailsReducer from "./features/booking/placeDetailsSlice";
-import PopularPlaceReducer from "./features/booking/PopularPlaceSlice";
 
 export const store = configureStore({
   reducer: {
     // reference reducers here
-    auth: AuthReducer,
-    place: PlaceReducer,
-    search: SearchReducer,
-    category: CategoryReducer,
-    placeDetails: PlaceDetailsReducer,
-    popular: PopularPlaceReducer
+    auth: AuthReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

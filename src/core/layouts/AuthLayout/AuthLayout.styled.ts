@@ -32,12 +32,12 @@ export const StyledAuthCard = styled(Card)`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.lg}px) {
     min-height: 500px;
-    min-width: 900px;
+    min-width: 500px;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.xl}px) {
     min-height: 500px;
-    min-width: 1000px;
+    min-width: 500px;
   }
 
   & .ant-card-body {
@@ -55,11 +55,11 @@ export const StyledAuthMainContent = styled.div`
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.sm}px) {
     padding: 20px;
-    width: 50%;
+    width: 100%;
   }
 
   @media screen and (min-width: ${({ theme }) => theme.breakpoints.lg}px) {
-    width: 40%;
+    width: 100%;
     padding: 40px;
   }
 `;
@@ -76,7 +76,8 @@ export const StyledAuthCardHeader = styled.div`
 
   & img {
     cursor: pointer;
-    height: 36px;
+    height: 100px;
+    width: auto;
     margin-right: 10px;
   }
 `;

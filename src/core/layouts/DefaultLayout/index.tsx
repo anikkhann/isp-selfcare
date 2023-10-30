@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout } from "antd";
 import AppHeader from "./components/AppHeader";
-
-import { useAppDispatch } from "@/store/hooks";
-import { getCategories } from "@/store/features/category/categorySlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import AppFooter from "./AppFooter";
 import Cookies from "js-cookie";
-import { getPopularPlaces } from "@/store/features/booking/PopularPlaceSlice";
+import AppImageLoader from "@/components/loader/AppImageLoader";
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
@@ -14,39 +12,48 @@ interface DefaultLayoutProps {
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const { Content } = Layout;
+  const auth = useAppSelector(state => state.auth);
+  const [loading, setLoading] = useState(true);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setLoading(true);
+
+    if (!auth.isLoggedIn) return;
+
     const token = Cookies.get("token");
+
     if (token) {
       dispatch({ type: "auth/setIsLoggedIn", payload: true });
+      setLoading(false);
     }
-
-    dispatch(getCategories());
-    dispatch(getPopularPlaces({ page: 1, per_page: 10 }));
-  }, [dispatch]);
+  }, [dispatch, auth]);
 
   return (
     <>
-      <Layout
-        className="layout container"
-        style={{
-          background: "#fff"
-        }}
-      >
-        <AppHeader />
-
-        <Content
-          className="site-layout"
+      {loading && <AppImageLoader />}
+      {auth.isLoading && <AppImageLoader />}
+      {!loading && (
+        <Layout
+          className="layout container"
           style={{
-            margin: "20px 16px 15px 16px"
+            background: "#fff"
           }}
         >
-          {children}
-        </Content>
-        <AppFooter />
-      </Layout>
+          <AppHeader />
+
+          <Content
+            className="site-layout"
+            style={{
+              margin: "20px 16px 15px 16px"
+            }}
+          >
+            {children}
+          </Content>
+          <AppFooter />
+        </Layout>
+      )}
     </>
   );
 };

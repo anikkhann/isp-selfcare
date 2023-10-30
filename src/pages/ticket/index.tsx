@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const Booking = () => {
+const Index = () => {
   const auth = useAppSelector(state => state.auth);
 
   const router = useRouter();
@@ -29,5 +29,4 @@ const Booking = () => {
   );
 };
 
-Booking.authGuard = true;
-export default Booking;
+export default Index;

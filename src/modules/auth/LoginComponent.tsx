@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
-import { Alert, Button, Form, Input, Space } from "antd";
+import React, { useState } from "react";
+import { Alert, Form, Input } from "antd";
 
 import {
   SignInButton,
@@ -9,88 +9,83 @@ import {
   StyledSignForm
 } from "./index.styled";
 import { useRouter } from "next/router";
-import AppAxios from "@/services/AppAxios";
 import Cookies from "js-cookie";
 import LoginAppLoader from "@/components/loader/LoginAppLoader";
 import { useAppDispatch } from "@/store/hooks";
-import Link from "next/link";
-import { getUserInfo } from "@/store/features/auth/AuthSlice";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+// import axios from "axios";
+
+import axios from "axios";
 
 const LoginComponent = () => {
-  const MySwal = withReactContent(Swal);
-
   const router = useRouter();
 
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [showError, setShowError] = React.useState(false);
+  const [showError, setShowError] = useState<boolean>(false);
 
-  const [errorMessage, setErrorMessage] = React.useState([]);
+  const [errorMessage, setErrorMessage] = useState<any>(null);
+
+  const { returnUrl } = router.query;
 
   const dispatch = useAppDispatch();
 
   const signInUser = async (values: any) => {
+    setShowError(false);
+    setErrorMessage(null);
     const { email, password } = values;
     setLoading(true);
 
     try {
-      AppAxios.post("/web-login", {
-        username: email,
-        password: password
-      })
+      axios
+        .post("/api/api/v1/customer/auth/authenticate", {
+          email: email,
+          password: password
+        })
         .then(async response => {
           const { data } = response;
 
+          // console.log(data);
           if (data.success === false) {
             setShowError(true);
             setErrorMessage(data.message);
-            setLoading(false);
             return;
           }
 
-          Cookies.set("token", data.data.token);
+          Cookies.set("token", data.token);
 
           dispatch({ type: "auth/setIsLoggedIn", payload: true });
 
-          dispatch(getUserInfo());
-
           setLoading(false);
-
-          MySwal.fire({
-            title: "Success",
-            text: data.message,
-            icon: "success"
-          }).then(() => {
-            router.push("/");
-          });
+          if (returnUrl) {
+            router.replace(returnUrl as string);
+          } else {
+            router.replace("/");
+          }
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           setLoading(false);
           setShowError(true);
           setErrorMessage(err.response.data.message);
 
-          // if (err.response.status === 401) {
-          // setErrorMessage(err.response.data.message)
-          // } else {
-          // setErrorMessage('Something went wrong. Please try again later.')
-          // }
+          if (err.response.status === 400) {
+            setErrorMessage(err.response.data.message);
+          } else {
+            setErrorMessage(["Something went wrong, please try again later"]);
+          }
         });
     } catch (err) {
-      console.log(err);
-      /*  setShowError(true)
-       setErrorMessage(err) */
+      // console.log(err);
+      setShowError(true);
+      setErrorMessage(err);
     }
 
-    console.log("Success:");
-
-    return false;
+    // // console.log("Success:");
+    // return false;
   };
 
   const onFinishFailed = () => {
-    console.log("Failed:");
+    // console.log("Failed:");
   };
 
   return loading ? (
@@ -99,7 +94,7 @@ const LoginComponent = () => {
     <StyledSign>
       <StyledSignContent>
         <div>
-          {showError && (
+          {showError && errorMessage && (
             <Alert
               message={errorMessage}
               type="error"
@@ -113,65 +108,66 @@ const LoginComponent = () => {
           name="basic"
           layout="vertical"
           initialValues={{
-            remember: false,
-            email: "",
-            password: ""
+            remember: true,
+            email: "talib",
+            password: "123456"
           }}
           onFinish={signInUser}
           onFinishFailed={onFinishFailed}
+          style={{ fontWeight: "bold" }}
         >
           <Form.Item
-            label="মোবাইল"
+            label="Email"
             name="email"
             className="form-field"
             rules={[
               {
                 required: true,
-                message: "Please enter your mobile!"
+                message: "Please input your Email!"
+              },
+              {
+                pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
+                message:
+                  "Only letters, numbers, underscores and hyphens allowed."
               }
             ]}
           >
-            <Input placeholder="Please enter your mobile" />
+            <Input placeholder="email" />
           </Form.Item>
 
           <Form.Item
             name="password"
-            label="পাসওয়ার্ড"
+            label="Password"
             className="form-field"
             rules={[
               {
                 required: true,
-                message: "Please enter your Password!"
+                message: "Please input your Password!"
+              },
+              {
+                pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
+                message:
+                  "Only letters, numbers, underscores and hyphens allowed"
               }
             ]}
           >
-            <Input.Password placeholder="Please enter your Password" />
+            <Input.Password placeholder="password" />
           </Form.Item>
 
           <div className="form-btn-field">
-            <SignInButton type="primary" block htmlType="submit">
+            <SignInButton
+              type="primary"
+              htmlType="submit"
+              style={{
+                backgroundColor: "#4776e6",
+                background:
+                  "-webkit-linear-gradient(to right, #4776e6, #8e54e9)",
+                fontWeight: "bold"
+              }}
+            >
               Login
             </SignInButton>
           </div>
-
-          <div
-            style={{
-              textAlign: "center",
-              fontSize: "16px",
-              fontWeight: "bold",
-              marginBottom: "10px"
-            }}
-          >
-            OR
-          </div>
-
-          <Space direction="vertical" style={{ width: "100%" }}>
-            <Link href="/otp">
-              <Button type="primary" block danger>
-                Register
-              </Button>
-            </Link>
-          </Space>
         </StyledSignForm>
       </StyledSignContent>
     </StyledSign>

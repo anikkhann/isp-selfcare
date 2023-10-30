@@ -5,13 +5,9 @@ import {
   StyledAuthCard,
   StyledAuthCardHeader,
   StyledAuthMainContent,
-  StyledAuthWelContent,
-  StyledAuthWellAction,
   StyledAuthWrap
 } from "./AuthLayout.styled";
 import AppLogo from "@/lib/AppLogo";
-import AppHeader from "../DefaultLayout/components/AppHeader";
-import AppFooter from "../DefaultLayout/AppFooter";
 
 interface IAuthLayoutProps {
   children: React.ReactNode;
@@ -20,20 +16,10 @@ interface IAuthLayoutProps {
 const AuthLayout = ({ children }: IAuthLayoutProps) => {
   return (
     <>
-      <AppHeader />
       <StyledAuth>
         <div>
           <StyledAuthWrap key={"wrap"}>
             <StyledAuthCard>
-              <StyledAuthWellAction>
-                <StyledAuthWelContent>
-                  <h2>Squarefeet Booking</h2>
-                  <p>
-                    Please Login or Register to your account to continue your
-                    booking
-                  </p>
-                </StyledAuthWelContent>
-              </StyledAuthWellAction>
               <StyledAuthMainContent>
                 <StyledAuthCardHeader>
                   <AppLogo />
@@ -44,7 +30,6 @@ const AuthLayout = ({ children }: IAuthLayoutProps) => {
           </StyledAuthWrap>
         </div>
       </StyledAuth>
-      <AppFooter />
     </>
   );
 };

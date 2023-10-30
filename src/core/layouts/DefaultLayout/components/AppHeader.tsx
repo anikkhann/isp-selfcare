@@ -1,12 +1,11 @@
 import { Avatar, Button, Drawer, Dropdown, Layout, Menu, Space } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import type { MenuProps } from "antd";
 import {
-  // ControlOutlined,
-  // UserOutlined
+  ControlOutlined,
+  UserOutlined,
   LogoutOutlined,
-  MenuOutlined,
-  UnorderedListOutlined
+  MenuOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
 import LogoTitle from "./LogoTitle";
@@ -42,78 +41,63 @@ export const StyledCrUserInfoAvatar = styled(Avatar)`
 const routes: MenuProps["items"] = [
   {
     key: "/",
-    label: "মূলপাতা"
+    label: "Dashboard"
   },
   {
-    key: "/popular",
-    label: "পপুলার বুকিং"
+    key: "/pay-bill",
+    label: "Pay Bill"
+  },
+  {
+    key: "/usage",
+    label: "Usage"
+  },
+  {
+    key: "/ticket",
+    label: "Support Ticket"
+  },
+  {
+    key: "/user/profile",
+    label: "My Account"
   }
 ];
 
 const items: MenuProps["items"] = [
-  // {
-  //   key: "profile",
-  //   label: (
-  //     <Link href="/">
-  //       <Space>
-  //         <UserOutlined />
-  //         Profile
-  //       </Space>
-  //     </Link>
-  //   )
-  // },
-  // {
-  //   type: "divider"
-  // },
-  // {
-  //   key: "change-password",
-  //   label: (
-  //     <Link href="/">
-  //       <Space>
-  //         <ControlOutlined />
-  //         Change Password
-  //       </Space>
-  //     </Link>
-  //   )
-  // },
+  {
+    key: "profile",
+    label: (
+      <Link href="/user/profile">
+        <Space>
+          <UserOutlined />
+          Profile
+        </Space>
+      </Link>
+    )
+  },
+  {
+    type: "divider"
+  },
+  {
+    key: "change-password",
+    label: (
+      <Link href="/user/change-password">
+        <Space>
+          <ControlOutlined />
+          Change Password
+        </Space>
+      </Link>
+    )
+  },
 
   {
     type: "divider"
   },
-  {
-    key: "booking",
-    label: (
-      <Link href="/user/booking">
-        <Space>
-          <UnorderedListOutlined />
-          বুকিং
-        </Space>
-      </Link>
-    )
-  },
-  {
-    type: "divider"
-  },
-  {
-    key: "payment",
-    label: (
-      <Link href="/user/invoice">
-        <Space>
-          <UnorderedListOutlined />
-          পেমেন্ট
-        </Space>
-      </Link>
-    )
-  },
-  {
-    type: "divider"
-  },
+
   {
     key: "logout",
     label: (
       <Space>
         <LogoutOutlined />
-        লগ আউট
+        Logout
       </Space>
     )
   },
@@ -125,63 +109,15 @@ const items: MenuProps["items"] = [
 function AppHeader() {
   const { Header } = Layout;
 
-  const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn);
+  const user = useAppSelector(state => state.auth.user);
 
   const [open, setOpen] = useState(false);
 
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
-  const [routeList, setRouteList] = useState(routes);
-  const [webRoutesList, setWebRoutesList] = useState(routes);
+  // console.log('user :>> ', user);
 
   const MySwal = withReactContent(Swal);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      if (routeList) {
-        const newRouteList = [
-          ...routeList,
-          {
-            key: "/logout",
-            label: "লগআউট"
-          }
-        ];
-        setRouteList(newRouteList);
-      }
-
-      if (webRoutesList) {
-        const newWebRouteList = [
-          ...webRoutesList,
-          {
-            key: "/user/booking",
-            label: "আমার বুকিং"
-          },
-          {
-            key: "/user/invoice",
-            label: "আমার পেমেন্ট"
-          }
-        ];
-        setWebRoutesList(newWebRouteList);
-      }
-    } else {
-      if (routeList) {
-        const newRouteList = [
-          ...routeList,
-          {
-            key: "/login",
-            label: "লগইন"
-          },
-          {
-            key: "/otp",
-            label: "রেজিস্টার"
-          }
-        ];
-        setRouteList(newRouteList);
-      }
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
 
   const showDrawer = () => {
     setOpenMobileMenu(true);
@@ -266,119 +202,103 @@ function AppHeader() {
               onClick={({ key }) => {
                 router.push(key);
               }}
-              items={webRoutesList}
+              items={routes}
             />
-            {!isLoggedIn && (
-              <Space
-                size="large"
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  lineHeight: "64px",
-                  background: "#fff",
-                  color: "#000"
-                }}
-              >
-                <Link href="/login">
-                  <Button
-                    type="primary"
-                    style={{
-                      marginLeft: "10px",
-                      backgroundColor: "#2db38b",
-                      color: "#ffffff",
-                      borderColor: "#2db38b"
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/otp">
-                  <Button
-                    type="primary"
-                    style={{
-                      color: "#fff",
-                      backgroundColor: "#EC4B15"
-                    }}
-                  >
-                    Register
-                  </Button>
-                </Link>
-              </Space>
-            )}
-            {isLoggedIn && (
-              <div
-                style={{
-                  marginLeft: "auto"
-                }}
-              >
-                <Dropdown
-                  menu={{
-                    items,
-                    onClick: handleMenuClick
-                  }}
-                  onOpenChange={handleOpenChange}
-                  open={open}
-                  className="flex justify-center"
-                >
-                  <HeaderBlock className="">
-                    <a onClick={e => e.preventDefault()}>
-                      <Space className="rounded-full">
-                        <StyledCrUserInfoAvatar src="/assets/images/avatar/profile.png" />
-                      </Space>
-                    </a>
-                  </HeaderBlock>
-                </Dropdown>
-              </div>
-            )}
           </div>
         </div>
 
-        <div
-          className="mobileVisible"
-          style={{
-            margin: "0 20px"
-          }}
-        >
-          <Button type="primary" onClick={showDrawer}>
-            <MenuOutlined />
-          </Button>
-          <Drawer
-            title="Menu"
-            placement="left"
-            closable={false}
-            onClose={onClose}
-            open={openMobileMenu}
+        <div className="mobileVisible">
+          <div
             style={{
-              zIndex: 9999,
-              background: "#fff",
-              boxShadow: "0 0 10px rgba(0,0,0,0.1)",
-              color: "#000",
-              maxWidth: "80%"
+              margin: "0 20px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
             }}
           >
-            <Menu
-              theme="light"
-              mode="inline"
-              defaultSelectedKeys={["2"]}
+            <div
               style={{
-                height: "100%",
-                borderRight: 0,
-                background: "#fff",
-                color: "#000",
-                maxWidth: "100%"
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center"
               }}
-              onClick={({ key }) => {
-                if (key === "/logout") {
-                  logout();
-                  onClose();
-                } else {
-                  onClose();
-                  router.push(key);
-                }
-              }}
-              items={routeList}
-            ></Menu>
-          </Drawer>
+            >
+              <Button type="primary" onClick={showDrawer}>
+                <MenuOutlined />
+              </Button>
+              <Drawer
+                title="Menu"
+                placement="left"
+                closable={false}
+                onClose={onClose}
+                open={openMobileMenu}
+                style={{
+                  zIndex: 9999,
+                  background: "#fff",
+                  boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+                  color: "#000",
+                  maxWidth: "80%"
+                }}
+              >
+                <Menu
+                  theme="light"
+                  mode="inline"
+                  defaultSelectedKeys={["2"]}
+                  style={{
+                    height: "100%",
+                    borderRight: 0,
+                    background: "#fff",
+                    color: "#000",
+                    maxWidth: "100%"
+                  }}
+                  onClick={({ key }) => {
+                    if (key === "/logout") {
+                      logout();
+                      onClose();
+                    } else {
+                      onClose();
+                      router.push(key);
+                    }
+                  }}
+                  items={routes}
+                ></Menu>
+              </Drawer>
+            </div>
+          </div>
+        </div>
+        <div
+          style={{
+            marginLeft: "auto"
+          }}
+        >
+          <Dropdown
+            menu={{
+              items,
+              onClick: handleMenuClick
+            }}
+            onOpenChange={handleOpenChange}
+            open={open}
+            className="flex justify-center"
+          >
+            <HeaderBlock className="">
+              <a onClick={e => e.preventDefault()}>
+                <Space className="rounded-full">
+                  <Avatar
+                    size={40}
+                    style={{
+                      backgroundColor: "#f56a00",
+                      verticalAlign: "middle",
+                      fontSize: "24px"
+                    }}
+                  >
+                    {/* {user?.name?.charAt(0).toUpperCase()} */}
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </Avatar>
+                  {/* <StyledCrUserInfoAvatar src="/assets/images/avatar/profile.png" /> */}
+                </Space>
+              </a>
+            </HeaderBlock>
+          </Dropdown>
         </div>
       </Header>
     </>

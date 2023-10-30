@@ -9,8 +9,8 @@ interface AppPageMetaProps {
   image?: string;
 }
 
-const defaultTitle = "Squarefeet";
-const defaultDescription = "Booking Panel for Squarefeet.";
+const defaultTitle = "SelfCare";
+const defaultDescription = "SelfCare";
 const defaultImage = "/images/logo.png";
 const defaultSep = " | ";
 
@@ -44,11 +44,11 @@ const AppPageMeta = ({
               url: theImage,
               width: 800,
               height: 600,
-              alt: "Squarefeet",
+              alt: "SelfCare",
               type: "image/jpeg"
             }
           ],
-          site_name: "Squarefeet"
+          site_name: "SelfCare"
         }}
       />
       {children}

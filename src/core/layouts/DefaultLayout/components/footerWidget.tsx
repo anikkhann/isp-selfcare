@@ -1,4 +1,4 @@
-import { Button, Col, Row, Space, Typography } from "antd";
+import { Col, Row, Space, Typography } from "antd";
 import { List } from "antd";
 import Image from "next/image";
 import React from "react";
@@ -15,7 +15,7 @@ import {
 const items = [
   {
     name: "phone",
-    text: "+8801940301000",
+    text: "+880 1711 111 111",
     icon: (
       <AiFillPhone
         style={{
@@ -32,7 +32,7 @@ const items = [
   },
   {
     name: "email",
-    text: "info@squarefeet.xyz",
+    text: "info@test.com.bd",
     icon: (
       <MdEmail
         style={{
@@ -49,7 +49,7 @@ const items = [
   },
   {
     name: "address",
-    text: "14 Rd 16/A, Gulshan, Dhaka 1212, Bangladesh",
+    text: "Dhaka, Bangladesh",
     icon: (
       <FaMapLocation
         style={{
@@ -69,7 +69,7 @@ const items = [
 const socials = [
   {
     name: "facebook",
-    link: "https://www.facebook.com/squarefeet.xyz",
+    link: "https://www.facebook.com",
     icon: (
       <AiFillFacebook
         style={{
@@ -85,7 +85,7 @@ const socials = [
   },
   {
     name: "instagram",
-    link: "https://www.instagram.com/squarefeet.xyz/",
+    link: "https://www.instagram.com",
     icon: (
       <AiFillInstagram
         style={{
@@ -101,7 +101,7 @@ const socials = [
   },
   {
     name: "linkedin",
-    link: "https://www.linkedin.com/company/squarefeetxyz",
+    link: "https://www.linkedin.com",
     icon: (
       <AiFillLinkedin
         style={{
@@ -117,7 +117,7 @@ const socials = [
   },
   {
     name: "twitter",
-    link: "https://twitter.com/squarefeetxyz",
+    link: "https://twitter.com",
     icon: (
       <AiOutlineTwitter
         style={{
@@ -156,10 +156,7 @@ const FooterWidget = () => {
                   fontSize: "16px"
                 }}
               >
-                স্কয়ারফিট হচ্ছে প্রথম বাংলাদেশী কমিনিটি-ভিত্তিক ডিজিটাল
-                প্রোপার্টি ম্যানেজমেন্ট প্ল্যাটফর্ম। এখান থেকে অনলাইন সার্ভিস
-                চার্জ ম্যানেজ করা এবং আরো অনেক সেবার পাশাপাশি খেলার মাঠ,
-                কমিউনিটি সেন্টার সহ অনেক কিছু অনলাইনে বুক করা যায় সহজে।
+                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               </Text>
             </Paragraph>
 
@@ -195,7 +192,7 @@ const FooterWidget = () => {
         {/* contact us */}
         <Col xs={{ span: 24 }} sm={{ span: 24 }} md={8}>
           <Typography>
-            <Title level={4}>যোগাযোগের তথ্য</Title>
+            <Title level={4}>Contact Us</Title>
             <Paragraph>
               <List>
                 {items &&
@@ -220,49 +217,18 @@ const FooterWidget = () => {
           </Typography>
         </Col>
 
-        {/* download */}
+        {/* payment */}
         <Col xs={{ span: 24 }} sm={{ span: 24 }} md={8}>
           <Typography>
-            <Title level={4}>আমাদের অ্যাপটি ডাউনলোড করুন</Title>
+            <Title level={4}>Payments Options</Title>
             <Paragraph>
               <Space direction="vertical" style={{ width: "100%" }}>
-                <a
-                  href="https://play.google.com/store/apps/details?id=xyz.squarefeet.user"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button
-                    type="primary"
-                    size="large"
-                    block
-                    style={{
-                      backgroundColor: "#2db38b",
-                      borderColor: "#2db38b",
-                      color: "#fff"
-                    }}
-                  >
-                    প্লে স্টোর
-                  </Button>
-                </a>
-
-                <a
-                  href="https://apps.apple.com/us/app/squarefeet-platform/id1638789542"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Button
-                    type="primary"
-                    size="large"
-                    block
-                    style={{
-                      backgroundColor: "#2db38b",
-                      borderColor: "#2db38b",
-                      color: "#fff"
-                    }}
-                  >
-                    অ্যাপেল স্টোর
-                  </Button>
-                </a>
+                <Image
+                  src="/images/payment.gif"
+                  alt="payment"
+                  width={200}
+                  height={200}
+                />
               </Space>
             </Paragraph>
           </Typography>

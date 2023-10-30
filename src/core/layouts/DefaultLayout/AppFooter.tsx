@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import React from "react";
-import FooterWidget from "./components/footerWidget";
+import FooterWidget from "./components/FooterWidget";
 import FooterCopyright from "./components/FooterCopyRight";
 
 const AppFooter = () => {

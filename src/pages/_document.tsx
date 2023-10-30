@@ -27,12 +27,11 @@ export default class MyDocument extends Document {
 
     ctx.renderPage = () =>
       originalRenderPage({
-        enhanceApp: App => props =>
-          (
-            <StyleProvider cache={cache}>
-              <App {...props} />
-            </StyleProvider>
-          )
+        enhanceApp: App => props => (
+          <StyleProvider cache={cache}>
+            <App {...props} />
+          </StyleProvider>
+        )
       });
 
     const initialProps = await Document.getInitialProps(ctx);
@@ -56,7 +55,7 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="shortcut icon" href="/images/icon.png" />
+          <link rel="shortcut icon" href="/images/logo.png" />
         </Head>
         <body id="#app">
           <Main />

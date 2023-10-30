@@ -8,12 +8,12 @@ const AppFooter = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="">
         <Footer
           // className="container"
           style={{
             width: "100%",
-            margin: "20px 16px 15px 16px"
+            margin: "0 auto"
           }}
         >
           <FooterWidget />

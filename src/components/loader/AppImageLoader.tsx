@@ -24,7 +24,13 @@ const AppImageLoader = () => {
           cursor: "wait"
         }}
       >
-        <Image src="/images/logo.png" width={40} height={50} alt="logo" />
+        <Image
+          src="/images/logo.png"
+          priority={true}
+          width={40}
+          height={50}
+          alt="logo"
+        />
         <Spin
           size="large"
           style={{

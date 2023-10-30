@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode, useEffect } from "react";
 import { useRouter } from "next/router";
-// import { useAuth } from './useAuth'
+
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import axios from "axios";
@@ -49,9 +49,12 @@ const AuthGuard = (props: AuthGuardProps) => {
             dispatch({ type: "auth/setUser", payload: response.data });
           })
           .catch(error => {
-            // // console.log(error);
+            console.log(error);
             if (error.response) {
-              if (error.response.status === 401) {
+              if (
+                error.response.status === 401 ||
+                error.response.status == "500"
+              ) {
                 Cookies.remove("token");
                 router.replace("/login");
               }

@@ -44,9 +44,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
           <AppHeader />
 
           <Content
-            className="site-layout"
             style={{
-              margin: "20px 16px 15px 16px"
+              margin: "20px",
+              minHeight: "100vh !important"
             }}
           >
             {children}

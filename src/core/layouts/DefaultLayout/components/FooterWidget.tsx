@@ -147,7 +147,9 @@ const FooterWidget = () => {
                 src="/images/logo.png"
                 alt="logo"
                 width={200}
-                height={200}
+                height={100}
+                priority={true}
+                style={{ width: "200px", height: "100" }}
               />
             </Title>
             <Paragraph>
@@ -227,7 +229,9 @@ const FooterWidget = () => {
                   src="/images/payment.gif"
                   alt="payment"
                   width={200}
-                  height={200}
+                  height={100}
+                  priority={true}
+                  style={{ width: "200px", height: "100px" }}
                 />
               </Space>
             </Paragraph>

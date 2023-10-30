@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import styled from "styled-components";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import mainRoutes from "@/core/routes/mainRoutes";
 
 const TriggerBlock = styled.div`
   display: inline-block;
@@ -37,29 +38,6 @@ export const StyledCrUserInfoAvatar = styled(Avatar)`
   justify-content: center;
   cursor: pointer;
 `;
-
-const routes: MenuProps["items"] = [
-  {
-    key: "/",
-    label: "Dashboard"
-  },
-  {
-    key: "/pay-bill",
-    label: "Pay Bill"
-  },
-  {
-    key: "/usage",
-    label: "Usage"
-  },
-  {
-    key: "/ticket",
-    label: "Support Ticket"
-  },
-  {
-    key: "/user/profile",
-    label: "My Account"
-  }
-];
 
 const items: MenuProps["items"] = [
   {
@@ -202,7 +180,7 @@ function AppHeader() {
               onClick={({ key }) => {
                 router.push(key);
               }}
-              items={routes}
+              items={mainRoutes}
             />
           </div>
         </div>
@@ -260,7 +238,7 @@ function AppHeader() {
                       router.push(key);
                     }
                   }}
-                  items={routes}
+                  items={mainRoutes}
                 ></Menu>
               </Drawer>
             </div>

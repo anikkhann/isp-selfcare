@@ -11,8 +11,6 @@ import { AlignType } from "rc-table/lib/interface";
 import axios from "axios";
 import { TicketData } from "@/interfaces/TicketData";
 import { format } from "date-fns";
-import Link from "next/link";
-
 interface TableParams {
   pagination?: TablePaginationConfig;
   sortField?: string;
@@ -77,7 +75,7 @@ const PaymentHistory = () => {
     },
     onSuccess(data: any) {
       if (data) {
-        console.log("data.data", data);
+        // console.log("data.data", data);
         if (data.body) {
           setData(data.body);
           setTableParams({
@@ -129,43 +127,6 @@ const PaymentHistory = () => {
     },
 
     {
-      title: "Ticket Number",
-      dataIndex: "ticketNo",
-      sorter: true,
-      render: (ticketNo, row) => {
-        return (
-          <Space size="middle" align="center" wrap className="mx-1">
-            <Link href={`/admin/complaint/customer-ticket/${row.id}`}>
-              {ticketNo}
-            </Link>
-          </Space>
-        );
-      },
-      width: 200,
-      align: "center" as AlignType
-    },
-    {
-      title: "Customer ID",
-      dataIndex: "customer.customerId",
-      sorter: false,
-      render: (customer, row) => {
-        return <>{row.customer.customerId}</>;
-      },
-
-      width: 200,
-      align: "center" as AlignType
-    },
-    {
-      title: "Username",
-      dataIndex: "customer.username",
-      sorter: false,
-      render: (customer, row) => {
-        return <>{row.customer.username}</>;
-      },
-      width: 200,
-      align: "center" as AlignType
-    },
-    {
       title: "complainType",
       dataIndex: "complainType",
       render: (complainType, row) => {
@@ -197,44 +158,6 @@ const PaymentHistory = () => {
       align: "center" as AlignType
     },
 
-    // insertedBy
-    {
-      title: "Created By",
-      dataIndex: "insertedBy",
-      sorter: false,
-      render: (insertedBy: any) => {
-        if (!insertedBy) return "-";
-        return <>{insertedBy.name}</>;
-      },
-      /* width: "20%", */
-      align: "center" as AlignType
-    },
-    // createdOn
-    {
-      title: "Created At",
-      dataIndex: "createdOn",
-      sorter: false,
-      render: (createdOn: any) => {
-        if (!createdOn) return "-";
-        const date = new Date(createdOn);
-        return <>{format(date, "yyyy-MM-dd pp")}</>;
-      },
-      /* width: "20%", */
-      align: "center" as AlignType
-    },
-    // editedBy
-    {
-      title: "Updated By",
-      dataIndex: "editedBy",
-      sorter: false,
-      render: (editedBy: any) => {
-        if (!editedBy) return "-";
-        return <>{editedBy.name}</>;
-      },
-
-      /* width: "20%", */
-      align: "center" as AlignType
-    },
     // updatedOn
     {
       title: "Updated At",

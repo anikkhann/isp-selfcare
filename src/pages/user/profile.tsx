@@ -1,6 +1,6 @@
 import AppLoader from "@/lib/AppLoader";
 
-import UserProfile from "@/modules/user/UserProfile";
+import DetailsProfile from "@/modules/user/DetailsProfile";
 
 import { useAppSelector } from "@/store/hooks";
 
@@ -10,7 +10,7 @@ const Booking = () => {
   return (
     <>
       {auth.isLoading && <AppLoader />}
-      {!auth.isLoading && auth.isLoggedIn && <UserProfile />}
+      {!auth.isLoading && auth.isLoggedIn && <DetailsProfile />}
     </>
   );
 };

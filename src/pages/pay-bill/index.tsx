@@ -1,5 +1,5 @@
 import AppLoader from "@/lib/AppLoader";
-import BookingList from "@/modules/booking/BookingList";
+import TicketList from "@/modules/ticket/TicketList";
 
 import { useAppSelector } from "@/store/hooks";
 
@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       {auth.isLoading && <AppLoader />}
-      {!auth.isLoading && auth.isLoggedIn && <BookingList />}
+      {!auth.isLoading && auth.isLoggedIn && <TicketList />}
     </>
   );
 };

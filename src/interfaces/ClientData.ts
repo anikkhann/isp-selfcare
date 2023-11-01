@@ -1,4 +1,14 @@
-import { EditedBy } from "./RoleData";
+export interface EditedBy {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  name: string;
+  username: string;
+  phone: string;
+  email: string;
+  isActive: boolean;
+  userType: string;
+}
 
 export interface ClientData {
   createdOn: number;

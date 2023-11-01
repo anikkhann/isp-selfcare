@@ -10,7 +10,7 @@ interface AuthState {
   user: UserLoggedInData | null;
 }
 
-interface UserLoggedInData {
+export interface UserLoggedInData {
   userId: string;
   name: string;
   firstName: any;

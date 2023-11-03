@@ -1,7 +1,7 @@
 import UsageCard from "@/components/dashboard/UsageCard";
-import UsageHistory from "@/components/dashboard/UsageHistory";
 import { Col, Row } from "antd";
 import React from "react";
+import UsageHistory from "./UsageHistroy";
 
 const DetailsUsageData = () => {
   return (

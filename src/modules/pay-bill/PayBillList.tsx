@@ -1,4 +1,4 @@
-import DetailsUsageData from "@/components/details/usage/DetailsUsageData";
+import DetailsPayBillData from "@/components/details/payBill/DetailsPayBillData";
 import { Col, Row } from "antd";
 import React from "react";
 
@@ -7,7 +7,7 @@ const PayBillList = () => {
     <>
       <Row gutter={[16, 16]} justify={"center"}>
         <Col lg={24}>
-          <DetailsUsageData />
+          <DetailsPayBillData />
         </Col>
       </Row>
     </>

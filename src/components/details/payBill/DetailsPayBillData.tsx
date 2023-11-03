@@ -1,9 +1,9 @@
-import UsageCard from "@/components/dashboard/UsageCard";
-import UsageHistory from "@/components/dashboard/UsageHistory";
-import { Col, Row } from "antd";
+import TopUpForm from "@/components/forms/payBill/TopUpForm";
+import { Card, Col, Row } from "antd";
 import React from "react";
+import PaymentHistory from "./PaymentHistory";
 
-const DetailsUsageData = () => {
+const DetailsPayBillData = () => {
   return (
     <>
       <Row gutter={[16, 16]} justify={"center"}>
@@ -18,11 +18,13 @@ const DetailsUsageData = () => {
             }
           }
         >
-          <UsageCard />
+          <Card title="Top Up" style={{ width: "100%" }}>
+            <TopUpForm />
+          </Card>
         </Col>
         <Col
-          lg={16}
-          md={16}
+          lg={18}
+          md={18}
           sm={24}
           xs={24}
           style={
@@ -31,11 +33,11 @@ const DetailsUsageData = () => {
             }
           }
         >
-          <UsageHistory />
+          <PaymentHistory />
         </Col>
       </Row>
     </>
   );
 };
 
-export default DetailsUsageData;
+export default DetailsPayBillData;

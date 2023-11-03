@@ -8,11 +8,7 @@ module.exports = {
 
   important: true,
 
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}"
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -41,5 +37,11 @@ module.exports = {
       grey3: "#E3E8F1"
     }
   },
-  plugins: []
+  plugins: [],
+  target: [
+    "relaxed",
+    {
+      space: "ie11"
+    }
+  ]
 };

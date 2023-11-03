@@ -18,6 +18,11 @@ const mainRoutes: MenuProps["items"] = [
     label: "Support Ticket"
   },
   {
+    key: "/troubleshoot",
+    label: "Troubleshoot"
+  },
+
+  {
     key: "/user/profile",
     label: "My Account"
   }

@@ -1,9 +1,9 @@
 import { FloatButton } from "antd";
-import React from "react";
+import React, { useRef } from "react";
 import dayjs from "dayjs";
 
 function FooterCopyright() {
-  const nodeRef = React.useRef(null);
+  const backTopRef = useRef(null);
 
   return (
     <>
@@ -19,9 +19,13 @@ function FooterCopyright() {
           {dayjs().year()}
           &copy; All Rights Reserved.
         </div>
-      </div>
-      <div ref={nodeRef}>
-        <FloatButton.BackTop type="primary" tooltip="Back to Top" />
+        {/* fix findDOMNode issue    */}
+
+        <FloatButton.BackTop
+          type="primary"
+          tooltip="Back to Top"
+          ref={backTopRef}
+        />
       </div>
     </>
   );

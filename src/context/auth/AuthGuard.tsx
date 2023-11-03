@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import axios from "axios";
+import { UserLoggedInData } from "@/store/features/auth/AuthSlice";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -16,6 +17,27 @@ const AuthGuard = (props: AuthGuardProps) => {
   const auth = useAppSelector(state => state.auth);
 
   const dispatch = useAppDispatch();
+
+  const getSiteData = async (user: UserLoggedInData) => {
+    await axios
+      .get(
+        `/api/email-template-settings/get-client-general-info/${user.partnerId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+      .then(response => {
+        if (response.data.status == "200") {
+          dispatch({ type: "site/setSiteData", payload: response.data.body });
+        }
+        // console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   // // console.log("auth", auth);
   const router = useRouter();
@@ -45,6 +67,7 @@ const AuthGuard = (props: AuthGuardProps) => {
               Cookies.remove("token");
               router.replace("/login");
             }
+            getSiteData(response.data);
             dispatch({ type: "auth/setIsLoggedIn", payload: true });
             dispatch({ type: "auth/setUser", payload: response.data });
           })

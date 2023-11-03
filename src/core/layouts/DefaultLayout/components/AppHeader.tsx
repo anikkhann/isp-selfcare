@@ -93,8 +93,6 @@ function AppHeader() {
 
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
-  // console.log('user :>> ', user);
-
   const MySwal = withReactContent(Swal);
 
   const showDrawer = () => {

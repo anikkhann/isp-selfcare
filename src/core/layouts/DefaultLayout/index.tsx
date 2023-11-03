@@ -26,6 +26,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
     if (token) {
       dispatch({ type: "auth/setIsLoggedIn", payload: true });
+
       setLoading(false);
     }
   }, [dispatch, auth]);

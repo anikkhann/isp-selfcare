@@ -11,130 +11,138 @@ import {
   AiOutlineTwitter,
   AiFillPhone
 } from "react-icons/ai";
-
-const items = [
-  {
-    name: "phone",
-    text: "+880 1711 111 111",
-    icon: (
-      <AiFillPhone
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-
-          fontWeight: "bold"
-        }}
-      />
-    )
-  },
-  {
-    name: "email",
-    text: "info@test.com.bd",
-    icon: (
-      <MdEmail
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-
-          fontWeight: "bold"
-        }}
-      />
-    )
-  },
-  {
-    name: "address",
-    text: "Dhaka, Bangladesh",
-    icon: (
-      <FaMapLocation
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-
-          fontWeight: "bold"
-        }}
-      />
-    )
-  }
-];
-
-const socials = [
-  {
-    name: "facebook",
-    link: "https://www.facebook.com",
-    icon: (
-      <AiFillFacebook
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-          fontWeight: "bold"
-        }}
-      />
-    )
-  },
-  {
-    name: "instagram",
-    link: "https://www.instagram.com",
-    icon: (
-      <AiFillInstagram
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-          fontWeight: "bold"
-        }}
-      />
-    )
-  },
-  {
-    name: "linkedin",
-    link: "https://www.linkedin.com",
-    icon: (
-      <AiFillLinkedin
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-          fontWeight: "bold"
-        }}
-      />
-    )
-  },
-  {
-    name: "twitter",
-    link: "https://twitter.com",
-    icon: (
-      <AiOutlineTwitter
-        style={{
-          alignItems: "center",
-          height: "20px",
-          width: "20px",
-          margin: "0 10px",
-          color: "#EC4B15",
-          fontWeight: "bold"
-        }}
-      />
-    )
-  }
-];
+import { useAppSelector } from "@/store/hooks";
 
 const FooterWidget = () => {
   const { Title, Paragraph, Text } = Typography;
+
+  const site = useAppSelector(state => state.site.site);
+
+  const url = process.env.NEXT_PUBLIC_BACKEND_URL;
+  const logo = site?.logo
+    ? `${url}/email-template-settings/public/downloadFile/${site.logo}`
+    : "/images/logo.png";
+
+  const items = [
+    {
+      name: "phone",
+      text: `${site?.support_number || "-"}`,
+      icon: (
+        <AiFillPhone
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+
+            fontWeight: "bold"
+          }}
+        />
+      )
+    },
+    {
+      name: "email",
+      text: `${site?.support_email || "-"}`,
+      icon: (
+        <MdEmail
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+
+            fontWeight: "bold"
+          }}
+        />
+      )
+    },
+    {
+      name: "address",
+      text: `${site?.address || "-"}`,
+      icon: (
+        <FaMapLocation
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+
+            fontWeight: "bold"
+          }}
+        />
+      )
+    }
+  ];
+
+  const socials = [
+    {
+      name: "facebook",
+      link: `${site?.facebook || "https://www.facebook.com"}`,
+      icon: (
+        <AiFillFacebook
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+            fontWeight: "bold"
+          }}
+        />
+      )
+    },
+    {
+      name: "instagram",
+      link: `${site?.instagram || "https://www.instagram.com"}`,
+      icon: (
+        <AiFillInstagram
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+            fontWeight: "bold"
+          }}
+        />
+      )
+    },
+    {
+      name: "linkedin",
+      link: `${site?.linkedin || "https://www.linkedin.com"}`,
+      icon: (
+        <AiFillLinkedin
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+            fontWeight: "bold"
+          }}
+        />
+      )
+    },
+    {
+      name: "twitter",
+      link: `${site?.twitter || "https://www.twitter.com"}`,
+      icon: (
+        <AiOutlineTwitter
+          style={{
+            alignItems: "center",
+            height: "20px",
+            width: "20px",
+            margin: "0 10px",
+            color: "#EC4B15",
+            fontWeight: "bold"
+          }}
+        />
+      )
+    }
+  ];
 
   return (
     <div className="footerWidget">
@@ -144,7 +152,7 @@ const FooterWidget = () => {
           <Typography>
             <Title>
               <Image
-                src="/images/logo.png"
+                src={site?.logo ? logo : "/images/logo.png"}
                 alt="logo"
                 width={200}
                 height={100}
@@ -158,7 +166,7 @@ const FooterWidget = () => {
                   fontSize: "16px"
                 }}
               >
-                lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                {site?.about_us}
               </Text>
             </Paragraph>
 
@@ -172,20 +180,21 @@ const FooterWidget = () => {
             >
               {socials &&
                 socials.map((item, index) => (
-                  <a
-                    key={index}
-                    href={item.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      margin: "0 10px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center"
-                    }}
-                  >
-                    {item.icon}
-                  </a>
+                  <>
+                    {/* remove first part that is adding by nextjs */}
+                    <a
+                      href={
+                        item.link.search("http") === -1
+                          ? `https://${item.link}`
+                          : item.link
+                      }
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      key={index}
+                    >
+                      {item.icon}
+                    </a>
+                  </>
                 ))}
             </div>
           </Typography>

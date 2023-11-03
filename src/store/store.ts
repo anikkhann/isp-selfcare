@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import AuthReducer from "./features/auth/AuthSlice";
+import SiteReducer from "./features/site/SiteSlice";
 
 export const store = configureStore({
   reducer: {
     // reference reducers here
-    auth: AuthReducer
+    auth: AuthReducer,
+    site: SiteReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

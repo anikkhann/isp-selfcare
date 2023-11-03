@@ -1,5 +1,5 @@
-import PaymentHistory from "@/components/dashboard/PaymentHistory";
-import TicketHistory from "@/components/dashboard/TicketHistory";
+import PaymentHistory from "@/components/dashboard/HomePaymentHistory";
+import TicketHistory from "@/components/dashboard/HomeTicketHistory";
 import TopHeader from "@/components/dashboard/TopHeader";
 import { Col, Row } from "antd";
 import React from "react";

@@ -1,4 +1,4 @@
-import TicketHistory from "@/components/dashboard/TicketHistory";
+import TicketHistory from "@/components/dashboard/HomeTicketHistory";
 import { Button, Card, Col, Row } from "antd";
 import Link from "next/link";
 import React from "react";

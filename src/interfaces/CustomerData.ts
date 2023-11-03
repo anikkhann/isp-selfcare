@@ -1,117 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { Union, Upazilla } from "./ClientData";
-import { SubZoneManager, ZoneManager } from "./TicketData";
-
-export interface EditedBy {
+export interface Division {
   createdOn: number;
-  updatedOn: number;
   id: string;
   name: string;
-  username: string;
-  phone: string;
-  email: string;
-  isActive: boolean;
-  userType: string;
-}
-
-export interface CustomerData {
-  createdOn: number;
-  id: string;
-  customerId: string;
-  name: string;
-  username: string;
-  password: string;
-  customerType: CustomerType;
-  customerTypeId: string;
-  mobileNo: string;
-  email: string;
-  contactPerson: string;
-  contactPersonNumber: string;
-  connectionAddress: string;
-  houseNo: string;
-  roadNo: string;
-  area: string;
-  identityType: string;
-  identityNo: string;
-  customerPackage: CustomerPackage;
-  customerPackageId: string;
-  distributionZone: DistributionZone;
-  distributionZoneId: string;
-  distributionPop: DistributionPop;
-  distributionPopId: string;
-  isMacBound: boolean;
-  simultaneousUser: number;
-  ipMode: string;
-  expirationTime: number;
-  credits: number;
-  autoRenew: boolean;
-  discount: number;
-  smsAlert: boolean;
-  emailAlert: boolean;
-  partner: Partner6;
-  partnerId: string;
-  client: Client;
-  clientId: string;
-  isActive: boolean;
-  isSafVerified: boolean;
-  insertedBy: InsertedBy;
-  editedBy: EditedBy;
-  updatedOn?: string;
-  altMobileNo?: string;
-  flatNo?: string;
-  remarks?: string;
-  referenceType?: string;
-  referrerName?: string;
-  divisionId?: string;
-  districtId?: string;
-  upazillaId?: string;
-  unionId?: string;
-  clientNote?: string;
-  clientStatus?: string;
-  zoneNote?: string;
-  zoneStatus?: string;
-  contactNumber?: number;
-  connectionType?: string;
-  swPortNo?: any;
-  vlanBoxName?: string;
-  cableLength?: number;
-  division?: Division;
-  district?: District;
-  upazilla?: Upazilla;
-  union?: Union;
-  zoneManager?: ZoneManager;
-  subZoneManager?: SubZoneManager;
-  adjustmentDay?: any;
-  mac: string;
-  staticIp: string;
-}
-
-export interface CustomerType {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  partner: Partner;
-  title: string;
-  isActive: boolean;
-}
-
-export interface Partner {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  partnerType: string;
-  name: string;
-  username: string;
-  contactPerson: string;
-  contactNumber: string;
-  altContactNumber: string;
-  email: string;
-  address: string;
-  division: Division;
-  district: District;
-  credits: number;
-  radiusIp: RadiusIp;
-  isActive: boolean;
+  bnName: string;
+  url: string;
 }
 
 export interface Division {
@@ -125,7 +17,7 @@ export interface Division {
 export interface District {
   createdOn: number;
   id: string;
-  division: Division2;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -133,7 +25,45 @@ export interface District {
   url: string;
 }
 
-export interface Division2 {
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
+  isActive: boolean;
+}
+
+export interface Partner {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  partnerType: string;
+  clientLevel: string;
+  name: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
+  isActive: boolean;
+  wsdCommission: number;
+}
+
+export interface CustomerType {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  partner: Partner;
+  title: string;
+  isActive: boolean;
+}
+
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -141,21 +71,144 @@ export interface Division2 {
   url: string;
 }
 
+export interface Division {
+  createdOn: number;
+  id: string;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface Division {
+  createdOn: number;
+  id: string;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface Upazilla {
+  createdOn: number;
+  id: string;
+  district: District;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface Division {
+  createdOn: number;
+  id: string;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface Upazilla {
+  createdOn: number;
+  id: string;
+  district: District;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface Union {
+  createdOn: number;
+  id: string;
+  upazilla: Upazilla;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface Division {
+  createdOn: number;
+  id: string;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface Division {
+  createdOn: number;
+  id: string;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
 export interface RadiusIp {
   createdOn: number;
   id: string;
+  authProtocol: string;
   name: string;
-  master: Master;
   isActive: boolean;
 }
 
-export interface Master {
+export interface Partner {
   createdOn: number;
   updatedOn: number;
   id: string;
+  partnerType: string;
+  clientLevel: string;
   name: string;
-  key: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
 export interface CustomerPackage {
@@ -169,7 +222,7 @@ export interface CustomerPackage {
   downloadLimit: number;
   downloadLimitUnit: string;
   ipPoolName: string;
-  validityUnit: ValidityUnit;
+  validityUnit: string;
   validity: number;
   vat: number;
   totalPrice: number;
@@ -177,49 +230,11 @@ export interface CustomerPackage {
   autoRenew: boolean;
   isAssignedToZone: boolean;
   isAssignedToSubZone: boolean;
-  partner: Partner2;
+  partner: Partner;
   isActive: boolean;
 }
 
-export interface ValidityUnit {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  name: string;
-  code: string;
-  master: Master2;
-  isActive: boolean;
-  isSystem: boolean;
-}
-
-export interface Master2 {
-  createdOn: number;
-  id: string;
-  name: string;
-  key: string;
-  isActive: boolean;
-}
-
-export interface Partner2 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  partnerType: string;
-  name: string;
-  username: string;
-  contactPerson: string;
-  contactNumber: string;
-  altContactNumber: string;
-  email: string;
-  address: string;
-  division: Division3;
-  district: District2;
-  credits: number;
-  radiusIp: RadiusIp2;
-  isActive: boolean;
-}
-
-export interface Division3 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -227,10 +242,18 @@ export interface Division3 {
   url: string;
 }
 
-export interface District2 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division4;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -238,59 +261,44 @@ export interface District2 {
   url: string;
 }
 
-export interface Division4 {
+export interface RadiusIp {
   createdOn: number;
   id: string;
+  authProtocol: string;
   name: string;
-  bnName: string;
-  url: string;
-}
-
-export interface RadiusIp2 {
-  createdOn: number;
-  id: string;
-  name: string;
-  master: Master3;
   isActive: boolean;
 }
 
-export interface Master3 {
+export interface Partner {
   createdOn: number;
   updatedOn: number;
   id: string;
+  partnerType: string;
+  clientLevel: string;
   name: string;
-  key: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
 export interface DistributionZone {
   createdOn: number;
   id: string;
-  partner: Partner3;
+  partner: Partner;
   name: string;
   isActive: boolean;
 }
 
-export interface Partner3 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  partnerType: string;
-  name: string;
-  username: string;
-  contactPerson: string;
-  contactNumber: string;
-  altContactNumber: string;
-  email: string;
-  address: string;
-  division: Division5;
-  district: District3;
-  credits: number;
-  radiusIp: RadiusIp3;
-  isActive: boolean;
-}
-
-export interface Division5 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -298,10 +306,18 @@ export interface Division5 {
   url: string;
 }
 
-export interface District3 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division6;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -309,7 +325,36 @@ export interface District3 {
   url: string;
 }
 
-export interface Division6 {
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
+  isActive: boolean;
+}
+
+export interface Partner {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  partnerType: string;
+  clientLevel: string;
+  name: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
+  isActive: boolean;
+  wsdCommission: number;
+}
+
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -317,28 +362,66 @@ export interface Division6 {
   url: string;
 }
 
-export interface RadiusIp3 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
-  master: Master4;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
   isActive: boolean;
 }
 
-export interface Master4 {
+export interface Partner {
   createdOn: number;
   updatedOn: number;
   id: string;
+  partnerType: string;
+  clientLevel: string;
   name: string;
-  key: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
+  isActive: boolean;
+  wsdCommission: number;
+}
+
+export interface Zone {
+  createdOn: number;
+  id: string;
+  partner: Partner;
+  name: string;
   isActive: boolean;
 }
 
 export interface DistributionPop {
   createdOn: number;
-  updatedOn: number;
   id: string;
-  partner: Partner4;
+  partner: Partner;
   zone: Zone;
   name: string;
   latitude: string;
@@ -346,26 +429,7 @@ export interface DistributionPop {
   isActive: boolean;
 }
 
-export interface Partner4 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  partnerType: string;
-  name: string;
-  username: string;
-  contactPerson: string;
-  contactNumber: string;
-  altContactNumber: string;
-  email: string;
-  address: string;
-  division: Division7;
-  district: District4;
-  credits: number;
-  radiusIp: RadiusIp4;
-  isActive: boolean;
-}
-
-export interface Division7 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -373,10 +437,18 @@ export interface Division7 {
   url: string;
 }
 
-export interface District4 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division8;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -384,44 +456,20 @@ export interface District4 {
   url: string;
 }
 
-export interface Division8 {
+export interface RadiusIp {
   createdOn: number;
   id: string;
-  name: string;
-  bnName: string;
-  url: string;
-}
-
-export interface RadiusIp4 {
-  createdOn: number;
-  id: string;
-  name: string;
-  master: Master5;
-  isActive: boolean;
-}
-
-export interface Master5 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  name: string;
-  key: string;
-  isActive: boolean;
-}
-
-export interface Zone {
-  createdOn: number;
-  id: string;
-  partner: Partner5;
+  authProtocol: string;
   name: string;
   isActive: boolean;
 }
 
-export interface Partner5 {
+export interface Partner {
   createdOn: number;
   updatedOn: number;
   id: string;
   partnerType: string;
+  clientLevel: string;
   name: string;
   username: string;
   contactPerson: string;
@@ -429,14 +477,15 @@ export interface Partner5 {
   altContactNumber: string;
   email: string;
   address: string;
-  division: Division9;
-  district: District5;
+  division: Division;
+  district: District;
   credits: number;
-  radiusIp: RadiusIp5;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
-export interface Division9 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -444,10 +493,18 @@ export interface Division9 {
   url: string;
 }
 
-export interface District5 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division10;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -455,7 +512,7 @@ export interface District5 {
   url: string;
 }
 
-export interface Division10 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -463,28 +520,39 @@ export interface Division10 {
   url: string;
 }
 
-export interface RadiusIp5 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
-  master: Master6;
-  isActive: boolean;
+  bnName: string;
+  url: string;
 }
 
-export interface Master6 {
+export interface District {
   createdOn: number;
-  updatedOn: number;
   id: string;
+  division: Division;
   name: string;
-  key: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
   isActive: boolean;
 }
 
-export interface Partner6 {
+export interface Parent {
   createdOn: number;
   updatedOn: number;
   id: string;
   partnerType: string;
+  clientLevel: string;
   name: string;
   username: string;
   contactPerson: string;
@@ -492,14 +560,15 @@ export interface Partner6 {
   altContactNumber: string;
   email: string;
   address: string;
-  division: Division11;
-  district: District6;
+  division: Division;
+  district: District;
   credits: number;
-  radiusIp: RadiusIp6;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
-export interface Division11 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -507,10 +576,18 @@ export interface Division11 {
   url: string;
 }
 
-export interface District6 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division12;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -518,28 +595,11 @@ export interface District6 {
   url: string;
 }
 
-export interface Division12 {
+export interface RadiusIp {
   createdOn: number;
   id: string;
+  authProtocol: string;
   name: string;
-  bnName: string;
-  url: string;
-}
-
-export interface RadiusIp6 {
-  createdOn: number;
-  id: string;
-  name: string;
-  master: Master7;
-  isActive: boolean;
-}
-
-export interface Master7 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  name: string;
-  key: string;
   isActive: boolean;
 }
 
@@ -548,6 +608,7 @@ export interface Client {
   updatedOn: number;
   id: string;
   partnerType: string;
+  clientLevel: string;
   name: string;
   username: string;
   contactPerson: string;
@@ -555,14 +616,36 @@ export interface Client {
   altContactNumber: string;
   email: string;
   address: string;
-  division: Division13;
-  district: District7;
+  division: Division;
+  district: District;
   credits: number;
-  radiusIp: RadiusIp7;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
-export interface Division13 {
+export interface ZoneManager {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  partnerType: string;
+  name: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  salesDistributionCommission: number;
+  credits: number;
+  parent: Parent;
+  client: Client;
+  isActive: boolean;
+  wsdCommission: number;
+}
+
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -570,10 +653,18 @@ export interface Division13 {
   url: string;
 }
 
-export interface District7 {
+export interface Division {
   createdOn: number;
   id: string;
-  division: Division14;
+  name: string;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
   name: string;
   bnName: string;
   lat: string;
@@ -581,7 +672,36 @@ export interface District7 {
   url: string;
 }
 
-export interface Division14 {
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
+  isActive: boolean;
+}
+
+export interface Client {
+  createdOn: number;
+  updatedOn: number;
+  id: string;
+  partnerType: string;
+  clientLevel: string;
+  name: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
+  isActive: boolean;
+  wsdCommission: number;
+}
+
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
@@ -589,21 +709,52 @@ export interface Division14 {
   url: string;
 }
 
-export interface RadiusIp7 {
+export interface Division {
   createdOn: number;
   id: string;
   name: string;
-  master: Master8;
+  bnName: string;
+  url: string;
+}
+
+export interface District {
+  createdOn: number;
+  id: string;
+  division: Division;
+  name: string;
+  bnName: string;
+  lat: string;
+  lon: string;
+  url: string;
+}
+
+export interface RadiusIp {
+  createdOn: number;
+  id: string;
+  authProtocol: string;
+  name: string;
   isActive: boolean;
 }
 
-export interface Master8 {
+export interface Partner {
   createdOn: number;
   updatedOn: number;
   id: string;
+  partnerType: string;
+  clientLevel: string;
   name: string;
-  key: string;
+  username: string;
+  contactPerson: string;
+  contactNumber: string;
+  altContactNumber: string;
+  email: string;
+  address: string;
+  division: Division;
+  district: District;
+  credits: number;
+  radiusIp: RadiusIp;
   isActive: boolean;
+  wsdCommission: number;
 }
 
 export interface InsertedBy {
@@ -615,71 +766,70 @@ export interface InsertedBy {
   phone: string;
   email: string;
   isActive: boolean;
+  isMasterUser: boolean;
   partnerId: string;
-  partner: Partner7;
+  partner: Partner;
   userType: string;
   credits: number;
+  lastLoginTime: number;
+  ipAddress: string;
 }
 
-export interface Partner7 {
+export interface CustomerData {
   createdOn: number;
   updatedOn: number;
   id: string;
-  partnerType: string;
+  customerId: string;
   name: string;
   username: string;
+  password: string;
+  panelPassword: string;
+  customerType: CustomerType;
+  customerTypeId: string;
+  mobileNo: string;
+  email: string;
   contactPerson: string;
   contactNumber: string;
-  altContactNumber: string;
-  email: string;
-  address: string;
-  division: Division15;
-  district: District8;
+  connectionAddress: string;
+  houseNo: string;
+  roadNo: string;
+  area: string;
+  identityType: string;
+  identityNo: string;
+  divisionId: string;
+  division: Division;
+  districtId: string;
+  district: District;
+  upazillaId: string;
+  upazilla: Upazilla;
+  unionId: string;
+  union: Union;
+  customerPackage: CustomerPackage;
+  customerPackageId: string;
+  distributionZone: DistributionZone;
+  distributionZoneId: string;
+  distributionPop: DistributionPop;
+  distributionPopId: string;
+  isMacBound: boolean;
+  mac: string;
+  simultaneousUser: number;
+  ipMode: string;
+  expirationTime: number;
   credits: number;
-  radiusIp: RadiusIp8;
+  autoRenew: boolean;
+  discount: number;
+  smsAlert: boolean;
+  emailAlert: boolean;
+  partner: Partner;
+  partnerId: string;
+  zoneManager: ZoneManager;
+  zoneManagerId: string;
+  client: Client;
+  clientId: string;
   isActive: boolean;
-}
-
-export interface Division15 {
-  createdOn: number;
-  id: string;
-  name: string;
-  bnName: string;
-  url: string;
-}
-
-export interface District8 {
-  createdOn: number;
-  id: string;
-  division: Division16;
-  name: string;
-  bnName: string;
-  lat: string;
-  lon: string;
-  url: string;
-}
-
-export interface Division16 {
-  createdOn: number;
-  id: string;
-  name: string;
-  bnName: string;
-  url: string;
-}
-
-export interface RadiusIp8 {
-  createdOn: number;
-  id: string;
-  name: string;
-  master: Master9;
-  isActive: boolean;
-}
-
-export interface Master9 {
-  createdOn: number;
-  updatedOn: number;
-  id: string;
-  name: string;
-  key: string;
-  isActive: boolean;
+  isSafOtpSend: boolean;
+  isSafVerified: boolean;
+  isSafOtpVerified: boolean;
+  adjustmentDay: number;
+  insertedBy: InsertedBy;
 }

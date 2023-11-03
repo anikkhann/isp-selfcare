@@ -3,8 +3,7 @@ import { Card, Col, Space, Tag } from "antd";
 import AppRowContainer from "@/lib/AppRowContainer";
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
-import type { FilterValue, SorterResult } from "antd/es/table/interface";
+import type { ColumnsType } from "antd/es/table";
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { AlignType } from "rc-table/lib/interface";
@@ -12,46 +11,21 @@ import axios from "axios";
 import { TicketData } from "@/interfaces/TicketData";
 import { format } from "date-fns";
 
-interface TableParams {
-  pagination?: TablePaginationConfig;
-  sortField?: string;
-  sortOrder?: string;
-  filters?: Record<string, FilterValue | null>;
-}
-
-const TicketHistory = () => {
+const HomeTicketHistory = () => {
   const [data, setData] = useState<TicketData[]>([]);
 
-  const [page, SetPage] = useState(0);
-  const [limit, SetLimit] = useState(10);
-  const [order, SetOrder] = useState("asc");
-  const [sort, SetSort] = useState("id");
-
-  const [tableParams, setTableParams] = useState<TableParams>({
-    pagination: {
-      total: 0,
-      current: 1,
-      pageSize: 10
-    }
-  });
-
-  const fetchData = async (
-    page: number,
-    limit: number,
-    order: string,
-    sort: string
-  ) => {
+  const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
     const body = {
       meta: {
-        limit: limit,
-        page: page === 0 ? 0 : page - 1,
+        limit: 10,
+        // page: page === 0 ? 0 : page - 1,
         sort: [
           {
-            order: order,
-            field: sort
+            order: "desc",
+            field: "createdOn"
           }
         ]
       },
@@ -69,9 +43,9 @@ const TicketHistory = () => {
   };
 
   const { isLoading, isError, error, isFetching } = useQuery<boolean, any>({
-    queryKey: ["ticket-list", page, limit, order, sort],
+    queryKey: ["ticket-list"],
     queryFn: async () => {
-      const response = await fetchData(page, limit, order, sort);
+      const response = await fetchData();
       return response;
     },
     onSuccess(data: any) {
@@ -79,24 +53,16 @@ const TicketHistory = () => {
         // console.log("data.data", data);
         if (data.body) {
           setData(data.body);
-          setTableParams({
-            pagination: {
-              total: data.meta.totalRecords,
-              pageSize: data.meta.limit,
-              current: (data.meta.page as number) + 1,
-              pageSizeOptions: ["10", "20", "30", "40", "50"]
-            }
-          });
+          // setTableParams({
+          //   pagination: {
+          //     total: data.meta.totalRecords,
+          //     pageSize: data.meta.limit,
+          //     current: (data.meta.page as number) + 1,
+          //     pageSizeOptions: ["10", "20", "30", "40", "50"]
+          //   }
+          // });
         } else {
           setData([]);
-          setTableParams({
-            pagination: {
-              total: 0,
-              pageSize: 10,
-              current: 1,
-              pageSizeOptions: ["10", "20", "30", "40", "50"]
-            }
-          });
         }
       }
     },
@@ -113,24 +79,19 @@ const TicketHistory = () => {
 
   const columns: ColumnsType<TicketData> = [
     {
-      title: "Serial",
-      dataIndex: "id",
-      render: (tableParams, row, index) => {
-        return (
-          <>
-            <Space>{page !== 1 ? index + 1 + page * limit : index + 1}</Space>
-          </>
-        );
+      title: "Ticket No",
+      dataIndex: "ticketNo",
+      render: (_, row) => {
+        return <>{row.ticketNo}</>;
       },
-      sorter: true,
-      width: "10%",
+      sorter: false,
+      width: 400,
       align: "center" as AlignType
     },
-
     {
       title: "complainType",
       dataIndex: "complainType",
-      render: (complainType, row) => {
+      render: (_, row) => {
         return <>{row.complainType.name}</>;
       },
       sorter: false,
@@ -174,24 +135,6 @@ const TicketHistory = () => {
     }
   ];
 
-  const handleTableChange = (
-    pagination: TablePaginationConfig,
-    filters: Record<string, FilterValue | null>,
-    sorter: SorterResult<TicketData> | SorterResult<TicketData>[]
-  ) => {
-    SetPage(pagination.current as number);
-    SetLimit(pagination.pageSize as number);
-
-    if (sorter && (sorter as SorterResult<TicketData>).order) {
-      SetOrder(
-        (sorter as SorterResult<TicketData>).order === "ascend" ? "asc" : "desc"
-      );
-    }
-    if (sorter && (sorter as SorterResult<TicketData>).field) {
-      SetSort((sorter as SorterResult<TicketData>).field as string);
-    }
-  };
-
   return (
     <>
       <AppRowContainer>
@@ -230,14 +173,18 @@ const TicketHistory = () => {
           )}
 
           <Space direction="vertical" style={{ width: "100%" }}>
-            <Table
-              columns={columns}
-              rowKey={record => record.id}
-              dataSource={data}
-              pagination={tableParams.pagination}
+            <Card
+              title="Ticket History"
+              style={{ width: "100%" }}
               loading={isLoading || isFetching}
-              onChange={handleTableChange}
-            />
+            >
+              <Table
+                columns={columns}
+                rowKey={record => record.id}
+                dataSource={data}
+                loading={isLoading || isFetching}
+              />
+            </Card>
           </Space>
         </Col>
       </AppRowContainer>
@@ -245,4 +192,4 @@ const TicketHistory = () => {
   );
 };
 
-export default TicketHistory;
+export default HomeTicketHistory;

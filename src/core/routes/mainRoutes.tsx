@@ -23,6 +23,11 @@ const mainRoutes: MenuProps["items"] = [
   },
 
   {
+    key: "/survey",
+    label: "Survey"
+  },
+
+  {
     key: "/user/profile",
     label: "My Account"
   }

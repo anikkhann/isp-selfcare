@@ -58,7 +58,7 @@ const TopUpForm = () => {
 
     axios.post("/api/payment-gateway-config/get-list", body).then(res => {
       const { data } = res;
-      console.log(data.body);
+      // console.log(data.body);
       if (data.status != 200) {
         MySwal.fire({
           title: "Error",

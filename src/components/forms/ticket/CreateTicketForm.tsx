@@ -174,10 +174,12 @@ const CreateTicketForm = () => {
     setLoading(true);
 
     const bodyData = {
-      body: {
-        complainTypeId: selectedComplainType,
-        complainDetails: data.complainDetails
-      }
+      complainTypeId: selectedComplainType,
+      complainDetails: data.complainDetails
+      // body: {
+      //   complainTypeId: selectedComplainType,
+      //   complainDetails: data.complainDetails
+      // }
     };
 
     const formData = new FormData();

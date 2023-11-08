@@ -111,7 +111,7 @@ const HomeNoticeHistory = () => {
                           // title=""
                           style={{
                             width: "100%",
-                            color: "#FF5630"
+                            color: "#000"
                             // backgroundColor: "#ffffff"
                           }}
                         >

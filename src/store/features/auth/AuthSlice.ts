@@ -17,7 +17,7 @@ export interface UserLoggedInData {
   userName: string;
   lastName: any;
   email: string;
-  address: string;
+  connectionAddress: string;
   phone: string;
   profileImg: any;
   roleId: any;

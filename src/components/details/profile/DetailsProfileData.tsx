@@ -1,19 +1,76 @@
-import React from "react";
-import { Row, Col, Card } from "antd";
+import React, { useEffect, useState } from "react";
 import { CustomerData } from "@/interfaces/CustomerData";
 import { UserLoggedInData } from "@/store/features/auth/AuthSlice";
+import AppLoader from "@/lib/AppLoader";
+// import { useAppSelector } from "@/store/hooks";
+
+import { useQuery } from "@tanstack/react-query";
+import { Card, Col, Row } from "antd";
+import axios from "axios";
+import { format } from "date-fns";
+import Cookies from "js-cookie";
 
 interface PropData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   item: UserLoggedInData;
   customer: CustomerData | null;
 }
-
+export interface UsageData {
+  total_usages: string;
+}
+// , customer
 const DetailsProfileData = ({ item, customer }: PropData) => {
   // console.log("item", item);
   // const data = JSON.stringify(item);
+
+  const [usageData, SetUsageData] = useState<UsageData | null>(null);
+  const fetchData = async () => {
+    const token = Cookies.get("token");
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+    const response = await axios.get(
+      `/api/customer/total-usages/${item?.userName}`
+    );
+    return response;
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { isLoading, isError, error, isFetching } = useQuery<boolean, any>({
+    queryKey: ["usage", item?.userName],
+    enabled: !!item?.userName,
+    queryFn: async () => {
+      const { data } = await fetchData();
+      return data;
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSuccess(data: any) {
+      if (data && data.body.length > 0) {
+        SetUsageData(data.body[0]);
+      }
+    },
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError(error: any) {
+      console.log("error", error);
+    }
+  });
+
+  useEffect(() => {
+    if (usageData) {
+      SetUsageData(usageData);
+    }
+  }, [usageData]);
+
+  function subOneDay(date = new Date()) {
+    date.setDate(date.getDate() - 1);
+
+    return date;
+  }
+
   return (
     <>
+      {isLoading && isFetching && <AppLoader />}
+
+      {isError && <div>{error.message}</div>}
       <div
         style={{
           width: "100%",
@@ -90,10 +147,10 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                     alignItems: "end"
                   }}
                 >
-                  <span className="font-bold text-base">ID :</span>
+                  <span className="font-bold text-base">Customer ID :</span>
                 </Col>
                 <Col>
-                  <span className="mx-1 text-base">{item.userId}</span>
+                  <span className="mx-1 text-base">{customer?.customerId}</span>
                 </Col>
               </Row>
 
@@ -176,7 +233,9 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                   <span className="font-bold text-base">Address :</span>
                 </Col>
                 <Col>
-                  <span className="mx-1 text-base">{item.address}</span>
+                  <span className="mx-1 text-base">
+                    {customer?.connectionAddress}
+                  </span>
                 </Col>
               </Row>
               {/* <Row
@@ -216,7 +275,7 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
           lg={12}
           xl={12}
           xxl={12}
-          className="gutter-row"
+          className="gutter-row sm: mt-3 md:mt-0"
         >
           <Card
             hoverable
@@ -227,6 +286,7 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
               borderRadius: "10px",
               border: "1px solid #F15F22"
             }}
+            loading={isLoading || isFetching}
           >
             <div>
               <Row
@@ -241,10 +301,61 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                     alignItems: "end"
                   }}
                 >
-                  <span className="font-bold text-base">Name :</span>
+                  <span className="font-bold text-base">Package :</span>
                 </Col>
                 <Col>
-                  <span className="mx-1 text-base">{customer?.name}</span>
+                  <span className="mx-1 text-base">
+                    {customer?.customerPackage.totalPrice} BDT
+                  </span>
+                </Col>
+              </Row>
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Validity Till :</span>
+                </Col>
+                <Col>
+                  {/* <span className="mx-1 text-base">{usageData?.total_usages}</span> */}
+                  <span>
+                    {customer && (
+                      <span className="ml-1">
+                        {customer?.customerPackage.validity &&
+                          format(
+                            subOneDay(new Date(customer.expirationTime)), // Assuming this holds the expiration date -1
+                            "dd MMMM yyyy" // Format the date as "27 July 2023"
+                          )}
+                      </span>
+                    )}
+                  </span>
+                </Col>
+              </Row>
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Total Usage :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">
+                    {usageData?.total_usages}
+                  </span>
                 </Col>
               </Row>
             </div>

@@ -94,16 +94,17 @@ const TopHeader = () => {
             {item && (
               <>
                 <p>
-                  - Name : <span className="font-bold">{item.name}</span>{" "}
+                  Name : <span className="font-bold">{item.name}</span>
                 </p>
                 <p>
-                  - ID : <span className="font-bold"># {item.customerId}</span>{" "}
+                  Customer ID :{" "}
+                  <span className="font-bold">{item.customerId}</span>
                 </p>
                 <p>
-                  - Package :{" "}
-                  <span className="font-bold">
+                  Package :
+                  <span className="font-bold ml-1">
                     {item.customerPackage?.name}
-                  </span>{" "}
+                  </span>
                 </p>
                 <hr />
                 {/* <p>
@@ -111,22 +112,22 @@ const TopHeader = () => {
                   {item.customerPackage.validityUnit}</span> 
                 </p> */}
                 <p>
-                  - Validity Till :
+                  Validity Till :
                   {item && (
                     <span className="font-bold ml-1">
                       {item.customerPackage.validity &&
                         format(
-                          subOneDay(new Date(item.customerPackage.validity)), // Assuming this holds the expiration date -1
+                          subOneDay(new Date(item.expirationTime)), // Assuming this holds the expiration date -1
                           "dd MMMM yyyy" // Format the date as "27 July 2023"
                         )}
                     </span>
                   )}
                 </p>
                 <p>
-                  - Price :{" "}
-                  <span className="font-bold">
+                  Charge :
+                  <span className="font-bold ml-1">
                     {item.customerPackage.totalPrice} BDT
-                  </span>{" "}
+                  </span>
                 </p>
               </>
             )}

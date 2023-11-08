@@ -3,7 +3,7 @@
 import DetailsProfileData from "@/components/details/profile/DetailsProfileData";
 import { CustomerData } from "@/interfaces/CustomerData";
 import AppLoader from "@/lib/AppLoader";
-import AppRowContainer from "@/lib/AppRowContainer";
+// import AppRowContainer from "@/lib/AppRowContainer";
 import { useAppSelector } from "@/store/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { Card } from "antd";
@@ -16,6 +16,7 @@ const DetailsProfile = () => {
   const authUser = useAppSelector(state => state.auth.user);
 
   const [item, SetItem] = useState<CustomerData | null>(null);
+  console.log(item);
   const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -50,25 +51,26 @@ const DetailsProfile = () => {
 
   return (
     <>
-      <AppRowContainer>
-        {isLoading && isFetching && <AppLoader />}
+      {/* <AppRowContainer> */}
+      {isLoading && isFetching && <AppLoader />}
 
-        {isError && <div>{error.message}</div>}
-        <Card
-          style={{
-            width: "100%",
-            // backgroundColor: "#ECF0F1",
-            backgroundColor: "#f5f5f5",
-            borderRadius: "10px",
-            margin: "0 auto",
-            textAlign: "center",
-            marginTop: "2rem",
-            marginBottom: "2rem"
-          }}
-        >
-          {authUser && <DetailsProfileData item={authUser} customer={item} />}
-        </Card>
-      </AppRowContainer>
+      {isError && <div>{error.message}</div>}
+      <Card
+        style={{
+          width: "100%",
+          // backgroundColor: "#ECF0F1",
+          backgroundColor: "#f5f5f5",
+          borderRadius: "10px",
+          margin: "0 auto",
+          textAlign: "center",
+          marginTop: "2rem",
+          marginBottom: "2rem"
+        }}
+      >
+        {/* customer={item} */}
+        {authUser && <DetailsProfileData item={authUser} customer={item} />}
+      </Card>
+      {/* </AppRowContainer> */}
     </>
   );
 };

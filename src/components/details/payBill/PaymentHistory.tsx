@@ -86,7 +86,7 @@ const PaymentHistory: React.FC = () => {
   const columns: ColumnsType<TransactionData> = [
     // trx_date
     {
-      title: "Transaction Date",
+      title: "Trx Date",
       dataIndex: "trx_date",
       render: (trx_date: any) => {
         if (!trx_date) return "-";
@@ -97,14 +97,27 @@ const PaymentHistory: React.FC = () => {
       align: "center" as AlignType
     },
     {
-      title: "trx_by",
+      title: "Trx Amount",
+      dataIndex: "amount",
+      render: (_, record) => {
+        return (
+          <>
+            <Space>{record.amount}</Space>
+          </>
+        );
+      },
+      width: "20%",
+      align: "center" as AlignType
+    },
+    {
+      title: "Trx By",
       dataIndex: "trx_by",
       width: "20%",
       align: "center" as AlignType
     },
 
     {
-      title: "transaction_id",
+      title: "Trx Id",
       dataIndex: "transaction_id",
       render: (_, record) => {
         return (
@@ -118,7 +131,7 @@ const PaymentHistory: React.FC = () => {
     },
 
     {
-      title: "trx_mode",
+      title: "Trx Mode",
       dataIndex: "trx_mode",
       render: (_, record) => {
         return (
@@ -132,7 +145,7 @@ const PaymentHistory: React.FC = () => {
     },
 
     {
-      title: "trx_type",
+      title: "Trx Type",
       dataIndex: "trx_type",
       render: (_, record) => {
         return (
@@ -146,21 +159,7 @@ const PaymentHistory: React.FC = () => {
     },
 
     {
-      title: "amount",
-      dataIndex: "amount",
-      render: (_, record) => {
-        return (
-          <>
-            <Space>{record.amount}</Space>
-          </>
-        );
-      },
-      width: "20%",
-      align: "center" as AlignType
-    },
-
-    {
-      title: "balance",
+      title: "Balance",
       dataIndex: "balance",
       render: (_, record) => {
         return (
@@ -174,7 +173,7 @@ const PaymentHistory: React.FC = () => {
     },
 
     {
-      title: "remarks",
+      title: "Remarks",
       dataIndex: "remarks",
       render: (_, record) => {
         return (
@@ -251,7 +250,14 @@ const PaymentHistory: React.FC = () => {
             </>
           )}
 
-          <Card title="Payment History" style={{ width: "100%" }}>
+          <Card
+            title="Payment History"
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              border: "1px solid #F15F22"
+            }}
+          >
             <Space direction="vertical" style={{ width: "100%" }}>
               <Space style={{ marginBottom: 16, width: "100%" }}>
                 <Row

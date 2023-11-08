@@ -1,15 +1,21 @@
 import UsageCard from "@/components/dashboard/UsageCard";
-import { Col, Row } from "antd";
+import { Card, Col, Row } from "antd";
 import React from "react";
 import UsageHistory from "./UsageHistroy";
 
 const DetailsUsageData = () => {
   return (
-    <>
+    <Card
+      style={{
+        width: "100%",
+        backgroundColor: "#f5f5f5"
+        // backgroundColor: "#d4e1ea"
+      }}
+    >
       <Row gutter={[16, 16]} justify={"center"}>
         <Col
-          lg={6}
-          md={6}
+          lg={10}
+          md={10}
           sm={24}
           xs={24}
           style={
@@ -21,8 +27,8 @@ const DetailsUsageData = () => {
           <UsageCard />
         </Col>
         <Col
-          lg={16}
-          md={16}
+          lg={14}
+          md={14}
           sm={24}
           xs={24}
           style={
@@ -34,7 +40,7 @@ const DetailsUsageData = () => {
           <UsageHistory />
         </Col>
       </Row>
-    </>
+    </Card>
   );
 };
 

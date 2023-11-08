@@ -9,11 +9,12 @@ import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import UsageCard from "./UsageCard";
 import HomeNoticeHistory from "./HomeNoticeHistory";
-
+import { format } from "date-fns";
 const TopHeader = () => {
   const authUser = useAppSelector(state => state.auth.user);
 
   const [item, SetItem] = useState<CustomerData | null>(null);
+
   const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -47,6 +48,12 @@ const TopHeader = () => {
     }
   }, [item]);
 
+  function subOneDay(date = new Date()) {
+    date.setDate(date.getDate() - 1);
+
+    return date;
+  }
+
   return (
     <>
       {isLoading && isFetching && <AppLoader />}
@@ -64,7 +71,11 @@ const TopHeader = () => {
           }
         >
           <Card
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              border: "1px solid #F15F22"
+            }}
             cover={
               <>
                 <img
@@ -82,21 +93,47 @@ const TopHeader = () => {
           >
             {item && (
               <>
-                <p>Name : {item.name}</p>
-                <p>ID # {item.customerId}</p>
-                <p>Package {item.customerPackage?.name}</p>
-                <hr />
                 <p>
-                  validily : {item.customerPackage.validity}{" "}
-                  {item.customerPackage.validityUnit}{" "}
+                  - Name : <span className="font-bold">{item.name}</span>{" "}
                 </p>
-                <p>Price : {item.customerPackage.totalPrice} BDT</p>
+                <p>
+                  - ID : <span className="font-bold"># {item.customerId}</span>{" "}
+                </p>
+                <p>
+                  - Package :{" "}
+                  <span className="font-bold">
+                    {item.customerPackage?.name}
+                  </span>{" "}
+                </p>
+                <hr />
+                {/* <p>
+                  - Validity Till :  <span className="font-bold">{item.customerPackage.validity}
+                  {item.customerPackage.validityUnit}</span> 
+                </p> */}
+                <p>
+                  - Validity Till :
+                  {item && (
+                    <span className="font-bold ml-1">
+                      {item.customerPackage.validity &&
+                        format(
+                          subOneDay(new Date(item.customerPackage.validity)), // Assuming this holds the expiration date -1
+                          "dd MMMM yyyy" // Format the date as "27 July 2023"
+                        )}
+                    </span>
+                  )}
+                </p>
+                <p>
+                  - Price :{" "}
+                  <span className="font-bold">
+                    {item.customerPackage.totalPrice} BDT
+                  </span>{" "}
+                </p>
               </>
             )}
           </Card>
         </Col>
         <Col
-          lg={4}
+          lg={6}
           md={12}
           sm={24}
           style={
@@ -111,6 +148,7 @@ const TopHeader = () => {
           lg={12}
           md={24}
           sm={24}
+          xs={24}
           style={
             {
               // backgroundColor: "#d4e1ea",

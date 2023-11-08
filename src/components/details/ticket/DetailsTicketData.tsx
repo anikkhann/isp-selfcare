@@ -5,11 +5,17 @@ import React from "react";
 
 const DetailsTicketData = () => {
   return (
-    <>
+    <Card
+      style={{
+        width: "100%",
+        backgroundColor: "#f5f5f5"
+        // backgroundColor: "#d4e1ea"
+      }}
+    >
       <Row gutter={[16, 16]} justify={"center"}>
         <Col
-          lg={6}
-          md={6}
+          lg={8}
+          md={8}
           sm={24}
           xs={24}
           style={
@@ -19,7 +25,11 @@ const DetailsTicketData = () => {
           }
         >
           <Card
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              border: "1px solid #F15F22"
+            }}
             cover={
               <>
                 <img
@@ -34,9 +44,14 @@ const DetailsTicketData = () => {
               </>
             }
           >
-            <p>
-              This private ticketing system is developed to handle queries &
-              complain of our direct customers.
+            <p className="text-justify">
+              Welcome to our Support Center! If you have any questions,
+              concerns, or require assistance, our team is here to help. To get
+              started, simply click on the sp Create Ticket option below. Our
+              dedicated support staff will promptly address your needs and
+              provide the assistance you require. We are committed to delivering
+              top-notch customer service, and your satisfaction is our priority.
+              Thank you for choosing our services.
             </p>
             <Link href="/ticket/create">
               <Button type="primary" block>
@@ -59,7 +74,7 @@ const DetailsTicketData = () => {
           <TicketHistory />
         </Col>
       </Row>
-    </>
+    </Card>
   );
 };
 

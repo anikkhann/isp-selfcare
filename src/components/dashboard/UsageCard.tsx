@@ -67,15 +67,21 @@ const UsageCard = () => {
           }
         >
           <Card
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              border: "1px solid #F15F22"
+            }}
             title="Total Usage"
             loading={isLoading || isFetching}
           >
             {item && (
-              <>
-                <h1>{item.total_usages}</h1>
+              <span className="text-center">
+                <h1 className="font-bold text-[#3f51b5]">
+                  {item.total_usages}
+                </h1>
                 <p>Till {dayjs().format("MMM D, YYYY")}</p>
-              </>
+              </span>
             )}
           </Card>
         </Col>

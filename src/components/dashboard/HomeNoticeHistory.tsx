@@ -95,7 +95,11 @@ const HomeNoticeHistory = () => {
           <Space direction="vertical" style={{ width: "100%" }}>
             <Card
               title="Notice Board"
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                backgroundColor: "#ffffff",
+                border: "1px solid #F15F22"
+              }}
               loading={isLoading || isFetching}
             >
               <Row gutter={[16, 16]} justify={"center"}>
@@ -107,8 +111,8 @@ const HomeNoticeHistory = () => {
                           // title=""
                           style={{
                             width: "100%",
-                            color: "#FF5630",
-                            backgroundColor: "#ffffff"
+                            color: "#FF5630"
+                            // backgroundColor: "#ffffff"
                           }}
                         >
                           <p

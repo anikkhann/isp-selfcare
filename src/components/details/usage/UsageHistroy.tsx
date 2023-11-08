@@ -83,39 +83,58 @@ const UsageHistory: React.FC = () => {
   }, [data]);
 
   const columns: ColumnsType<UsageData> = [
+    // {
+    //   title: "IP",
+    //   dataIndex: "IP",
+    //   render: (_, row) => {
+    //     return <>{row.IP}</>;
+    //   },
+    //   sorter: false,
+    //   width: 400,
+    //   align: "center" as AlignType
+    // },
+    // {
+    //   title: "Device Mac",
+    //   dataIndex: "device_mac",
+    //   render: (_, row) => {
+    //     return <>{row.device_mac}</>;
+    //   },
+    //   sorter: false,
+    //   width: 400,
+    //   align: "center" as AlignType
+    // },
     {
-      title: "IP",
-      dataIndex: "IP",
+      title: "Start Time",
+      dataIndex: "start_time",
       render: (_, row) => {
-        return <>{row.IP}</>;
+        return <>{row.start_time}</>;
       },
       sorter: false,
       width: 400,
       align: "center" as AlignType
     },
     {
-      title: "Device Mac",
-      dataIndex: "device_mac",
+      title: "End Time",
+      dataIndex: "end_time",
       render: (_, row) => {
-        return <>{row.device_mac}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
-    },
-
-    {
-      title: "download",
-      dataIndex: "download",
-      render: (_, row) => {
-        return <>{row.download}</>;
+        return <>{row.end_time}</>;
       },
       sorter: false,
       width: 400,
       align: "center" as AlignType
     },
     {
-      title: "upload",
+      title: "Online Time",
+      dataIndex: "onlinetime",
+      render: (_, row) => {
+        return <>{row.onlinetime}</>;
+      },
+      sorter: false,
+      width: 400,
+      align: "center" as AlignType
+    },
+    {
+      title: "Upload",
       dataIndex: "upload",
       render: (_, row) => {
         return <>{row.upload}</>;
@@ -126,7 +145,18 @@ const UsageHistory: React.FC = () => {
     },
 
     {
-      title: "total",
+      title: "Download",
+      dataIndex: "download",
+      render: (_, row) => {
+        return <>{row.download}</>;
+      },
+      sorter: false,
+      width: 400,
+      align: "center" as AlignType
+    },
+
+    {
+      title: "Total",
       dataIndex: "total",
       render: (_, row) => {
         return <>{row.total}</>;
@@ -134,47 +164,18 @@ const UsageHistory: React.FC = () => {
       sorter: false,
       width: 400,
       align: "center" as AlignType
-    },
-    {
-      title: "onlinetime",
-      dataIndex: "onlinetime",
-      render: (_, row) => {
-        return <>{row.onlinetime}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
-    },
-    {
-      title: "start_time",
-      dataIndex: "start_time",
-      render: (_, row) => {
-        return <>{row.start_time}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
-    },
-    {
-      title: "end_time",
-      dataIndex: "end_time",
-      render: (_, row) => {
-        return <>{row.end_time}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
-    },
-    {
-      title: "username",
-      dataIndex: "username",
-      render: (_, row) => {
-        return <>{row.username}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
     }
+
+    // {
+    //   title: "username",
+    //   dataIndex: "username",
+    //   render: (_, row) => {
+    //     return <>{row.username}</>;
+    //   },
+    //   sorter: false,
+    //   width: 400,
+    //   align: "center" as AlignType
+    // }
   ];
 
   const handleDateChange = (value: any) => {
@@ -240,7 +241,14 @@ const UsageHistory: React.FC = () => {
             </>
           )}
 
-          <Card title="Usage History" style={{ width: "100%" }}>
+          <Card
+            title="Usage History"
+            style={{
+              width: "100%",
+              backgroundColor: "white",
+              border: "1px solid #F15F22"
+            }}
+          >
             <Space direction="vertical" style={{ width: "100%" }}>
               <Space style={{ marginBottom: 16, width: "100%" }}>
                 <Row

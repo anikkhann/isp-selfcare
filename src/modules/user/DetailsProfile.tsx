@@ -51,34 +51,14 @@ const DetailsProfile = () => {
   return (
     <>
       <AppRowContainer>
-        <div
-          style={{
-            width: "90%",
-            backgroundColor: "#ffffff",
-            borderRadius: "10px",
-            margin: "0 auto",
-            // border: "1px solid #F15F22",
-            textAlign: "center"
-          }}
-        >
-          <h1
-            style={{
-              fontSize: "1.5rem",
-              marginTop: "1rem",
-              marginBottom: "1rem",
-              color: "#F15F22"
-            }}
-          >
-            Profile Details
-          </h1>
-        </div>
         {isLoading && isFetching && <AppLoader />}
 
         {isError && <div>{error.message}</div>}
         <Card
           style={{
-            width: "90%",
-            backgroundColor: "#ECF0F1",
+            width: "100%",
+            // backgroundColor: "#ECF0F1",
+            backgroundColor: "#f5f5f5",
             borderRadius: "10px",
             margin: "0 auto",
             textAlign: "center",

@@ -89,7 +89,7 @@ const HomeTicketHistory = () => {
       align: "center" as AlignType
     },
     {
-      title: "complainType",
+      title: "Complain",
       dataIndex: "complainType",
       render: (_, row) => {
         return <>{row.complainType.name}</>;
@@ -100,7 +100,7 @@ const HomeTicketHistory = () => {
     },
 
     {
-      title: "Ticket State",
+      title: "Ticket Status",
       dataIndex: "status",
       sorter: true,
       render: (status: any) => {
@@ -122,7 +122,7 @@ const HomeTicketHistory = () => {
 
     // updatedOn
     {
-      title: "Updated At",
+      title: "Last Updated At",
       dataIndex: "updatedOn",
       sorter: false,
       render: (updatedOn: any) => {
@@ -175,10 +175,19 @@ const HomeTicketHistory = () => {
           <Space direction="vertical" style={{ width: "100%" }}>
             <Card
               title="Ticket History"
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                backgroundColor: "white",
+                border: "1px solid #F15F22"
+              }}
               loading={isLoading || isFetching}
             >
               <Table
+                style={{
+                  width: "100%",
+                  overflowX: "auto"
+                }}
+                className={"table-striped-rows"}
                 columns={columns}
                 rowKey={record => record.id}
                 dataSource={data}

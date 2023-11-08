@@ -150,67 +150,93 @@ const TroubleshootListData: React.FC = () => {
               </div>
             </>
           )}
+          <div
+            style={{
+              width: "100%",
+              backgroundColor: "#ffffff",
+              borderRadius: "10px",
+              margin: "0 auto",
+              // border: "1px solid #F15F22",
+              textAlign: "center"
+            }}
+          >
+            <h1
+              style={{
+                fontSize: "1.5rem",
+                marginTop: "1rem",
+                marginBottom: "1rem",
+                color: "#F15F22",
+                fontWeight: "bolder",
+                padding: "0.5rem 0.5rem 0 0"
+              }}
+            >
+              Troubleshoot List
+            </h1>
+          </div>
 
-          <Card title="Troubleshoot List" style={{ width: "100%" }}>
-            <Space direction="vertical" style={{ width: "100%" }}>
-              <Card style={{ width: "100%" }} loading={isLoading || isFetching}>
-                <Row gutter={[16, 16]} justify={"center"}>
-                  {data.length > 0 &&
-                    data.map((item: ConvertTroubleshootData, index: number) => {
-                      return (
-                        <Col span={24} key={index}>
-                          <Card
-                            title={item.title}
-                            style={{
-                              width: "100%",
-                              color: "#FF5630",
-                              backgroundColor: "#ffffff"
-                            }}
-                          >
-                            <List
-                              size="large"
-                              // bordered
-                              dataSource={item.options}
-                              renderItem={(list, index) => (
-                                <List.Item
-                                  key={index}
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "flex-start",
-                                    alignItems: "center"
-                                  }}
-                                >
-                                  <ArrowRightOutlined />
-                                  <p
-                                    style={{
-                                      marginLeft: "10px",
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      margin: "10px"
-                                    }}
-                                  >
-                                    {list.option}
-                                  </p>
-                                </List.Item>
-                              )}
-                            />
-                          </Card>
-                        </Col>
-                      );
-                    })}
-                </Row>
-                <Pagination
-                  defaultCurrent={1}
-                  total={total}
-                  onChange={page => setPage(page)}
-                  showTotal={(total, range) =>
-                    `${range[0]}-${range[1]} of ${total} items`
-                  }
-                />
-              </Card>
-            </Space>
-          </Card>
+          {/* <Card title="Troubleshoot List" style={{ width: "100%", backgroundColor:"white" }} loading={isLoading || isFetching}> */}
+          <Space direction="vertical" style={{ width: "100%" }}>
+            {/* <Card style={{ width: "100%", backgroundColor:"black" }} loading={isLoading || isFetching}> */}
+            <Row gutter={[16, 16]} justify={"center"}>
+              {data.length > 0 &&
+                data.map((item: ConvertTroubleshootData, index: number) => {
+                  return (
+                    <Col lg={12} md={12} sm={24} xs={24} key={index}>
+                      <Card
+                        title={item.title}
+                        style={{
+                          width: "100%",
+                          color: "#FF5630",
+                          backgroundColor: "#ffffff",
+                          border: "1px solid #F15F22"
+                        }}
+                        loading={isLoading || isFetching}
+                      >
+                        <List
+                          size="large"
+                          // bordered
+                          dataSource={item.options}
+                          renderItem={(list, index) => (
+                            <List.Item
+                              key={index}
+                              style={{
+                                display: "flex",
+                                justifyContent: "flex-start",
+                                alignItems: "center"
+                              }}
+                            >
+                              <ArrowRightOutlined />
+                              <p
+                                style={{
+                                  marginLeft: "10px",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  margin: "10px"
+                                }}
+                              >
+                                {list.option}
+                              </p>
+                            </List.Item>
+                          )}
+                        />
+                      </Card>
+                    </Col>
+                  );
+                })}
+            </Row>
+            <Pagination
+              defaultCurrent={1}
+              total={total}
+              onChange={page => setPage(page)}
+              // showTotal={(total, range) =>
+              //   `${range[0]}-${range[1]} of ${total} items`
+              // }
+              defaultPageSize={10}
+            />
+            {/* </Card> */}
+          </Space>
+          {/* </Card> */}
         </Col>
       </AppRowContainer>
     </>

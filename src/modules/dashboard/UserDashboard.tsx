@@ -24,7 +24,8 @@ const UserDashboard = () => {
         title=""
         style={{
           width: "100%",
-          backgroundColor: "#d4e1ea"
+          backgroundColor: "#f5f5f5"
+          // backgroundColor: "#d4e1ea"
         }}
         loading={loading}
       >

@@ -28,11 +28,11 @@ import AppImageLoader from "@/components/loader/AppImageLoader";
 
 const steps = [
   {
-    title: "complain",
+    title: "Complain",
     content: "complain"
   },
   {
-    title: "Attachments",
+    title: "Details",
     content: "attachments"
   }
 ];

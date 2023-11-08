@@ -72,7 +72,7 @@ const TopUpForm = () => {
       const list = data.body.map((item: any) => {
         return {
           label: item.paymentGateway.bankName,
-          value: item.paymentGatewayId
+          value: item.id
         };
       });
 

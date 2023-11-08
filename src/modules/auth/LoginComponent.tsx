@@ -44,7 +44,7 @@ const LoginComponent = () => {
         .then(async response => {
           const { data } = response;
 
-          // console.log(data);
+          console.log(data);
           if (data.success === false) {
             setShowError(true);
             setErrorMessage(data.message);
@@ -119,7 +119,7 @@ const LoginComponent = () => {
           <Form.Item
             label="Email"
             name="email"
-            className="form-field"
+            className="form-field text-xl"
             rules={[
               {
                 required: true,
@@ -138,7 +138,7 @@ const LoginComponent = () => {
           <Form.Item
             name="password"
             label="Password"
-            className="form-field"
+            className="form-field text-xl"
             rules={[
               {
                 required: true,

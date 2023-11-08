@@ -6,11 +6,17 @@ import React from "react";
 
 const NewTicket = () => {
   return (
-    <>
+    <Card
+      style={{
+        width: "100%",
+        backgroundColor: "#f5f5f5"
+        // backgroundColor: "#d4e1ea"
+      }}
+    >
       <AppRowContainer>
         <div
           style={{
-            width: "90%",
+            width: "95%",
             backgroundColor: "#ffffff",
             borderRadius: "10px",
             margin: "0 auto",
@@ -23,7 +29,9 @@ const NewTicket = () => {
               fontSize: "1.5rem",
               marginTop: "1rem",
               marginBottom: "1rem",
-              color: "#F15F22"
+              color: "#F15F22",
+              fontWeight: "bolder",
+              padding: "0.5rem 0.5rem 0 0"
             }}
           >
             New Ticket
@@ -33,7 +41,7 @@ const NewTicket = () => {
           // title="New Admin Ticket"
           hoverable
           style={{
-            width: "90%",
+            width: "95%",
             backgroundColor: "#ffffff",
             borderRadius: "10px",
             margin: "0 auto",
@@ -48,7 +56,7 @@ const NewTicket = () => {
           <CreateTicketForm />
         </Card>
       </AppRowContainer>
-    </>
+    </Card>
   );
 };
 

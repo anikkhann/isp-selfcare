@@ -173,7 +173,9 @@ function AppHeader() {
                 lineHeight: "64px",
                 background: "#fff",
                 color: "#000",
-                width: "100%"
+                width: "100%",
+                fontSize: "1rem",
+                fontWeight: "bolder"
               }}
               onClick={({ key }) => {
                 router.push(key);
@@ -225,7 +227,9 @@ function AppHeader() {
                     borderRight: 0,
                     background: "#fff",
                     color: "#000",
-                    maxWidth: "100%"
+                    maxWidth: "100%",
+                    fontSize: "1rem",
+                    fontWeight: "bolder"
                   }}
                   onClick={({ key }) => {
                     if (key === "/logout") {

@@ -21,9 +21,9 @@ const HomePaymentHistory = () => {
   const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
+    const trxMode = "credit";
     const { data } = await axios.get(
-      `/api/topup-transaction/get-selfcare-transaction/${authUser?.userId}?trxMode="credit"`,
+      `/api/topup-transaction/get-selfcare-transaction/${authUser?.userId}?trxMode=${trxMode}`,
       {
         headers: {
           "Content-Type": "application/json"
@@ -61,8 +61,31 @@ const HomePaymentHistory = () => {
   }, [data]);
 
   const columns: ColumnsType<TransactionData> = [
+    // trx_date
     {
-      title: "trx_by",
+      title: "Trx Date",
+      dataIndex: "trx_date",
+      sorter: false,
+      render: (trx_date: any) => {
+        if (!trx_date) return "-";
+        const date = new Date(trx_date);
+        return <>{format(date, "yyyy-MM-dd pp")}</>;
+      },
+      /* width: "20%", */
+      align: "center" as AlignType
+    },
+    {
+      title: "Trx Amount",
+      dataIndex: "amount",
+      render: (_, row) => {
+        return <>{row.amount}</>;
+      },
+      sorter: false,
+      width: 400,
+      align: "center" as AlignType
+    },
+    {
+      title: "Trx By",
       dataIndex: "trx_by",
       render: (_, row) => {
         return <>{row.trx_by}</>;
@@ -72,37 +95,13 @@ const HomePaymentHistory = () => {
       align: "center" as AlignType
     },
     {
-      title: "transaction_id",
+      title: "Trx Id",
       dataIndex: "transaction_id",
       render: (_, row) => {
         return <>{row.transaction_id}</>;
       },
       sorter: false,
       width: 400,
-      align: "center" as AlignType
-    },
-    {
-      title: "amount",
-      dataIndex: "amount",
-      render: (_, row) => {
-        return <>{row.amount}</>;
-      },
-      sorter: false,
-      width: 400,
-      align: "center" as AlignType
-    },
-
-    // trx_date
-    {
-      title: "Transaction Date",
-      dataIndex: "trx_date",
-      sorter: false,
-      render: (trx_date: any) => {
-        if (!trx_date) return "-";
-        const date = new Date(trx_date);
-        return <>{format(date, "yyyy-MM-dd pp")}</>;
-      },
-      /* width: "20%", */
       align: "center" as AlignType
     }
   ];
@@ -147,10 +146,19 @@ const HomePaymentHistory = () => {
           <Space direction="vertical" style={{ width: "100%" }}>
             <Card
               title="Payment History"
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                backgroundColor: "white",
+                border: "1px solid #F15F22"
+              }}
               loading={isLoading || isFetching}
             >
               <Table
+                style={{
+                  width: "100%",
+                  overflowX: "auto"
+                }}
+                className={"table-striped-rows"}
                 columns={columns}
                 rowKey={record => record.trx_date}
                 dataSource={data}

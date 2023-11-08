@@ -13,66 +13,110 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
   // console.log("item", item);
   // const data = JSON.stringify(item);
   return (
-    <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="space-between">
-      <Col
-        xs={24}
-        sm={24}
-        md={12}
-        lg={12}
-        xl={12}
-        xxl={12}
-        className="gutter-row"
+    <>
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: "#ffffff",
+          borderRadius: "10px",
+          margin: "0 auto",
+          // border: "1px solid #F15F22",
+          textAlign: "center"
+        }}
       >
-        <Card
-          hoverable
-          bordered={false}
+        <h1
           style={{
-            textAlign: "start",
-            backgroundColor: "white",
-            borderRadius: "10px",
-            border: "1px solid #F15F22"
+            fontSize: "1.5rem",
+
+            // marginTop: "1rem",
+            marginBottom: "1.5rem",
+            color: "#F15F22",
+            fontWeight: "bolder",
+            padding: "0.5rem 0.5rem 0 0"
           }}
         >
-          <div>
-            <Row
-              style={{
-                marginTop: "2px"
-              }}
-            >
-              <Col
+          Profile Details
+        </h1>
+      </div>
+
+      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="space-between">
+        <Col
+          xs={24}
+          sm={24}
+          md={12}
+          lg={12}
+          xl={12}
+          xxl={12}
+          className="gutter-row"
+        >
+          <Card
+            hoverable
+            bordered={false}
+            style={{
+              textAlign: "start",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              border: "1px solid #F15F22"
+            }}
+          >
+            <div>
+              <Row
                 style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "end"
+                  marginTop: "2px"
                 }}
               >
-                <span className="font-bold text-base">Name :</span>
-              </Col>
-              <Col>
-                <span className="mx-1 text-base">{item.name}</span>
-              </Col>
-            </Row>
-
-            <Row
-              style={{
-                marginTop: "2px"
-              }}
-            >
-              <Col
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Name :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{item.name}</span>
+                </Col>
+              </Row>
+              <Row
                 style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "end"
+                  marginTop: "2px"
                 }}
               >
-                <span className="font-bold text-base">Phone Number :</span>
-              </Col>
-              <Col>
-                <span className="mx-1 text-base">{item.phone}</span>
-              </Col>
-            </Row>
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">ID :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{item.userId}</span>
+                </Col>
+              </Row>
 
-            <Row
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Contact :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{item.phone}</span>
+                </Col>
+              </Row>
+
+              {/* <Row
               style={{
                 marginTop: "2px"
               }}
@@ -98,31 +142,44 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                   {item.email}
                 </span>
               </Col>
-            </Row>
-          </div>
-        </Card>
-      </Col>
-      <Col
-        xs={24}
-        sm={24}
-        md={12}
-        lg={12}
-        xl={12}
-        xxl={12}
-        className="gutter-row"
-      >
-        <Card
-          hoverable
-          bordered={false}
-          style={{
-            textAlign: "start",
-            backgroundColor: "white",
-            borderRadius: "10px",
-            border: "1px solid #F15F22"
-          }}
-        >
-          <div>
-            <Row
+            </Row> */}
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Email :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{item.email}</span>
+                </Col>
+              </Row>
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Address :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{item.address}</span>
+                </Col>
+              </Row>
+              {/* <Row
               style={{
                 marginTop: "2px"
               }}
@@ -134,45 +191,7 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                   alignItems: "end"
                 }}
               >
-                <span className="font-bold text-base">Name :</span>
-              </Col>
-              <Col>
-                <span className="mx-1 text-base">{customer?.name}</span>
-              </Col>
-            </Row>
-
-            <Row
-              style={{
-                marginTop: "2px"
-              }}
-            >
-              <Col
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "end"
-                }}
-              >
-                <span className="font-bold text-base">Phone Number :</span>
-              </Col>
-              <Col>
-                <span className="mx-1 text-base">{item.phone}</span>
-              </Col>
-            </Row>
-
-            <Row
-              style={{
-                marginTop: "2px"
-              }}
-            >
-              <Col
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  alignItems: "end"
-                }}
-              >
-                <span className="font-bold text-base">Email :</span>
+                <span className="font-bold text-base">Address :</span>
               </Col>
               <Col className="overflow-hidden whitespace-nowrap overflow-ellipsis">
                 <span
@@ -183,14 +202,56 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                     textOverflow: "ellipsis"
                   }}
                 >
-                  {item.email}
+                  {item ? item.address : null}
                 </span>
               </Col>
-            </Row>
-          </div>
-        </Card>
-      </Col>
-    </Row>
+            </Row> */}
+            </div>
+          </Card>
+        </Col>
+        <Col
+          xs={24}
+          sm={24}
+          md={12}
+          lg={12}
+          xl={12}
+          xxl={12}
+          className="gutter-row"
+        >
+          <Card
+            hoverable
+            bordered={false}
+            style={{
+              textAlign: "start",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              border: "1px solid #F15F22"
+            }}
+          >
+            <div>
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Name :</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">{customer?.name}</span>
+                </Col>
+              </Row>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </>
   );
 };
 

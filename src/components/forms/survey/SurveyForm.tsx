@@ -73,6 +73,7 @@ const SurveyForm = () => {
       // FOR SEARCHING DATA - OPTIONAL
       body: {
         // SEND FIELD NAME WITH DATA TO SEARCH
+        type: "Survey",
         isActive: true
       }
     };

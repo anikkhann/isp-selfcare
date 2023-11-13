@@ -47,7 +47,7 @@ const DetailsTicketData = () => {
             <p className="text-justify">
               Welcome to our Support Center! If you have any questions,
               concerns, or require assistance, our team is here to help. To get
-              started, simply click on the sp Create Ticket option below. Our
+              started, simply click on the Create Ticket option below. Our
               dedicated support staff will promptly address your needs and
               provide the assistance you require. We are committed to delivering
               top-notch customer service, and your satisfaction is our priority.

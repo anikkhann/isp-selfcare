@@ -97,7 +97,7 @@ const TopHeader = () => {
                   Name : <span className="font-bold">{item.name}</span>
                 </p>
                 <p>
-                  Customer ID :{" "}
+                  Customer ID :
                   <span className="font-bold">{item.customerId}</span>
                 </p>
                 <p>
@@ -128,6 +128,10 @@ const TopHeader = () => {
                   <span className="font-bold ml-1">
                     {item.customerPackage.totalPrice} BDT
                   </span>
+                </p>
+                <p>
+                  Current Balance :
+                  <span className="font-bold ml-1">{item.credits} BDT</span>
                 </p>
               </>
             )}

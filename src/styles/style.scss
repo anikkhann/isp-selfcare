@@ -73,6 +73,13 @@ img {
 .table-striped-rows thead {
   background-color: white
 }
+.ant-card-head-title {
+  display: inline-block;
+  flex: 1;
+  overflow: visible !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+}
 @media only screen and (max-width: 767px) {
   .mobileVisible {
     display: block;

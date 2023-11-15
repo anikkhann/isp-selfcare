@@ -98,7 +98,7 @@ const TopHeader = () => {
                 </p>
                 <p>
                   Customer ID :
-                  <span className="font-bold">{item.customerId}</span>
+                  <span className="font-bold ml-1">{item.customerId}</span>
                 </p>
                 <p>
                   Package :

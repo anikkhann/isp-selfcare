@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import AppLoader from "@/lib/AppLoader";
+import AppRowContainer from "@/lib/AppRowContainer";
 import { useAppSelector } from "@/store/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { Card, Col, Row } from "antd";
+import { Card, Col, Row, Space } from "antd";
 import axios from "axios";
 import dayjs from "dayjs";
 import Cookies from "js-cookie";
@@ -52,9 +53,40 @@ const UsageCard = () => {
 
   return (
     <>
-      {isLoading && isFetching && <AppLoader />}
+      <AppRowContainer>
+        <Col span={24} key="data-f">
+          {isLoading && isFetching && <AppLoader />}
 
-      {isError && <div>{error.message}</div>}
+          {isError && <div>{error.message}</div>}
+          <Space direction="vertical" style={{ width: "100%" }}>
+            <Card
+              style={{
+                width: "100%",
+                backgroundColor: "white",
+                border: "1px solid #F15F22"
+              }}
+              title="Total Usage"
+              loading={isLoading || isFetching}
+              className="md:h-[23.4rem]"
+            >
+              <Row gutter={[16, 16]} justify={"center"}>
+                <Col lg={24} md={24} sm={24}>
+                  {item && (
+                    <span className="text-center ">
+                      <h1 className="font-bold text-[#3f51b5] md:pt-[4rem]">
+                        {item.total_usages}
+                      </h1>
+                      <p>Till {dayjs().format("MMM D, YYYY")}</p>
+                    </span>
+                  )}
+                </Col>
+              </Row>
+            </Card>
+          </Space>
+        </Col>
+      </AppRowContainer>
+
+      {/*    
       <Row gutter={[16, 16]} justify={"center"}>
         <Col
           lg={24}
@@ -62,30 +94,36 @@ const UsageCard = () => {
           sm={24}
           style={
             {
-              // backgroundColor: "#d4e1ea",
+           
             }
           }
         >
+          <Space className="w-full" direction="vertical" style={{ width: "100%" }}>
           <Card
             style={{
               width: "100%",
               backgroundColor: "white",
-              border: "1px solid #F15F22"
+              border: "1px solid #F15F22",
+           
             }}
             title="Total Usage"
             loading={isLoading || isFetching}
+            className="md:h-[23.4rem] w-full"
           >
             {item && (
-              <span className="text-center">
-                <h1 className="font-bold text-[#3f51b5]">
+              <span className="text-center ">
+                <h1 className="font-bold text-[#3f51b5] md:pt-[4rem]">
                   {item.total_usages}
                 </h1>
                 <p>Till {dayjs().format("MMM D, YYYY")}</p>
               </span>
             )}
           </Card>
+          </Space>
+         
+        
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };

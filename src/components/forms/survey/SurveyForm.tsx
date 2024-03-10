@@ -63,12 +63,12 @@ const SurveyForm = () => {
   function getData() {
     const body = {
       meta: {
-        sort: [
-          {
-            order: "asc",
-            field: "name"
-          }
-        ]
+        // sort: [
+        //   {
+        //     order: "asc",
+        //     field: "name"
+        //   }
+        // ]
       },
       // FOR SEARCHING DATA - OPTIONAL
       body: {

@@ -39,13 +39,13 @@ const TroubleshootListData: React.FC = () => {
       // FOR PAGINATION - OPTIONAL
       meta: {
         page: page,
-        limit: 10,
-        sort: [
-          {
-            order: "asc",
-            field: "title"
-          }
-        ]
+        limit: 10
+        // sort: [
+        //   {
+        //     order: "asc",
+        //     field: "title"
+        //   }
+        // ]
       },
       body: {
         type: "Troubleshoot",

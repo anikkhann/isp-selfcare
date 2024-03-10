@@ -127,7 +127,7 @@ const UsageHistory: React.FC = () => {
       title: "Online Time",
       dataIndex: "onlinetime",
       render: (_, row) => {
-        return <>{row.onlinetime}</>;
+        return <>{row.onlinetime} Min</>;
       },
       sorter: false,
       width: 400,

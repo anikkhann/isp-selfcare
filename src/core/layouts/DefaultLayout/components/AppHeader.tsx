@@ -12,8 +12,8 @@ import LogoTitle from "./LogoTitle";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import styled from "styled-components";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+// import Swal from "sweetalert2";
+// import withReactContent from "sweetalert2-react-content";
 import mainRoutes from "@/core/routes/mainRoutes";
 
 const TriggerBlock = styled.div`
@@ -93,7 +93,7 @@ function AppHeader() {
 
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
 
-  const MySwal = withReactContent(Swal);
+  // const MySwal = withReactContent(Swal);
 
   const showDrawer = () => {
     setOpenMobileMenu(true);
@@ -117,14 +117,15 @@ function AppHeader() {
 
   const logout = () => {
     dispatch({ type: "auth/logout" });
+    router.push("/login");
 
-    MySwal.fire({
-      title: "Success",
-      text: "You have successfully logged out",
-      icon: "success"
-    }).then(() => {
-      router.push("/login");
-    });
+    // MySwal.fire({
+    //   title: "Success",
+    //   text: "You have successfully logged out",
+    //   icon: "success"
+    // }).then(() => {
+    //   router.push("/login");
+    // });
   };
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);

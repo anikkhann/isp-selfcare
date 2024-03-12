@@ -301,7 +301,27 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                     alignItems: "end"
                   }}
                 >
-                  <span className="font-bold text-base">Package :</span>
+                  <span className="font-bold text-base">Package:</span>
+                </Col>
+                <Col>
+                  <span className="mx-1 text-base">
+                    {customer?.customerPackage?.name}
+                  </span>
+                </Col>
+              </Row>
+              <Row
+                style={{
+                  marginTop: "2px"
+                }}
+              >
+                <Col
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "end"
+                  }}
+                >
+                  <span className="font-bold text-base">Package Price:</span>
                 </Col>
                 <Col>
                   <span className="mx-1 text-base">
@@ -373,7 +393,9 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
                   <span className="font-bold text-base">Current Balance :</span>
                 </Col>
                 <Col>
-                  <span className="mx-1 text-base">{customer?.credits}</span>
+                  <span className="mx-1 text-base">
+                    {customer?.credits} BDT
+                  </span>
                 </Col>
               </Row>
             </div>

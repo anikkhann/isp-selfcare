@@ -110,7 +110,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.start_time}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -120,7 +122,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.end_time}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -130,7 +134,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.onlinetime} Min</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -140,7 +146,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.upload}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -151,7 +159,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.download}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -162,7 +172,9 @@ const UsageHistory: React.FC = () => {
         return <>{row.total}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     }
 
@@ -315,6 +327,7 @@ const UsageHistory: React.FC = () => {
                 rowKey={record => record.start_time}
                 dataSource={data}
                 loading={isLoading || isFetching}
+                scroll={{ x: true }}
               />
             </Space>
           </Card>

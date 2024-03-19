@@ -93,7 +93,9 @@ const PaymentHistory: React.FC = () => {
         const date = new Date(trx_date);
         return <>{format(date, "yyyy-MM-dd pp")}</>;
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -106,13 +108,17 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
       title: "Trx By",
       dataIndex: "trx_by",
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -126,7 +132,9 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -140,7 +148,9 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -154,7 +164,9 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -168,7 +180,9 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "20%",
+      // width: "20%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
 
@@ -182,7 +196,9 @@ const PaymentHistory: React.FC = () => {
           </>
         );
       },
-      width: "30%",
+      // width: "30%",
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     }
   ];
@@ -324,6 +340,7 @@ const PaymentHistory: React.FC = () => {
                 rowKey={record => record.trx_date + record.transaction_id}
                 dataSource={data}
                 loading={isLoading || isFetching}
+                scroll={{ x: true }}
               />
             </Space>
           </Card>

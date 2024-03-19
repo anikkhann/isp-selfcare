@@ -72,6 +72,8 @@ const HomePaymentHistory = () => {
         return <>{format(date, "yyyy-MM-dd pp")}</>;
       },
       /* width: "20%", */
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -81,7 +83,9 @@ const HomePaymentHistory = () => {
         return <>{row.amount}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -91,7 +95,9 @@ const HomePaymentHistory = () => {
         return <>{row.trx_by}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     },
     {
@@ -101,7 +107,9 @@ const HomePaymentHistory = () => {
         return <>{row.transaction_id}</>;
       },
       sorter: false,
-      width: 400,
+      // width: 400,
+      ellipsis: true,
+      width: "auto",
       align: "center" as AlignType
     }
   ];
@@ -165,6 +173,7 @@ const HomePaymentHistory = () => {
                 // pagination={tableParams.pagination}
                 loading={isLoading || isFetching}
                 // onChange={handleTableChange}
+                scroll={{ x: true }}
               />
             </Card>
           </Space>

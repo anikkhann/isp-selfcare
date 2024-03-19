@@ -36,7 +36,7 @@ const UsageCard = () => {
       return data;
     },
     onSuccess(data: any) {
-      if (data && data.body.length > 0) {
+      if (data && data.body?.length > 0) {
         SetItem(data.body[0]);
       }
     },

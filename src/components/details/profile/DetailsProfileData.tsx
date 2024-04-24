@@ -9,6 +9,7 @@ import { Card, Col, Row } from "antd";
 import axios from "axios";
 import { format } from "date-fns";
 import Cookies from "js-cookie";
+import ProfileDetailsForm from "@/components/forms/profileDetails/ProfileDetailsForm";
 
 interface PropData {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +21,7 @@ export interface UsageData {
 }
 // , customer
 const DetailsProfileData = ({ item, customer }: PropData) => {
-  // console.log("item", item);
+  console.log("item", item);
   // const data = JSON.stringify(item);
 
   const [usageData, SetUsageData] = useState<UsageData | null>(null);
@@ -100,11 +101,33 @@ const DetailsProfileData = ({ item, customer }: PropData) => {
         <Col
           xs={24}
           sm={24}
+          md={24}
+          lg={24}
+          xl={24}
+          xxl={24}
+          className="gutter-row mb-4"
+        >
+          <Card
+            hoverable
+            bordered={false}
+            style={{
+              textAlign: "start",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              border: "1px solid #F15F22"
+            }}
+          >
+            <ProfileDetailsForm id={item?.userId} customer={customer} />
+          </Card>
+        </Col>
+        <Col
+          xs={24}
+          sm={24}
           md={12}
           lg={12}
           xl={12}
           xxl={12}
-          className="gutter-row"
+          className="gutter-row "
         >
           <Card
             hoverable

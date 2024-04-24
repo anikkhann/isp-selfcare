@@ -778,7 +778,9 @@ export interface InsertedBy {
 export interface CustomerData {
   createdOn: number;
   updatedOn: number;
-
+  nidFront: string;
+  nidBack: string;
+  profilePicture: string;
   id: string;
   customerId: string;
   name: string;

@@ -28,7 +28,7 @@ import type { UploadFile, UploadFileStatus } from "antd/es/upload/interface";
 
 const steps = [
   {
-    title: "Complain",
+    title: "Complaint",
     content: "complain"
   },
   {
@@ -288,7 +288,7 @@ const CreateTicketForm = () => {
                   >
                     {/* complainTypeId */}
                     <Form.Item
-                      label="Complain Type"
+                      label="Complaint Type"
                       name="complainTypeId"
                       style={{
                         marginBottom: 0,
@@ -297,7 +297,7 @@ const CreateTicketForm = () => {
                       rules={[
                         {
                           required: true,
-                          message: "Please select Complain Type!"
+                          message: "Please select Complaint Type!"
                         }
                       ]}
                     >
@@ -305,7 +305,7 @@ const CreateTicketForm = () => {
                         <Select
                           allowClear
                           style={{ width: "100%", textAlign: "start" }}
-                          placeholder="Please select Complain Type"
+                          placeholder="Please select Complaint Type"
                           onChange={handleComplainTypeChange}
                           options={complainTypes}
                           value={selectedComplainType}
@@ -335,14 +335,14 @@ const CreateTicketForm = () => {
                       rules={[
                         {
                           required: true,
-                          message: "Please input your complain Details!"
+                          message: "Please input your complaint Details!"
                         }
                       ]}
                     >
                       <Input.TextArea
                         rows={4}
                         cols={16}
-                        placeholder="Complain Details"
+                        placeholder="Complaint Details"
                         className={`form-control`}
                         name="complainDetails"
                         style={{ padding: "6px" }}
@@ -438,6 +438,18 @@ const CreateTicketForm = () => {
               </Col>
             </Row>
           </Form>
+          <div className="bg-gray-400 flex flex-col gap-1 ">
+            <div className="rounded-sm w-full grid grid-cols-12 bg-white shadow p-3 gap-2 items-center hover:shadow-lg transition delay-150 duration-300 ease-in-out hover:scale-105 transform">
+              <div className="col-span-11 xl:-ml-5">
+                <p className="text-blue-600 font-semibold text-left text-lg">
+                  <span className="text-danger font-bold">
+                    * Attachment must be either JPG or PNG format and should not
+                    exceed 10 MB in size.
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </>
       {/* )} */}

@@ -121,7 +121,7 @@ const ChangePasswordForm = () => {
               >
                 <Form.Item
                   name="oldPassword"
-                  label="Old Password"
+                  label="Current Password"
                   style={{
                     marginBottom: 0,
                     fontWeight: "bold"
@@ -129,7 +129,7 @@ const ChangePasswordForm = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please input your Old Password!"
+                      message: "Please input your Current Password!"
                     },
                     {
                       min: 6,
@@ -144,7 +144,7 @@ const ChangePasswordForm = () => {
                   hasFeedback
                 >
                   <Input.Password
-                    placeholder="Old Password"
+                    placeholder="Current Password"
                     style={{ padding: "6px" }}
                   />
                 </Form.Item>
@@ -199,7 +199,7 @@ const ChangePasswordForm = () => {
               >
                 <Form.Item
                   name="confirmPassword"
-                  label="Confirm Password"
+                  label="Confirm New Password"
                   style={{
                     marginBottom: 0,
                     fontWeight: "bold"
@@ -210,7 +210,7 @@ const ChangePasswordForm = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please confirm your password!"
+                      message: "Please confirm your new password!"
                     },
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
@@ -232,7 +232,7 @@ const ChangePasswordForm = () => {
                   ]}
                 >
                   <Input.Password
-                    placeholder="Confirm Password"
+                    placeholder="Confirm New Password"
                     style={{ padding: "6px" }}
                   />
                 </Form.Item>

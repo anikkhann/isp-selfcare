@@ -91,7 +91,7 @@ const HomeTicketHistory = () => {
       align: "center" as AlignType
     },
     {
-      title: "Complain",
+      title: "Complaint",
       dataIndex: "complainType",
       render: (_, row) => {
         return <>{row.complainType.name}</>;

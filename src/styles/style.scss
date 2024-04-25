@@ -80,6 +80,27 @@ img {
   white-space: normal !important;
   text-overflow: clip !important;
 }
+@media (max-width: 480px) {
+  .ant-picker-panels {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+  }
+
+  .ant-picker-dropdown {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+@media (max-width: 680px) {
+  .ant-picker-panels {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+  }
+}
 @media only screen and (max-width: 767px) {
   .mobileVisible {
     display: block;
@@ -112,6 +133,7 @@ img {
   padding: 0 20px;
   margin: 0 auto;
 }
+
 
 @media screen and (min-width: 768px) {
   .container {

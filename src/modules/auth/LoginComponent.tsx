@@ -132,7 +132,7 @@ const LoginComponent = () => {
               }
             ]}
           >
-            <Input placeholder="Username" />
+            <Input placeholder="Username" maxLength={32} />
           </Form.Item>
 
           <Form.Item
@@ -151,7 +151,7 @@ const LoginComponent = () => {
               }
             ]}
           >
-            <Input.Password placeholder="Password" />
+            <Input.Password placeholder="Password" maxLength={32} />
           </Form.Item>
 
           <div className="form-btn-field">

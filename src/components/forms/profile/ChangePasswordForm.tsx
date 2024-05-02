@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // ** React Imports
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import Swal from "sweetalert2";
@@ -29,61 +29,65 @@ const ChangePasswordForm = () => {
 
   const token = Cookies.get("token");
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-  const onSubmit = (data: FormData) => {
+  useEffect(() => {
+    setLoading(loading);
+  }, [loading]);
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
+    setTimeout(async () => {
+      const { oldPassword, newPassword, confirmPassword } = data;
 
-    const { oldPassword, newPassword, confirmPassword } = data;
+      const formData = {
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmPassword: confirmPassword
+      };
 
-    const formData = {
-      oldPassword: oldPassword,
-      newPassword: newPassword,
-      confirmPassword: confirmPassword
-    };
+      try {
+        await axios
+          .post("/api/customer/change-profile-password", formData)
+          .then(res => {
+            const { data } = res;
 
-    try {
-      axios
-        .post("/api/customer/change-profile-password", formData)
-        .then(res => {
-          const { data } = res;
+            if (data.status != 200) {
+              setShowError(true);
+              setErrorMessages(data.message);
+              MySwal.fire({
+                title: "Error",
+                text: data.message || "Something went wrong",
+                icon: "error"
+              });
+            }
 
-          if (data.status != 200) {
-            setShowError(true);
-            setErrorMessages(data.message);
+            if (data.status == 200) {
+              MySwal.fire({
+                title: "Success",
+                text: data.message || "Updated successfully",
+                icon: "success"
+              }).then(() => {
+                // router.reload();
+                router.push("/");
+              });
+            }
+          })
+          .catch(err => {
+            // console.log(err);
             MySwal.fire({
               title: "Error",
-              text: data.message || "Something went wrong",
+              text: err.response.data.message || "Something went wrong",
               icon: "error"
             });
-          }
-
-          if (data.status == 200) {
-            MySwal.fire({
-              title: "Success",
-              text: data.message || "Updated successfully",
-              icon: "success"
-            }).then(() => {
-              router.reload();
-            });
-          }
-        })
-        .catch(err => {
-          // console.log(err);
-          MySwal.fire({
-            title: "Error",
-            text: err.response.data.message || "Something went wrong",
-            icon: "error"
+            setShowError(true);
+            setErrorMessages(err.response.data.message);
           });
-          setShowError(true);
-          setErrorMessages(err.response.data.message);
-        });
-    } catch (err: any) {
-      // console.log(err)
-      setShowError(true);
-      setErrorMessages(err.message);
-    } finally {
-      setLoading(false);
-    }
+      } catch (err: any) {
+        // console.log(err)
+        setShowError(true);
+        setErrorMessages(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   return (
@@ -146,6 +150,7 @@ const ChangePasswordForm = () => {
                   <Input.Password
                     placeholder="Current Password"
                     style={{ padding: "6px" }}
+                    maxLength={32}
                   />
                 </Form.Item>
               </Col>
@@ -184,6 +189,7 @@ const ChangePasswordForm = () => {
                   <Input.Password
                     placeholder="New Password"
                     style={{ padding: "6px" }}
+                    maxLength={32}
                   />
                 </Form.Item>
               </Col>
@@ -234,6 +240,7 @@ const ChangePasswordForm = () => {
                   <Input.Password
                     placeholder="Confirm New Password"
                     style={{ padding: "6px" }}
+                    maxLength={32}
                   />
                 </Form.Item>
               </Col>
@@ -252,15 +259,27 @@ const ChangePasswordForm = () => {
                       color: "#FFFFFF",
                       fontWeight: "bold"
                     }}
-                    loading={loading}
                     disabled={loading}
                   >
-                    Submit
+                    {loading ? "Submitting..." : "Submit"}
                   </Button>
                 </Form.Item>
               </Col>
             </Row>
           </Form>
+
+          <div className="bg-gray-400 flex flex-col gap-1 ">
+            <div className="rounded-sm w-full grid grid-cols-12 bg-white shadow p-6 gap-2 items-center hover:shadow-lg transition delay-150 duration-300 ease-in-out hover:scale-105 transform">
+              <div className="col-span-11 xl:-ml-5">
+                <p className="text-blue-600 font-semibold text-left text-lg">
+                  <span className="text-danger">
+                    * Password should be at least 6 digit and Only letters,
+                    numbers, underscores and hyphens allowed (0-9,a-z,A-Z,_,-)
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </>

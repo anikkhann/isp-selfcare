@@ -1,6 +1,10 @@
+// import AppLoader from "@/lib/AppLoader";
 import { Avatar, Button, Drawer, Dropdown, Layout, Menu, Space } from "antd";
 import React, { useState } from "react";
 import type { MenuProps } from "antd";
+// import { useQuery } from "@tanstack/react-query";
+// import Cookies from "js-cookie";
+// import axios from "axios";
 import {
   ControlOutlined,
   UserOutlined,
@@ -15,7 +19,10 @@ import styled from "styled-components";
 // import Swal from "sweetalert2";
 // import withReactContent from "sweetalert2-react-content";
 import mainRoutes from "@/core/routes/mainRoutes";
-
+import { CustomerData } from "@/interfaces/CustomerData";
+interface PropData {
+  item: CustomerData | null;
+}
 const TriggerBlock = styled.div`
   display: inline-block;
   height: 100%;
@@ -84,16 +91,21 @@ const items: MenuProps["items"] = [
   }
 ];
 
-function AppHeader() {
+const AppHeader = ({ item }: PropData) => {
+  console.log("item", item);
   const { Header } = Layout;
 
   const user = useAppSelector(state => state.auth.user);
+  console.log("user", user);
 
+  // const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
 
   const [openMobileMenu, setOpenMobileMenu] = useState(false);
-
+  // const [attachmentUrlFront, setAttachmentUrlFront] = useState("");
   // const MySwal = withReactContent(Swal);
+
+  // const [item, SetItem] = useState<CustomerData | null>(null);
 
   const showDrawer = () => {
     setOpenMobileMenu(true);
@@ -130,6 +142,18 @@ function AppHeader() {
   const handleOpenChange = (flag: boolean) => {
     setOpen(flag);
   };
+
+  const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+  // useEffect(() => {
+  //   if (customer) {
+  //     const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+  //     setAttachmentUrlFront(
+  //       `${API_URL}/public/downloadFile/${customer?.customer}/selfcare`
+  //     );
+  //     // setAttachmentNameFront(customer?.nidFront);
+  //   }
+  // }, [customer]);
 
   return (
     <>
@@ -264,17 +288,37 @@ function AppHeader() {
             <HeaderBlock className="">
               <a onClick={e => e.preventDefault()}>
                 <Space className="rounded-full">
-                  <Avatar
-                    size={40}
-                    style={{
-                      backgroundColor: "#f56a00",
-                      verticalAlign: "middle",
-                      fontSize: "24px"
-                    }}
-                  >
-                    {/* {user?.name?.charAt(0).toUpperCase()} */}
-                    {user?.name?.charAt(0).toUpperCase()}
-                  </Avatar>
+                  {item?.profilePicture ? (
+                    <div className=" my-5 inline-flex justify-center items-center h-10 w-10  border-2 border-danger rounded-full shadow-inner overflow-hidden">
+                      <img
+                        style={{
+                          width: "3rem",
+                          height: "3rem",
+                          objectFit: "cover",
+                          objectPosition: "center"
+                        }}
+                        src={`${API_URL}/public/downloadFile/${item?.profilePicture}/selfcare`}
+                      />
+                    </div>
+                  ) : (
+                    // <img
+                    //   // alt={item.attachment}
+                    //   style={{  width: "100px",
+                    //  }}
+                    //   src={`${API_URL}/public/downloadFile/${item?.profilePicture}/selfcare`}
+                    // />
+                    <Avatar
+                      size={40}
+                      style={{
+                        backgroundColor: "#f56a00",
+                        verticalAlign: "middle",
+                        fontSize: "24px"
+                      }}
+                    >
+                      user?.name?.charAt(0).toUpperCase()
+                    </Avatar>
+                  )}
+
                   {/* <StyledCrUserInfoAvatar src="/assets/images/avatar/profile.png" /> */}
                 </Space>
               </a>
@@ -284,6 +328,6 @@ function AppHeader() {
       </Header>
     </>
   );
-}
+};
 
 export default AppHeader;

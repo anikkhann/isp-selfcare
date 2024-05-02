@@ -44,7 +44,6 @@ const LoginComponent = () => {
         .then(async response => {
           const { data } = response;
 
-          console.log(data);
           if (data.success === false) {
             setShowError(true);
             setErrorMessage(data.message);

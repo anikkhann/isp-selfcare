@@ -21,11 +21,11 @@ const ProfileDetailsForm = ({ id, customer }: PropData) => {
   const [showError, setShowError] = useState(false);
   const [errorMessages, setErrorMessages] = useState(null);
   const [frontImage, setFrontImage] = useState<File | null>(null);
-  console.log("frontImage", frontImage);
+
   const [backImage, setBackImage] = useState<File | null>(null);
-  console.log("backImage", backImage);
+
   const [profileImage, setProfileImage] = useState<File | null>(null);
-  console.log("profileImage", profileImage);
+
   // const [previewOpen, setPreviewOpen] = useState(false);
   const [previewOpenFront, setPreviewOpenFront] = useState(false);
   const [previewOpenBack, setPreviewOpenBack] = useState(false);
@@ -179,7 +179,6 @@ const ProfileDetailsForm = ({ id, customer }: PropData) => {
         //   // },
         // };
 
-        console.log("FormData:", formData);
         await axios
           .post(`/api/customer/document-upload`, formData, {
             headers: {

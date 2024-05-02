@@ -126,7 +126,6 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useAppDispatch();
   const [item, SetItem] = useState<CustomerData | null>(null);
-  console.log(item);
   const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

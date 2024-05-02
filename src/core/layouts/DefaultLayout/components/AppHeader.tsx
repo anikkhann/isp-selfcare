@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import LogoTitle from "./LogoTitle";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import styled from "styled-components";
 // import Swal from "sweetalert2";
 // import withReactContent from "sweetalert2-react-content";
@@ -92,11 +92,10 @@ const items: MenuProps["items"] = [
 ];
 
 const AppHeader = ({ item }: PropData) => {
-  console.log("item", item);
   const { Header } = Layout;
 
-  const user = useAppSelector(state => state.auth.user);
-  console.log("user", user);
+  // const user = useAppSelector(state => state.auth.user);
+  // console.log("user", user);
 
   // const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const [open, setOpen] = useState(false);

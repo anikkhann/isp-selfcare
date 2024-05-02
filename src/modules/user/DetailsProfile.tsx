@@ -16,7 +16,7 @@ const DetailsProfile = () => {
   const authUser = useAppSelector(state => state.auth.user);
 
   const [item, SetItem] = useState<CustomerData | null>(null);
-  console.log(item);
+
   const fetchData = async () => {
     const token = Cookies.get("token");
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;

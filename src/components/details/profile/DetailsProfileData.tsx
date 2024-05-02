@@ -21,7 +21,6 @@ export interface UsageData {
 }
 // , customer
 const DetailsProfileData = ({ item, customer }: PropData) => {
-  console.log("item", item);
   // const data = JSON.stringify(item);
 
   const [usageData, SetUsageData] = useState<UsageData | null>(null);

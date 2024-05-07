@@ -17,15 +17,15 @@ const mainRoutes: MenuProps["items"] = [
     key: "/ticket",
     label: "Support Ticket"
   },
-  {
-    key: "/troubleshoot",
-    label: "Troubleshoot"
-  },
+  // {
+  //   key: "/troubleshoot",
+  //   label: "Troubleshoot"
+  // },
 
-  {
-    key: "/survey",
-    label: "Survey"
-  },
+  // {
+  //   key: "/survey",
+  //   label: "Survey"
+  // },
 
   {
     key: "/user/profile",

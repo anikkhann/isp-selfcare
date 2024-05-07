@@ -180,6 +180,10 @@ const ChangePasswordForm = () => {
                       message: "Please confirm your New Password!"
                     },
                     {
+                      min: 6,
+                      message: "Password must be minimum 6 characters."
+                    },
+                    {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
                       message:
                         "Only letters, numbers, underscores and hyphens allowed"
@@ -217,6 +221,10 @@ const ChangePasswordForm = () => {
                     {
                       required: true,
                       message: "Please confirm your new password!"
+                    },
+                    {
+                      min: 6,
+                      message: "Password must be minimum 6 characters."
                     },
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),

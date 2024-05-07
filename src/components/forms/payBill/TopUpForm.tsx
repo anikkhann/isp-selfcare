@@ -8,7 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import { Alert, Button, Form, Row, Col, Input, Space, Select } from "antd";
 import axios from "axios";
 import Cookies from "js-cookie";
-import AppImageLoader from "@/components/loader/AppImageLoader";
+// import AppImageLoader from "@/components/loader/AppImageLoader";
 
 interface FormData {
   amount: string;
@@ -89,185 +89,225 @@ const TopUpForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (data: FormData) => {
+  useEffect(() => {
+    setLoading(loading);
+  }, [loading]);
+
+  const onSubmit = async (data: FormData) => {
     setLoading(true);
 
-    const { amount } = data;
+    setTimeout(async () => {
+      const { amount } = data;
 
-    const formData = {
-      amount: amount,
-      paymentGatewayId: selectedPaymentGateway
-    };
+      const formData = {
+        amount: amount,
+        paymentGatewayId: selectedPaymentGateway
+      };
 
-    try {
-      axios
-        .post("/api/customer-topup/selfcare-topup", formData)
-        .then(res => {
-          const { data } = res;
+      try {
+        await axios
+          .post("/api/customer-topup/selfcare-topup", formData)
+          .then(res => {
+            const { data } = res;
 
-          if (data.status != 200) {
-            setShowError(true);
-            setErrorMessages(data.message);
+            if (data.status != 200) {
+              setShowError(true);
+              setErrorMessages(data.message);
+              MySwal.fire({
+                title: "Error",
+                text: data.message || "Something went wrong",
+                icon: "error"
+              });
+            }
+
+            // if (data.status == 200) {
+            //   MySwal.fire({
+            //     title: "Are you sure?",
+            //     text: "You won't be able to revert this!",
+            //     icon: "warning",
+            //     showCancelButton: true,
+            //     confirmButtonColor: "#570DF8",
+            //     cancelButtonColor: "#EB0808",
+            //     confirmButtonText: "Yes, Proceed!"
+            //     // title: "Success",
+            //     // text: data.message || "Updated successfully",
+            //     // icon: "success"
+            //   }).then(() => {
+            //     form.resetFields();
+            //     setSelectedPaymentGateway(null);
+            //     if (data.body) {
+            //       const url = data.body;
+            //       // window.open(url, "_blank");
+            //        // Redirect to the URL
+            //         window.location.href = url;
+            //     }
+            //   });
+            // }
+            if (data.status == 200) {
+              MySwal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#570DF8",
+                cancelButtonColor: "#EB0808",
+                confirmButtonText: "Yes, Proceed!",
+                cancelButtonText: "Cancel"
+              }).then(result => {
+                if (result.isConfirmed) {
+                  form.resetFields();
+                  setSelectedPaymentGateway(null);
+                  if (data.body) {
+                    const url = data.body;
+                    // Redirect to the URL
+                    window.location.href = url;
+                  }
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                  // Redirect to '/' if cancel button is clicked
+                  window.location.href = "/";
+                }
+              });
+            }
+          })
+          .catch(err => {
+            // console.log(err);
             MySwal.fire({
               title: "Error",
-              text: data.message || "Something went wrong",
+              text: err.response.data.message || "Something went wrong",
               icon: "error"
             });
-          }
-
-          if (data.status == 200) {
-            MySwal.fire({
-              title: "Success",
-              text: data.message || "Updated successfully",
-              icon: "success"
-            }).then(() => {
-              form.resetFields();
-              setSelectedPaymentGateway(null);
-              if (data.body.expected_url) {
-                const url = data.body.expected_url;
-                window.open(url, "_blank");
-              }
-            });
-          }
-        })
-        .catch(err => {
-          // console.log(err);
-          MySwal.fire({
-            title: "Error",
-            text: err.response.data.message || "Something went wrong",
-            icon: "error"
+            setShowError(true);
+            setErrorMessages(err.response.data.message);
           });
-          setShowError(true);
-          setErrorMessages(err.response.data.message);
-        });
-    } catch (err: any) {
-      // console.log(err)
-      setShowError(true);
-      setErrorMessages(err.message);
-    } finally {
-      setLoading(false);
-    }
+      } catch (err: any) {
+        // console.log(err)
+        setShowError(true);
+        setErrorMessages(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }, 1000);
   };
 
   return (
     <>
-      {loading && <AppImageLoader />}
+      {/* {loading && <AppImageLoader />} */}
 
       {showError && <Alert message={errorMessages} type="error" showIcon />}
-
-      {!loading && (
-        <div className="mt-8 mx-5">
-          <Form
-            layout="vertical"
-            autoComplete="off"
-            onFinish={onSubmit}
-            form={form}
-            initialValues={{
-              amount: ""
-            }}
-            style={{ maxWidth: "100%" }}
-            name="wrap"
-            colon={false}
-            scrollToFirstError
-          >
-            <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
-              <Col
-                xs={24}
-                sm={24}
-                md={24}
-                lg={24}
-                xl={24}
-                xxl={24}
-                className="gutter-row"
+      {/* 
+      {!loading && ( */}
+      <div className="mt-8 mx-5">
+        <Form
+          layout="vertical"
+          autoComplete="off"
+          onFinish={onSubmit}
+          form={form}
+          initialValues={{
+            amount: ""
+          }}
+          style={{ maxWidth: "100%" }}
+          name="wrap"
+          colon={false}
+          scrollToFirstError
+        >
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} justify="center">
+            <Col
+              xs={24}
+              sm={24}
+              md={24}
+              lg={24}
+              xl={24}
+              xxl={24}
+              className="gutter-row"
+            >
+              <Form.Item
+                name="amount"
+                label="Amount"
+                style={{
+                  marginBottom: 0,
+                  fontWeight: "bold"
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your Amount!"
+                  }
+                ]}
+                hasFeedback
               >
-                <Form.Item
-                  name="amount"
-                  label="Amount"
+                <Input placeholder="Amount" style={{ padding: "6px" }} />
+              </Form.Item>
+            </Col>
+
+            <Col
+              xs={24}
+              sm={24}
+              md={24}
+              lg={24}
+              xl={24}
+              xxl={24}
+              className="gutter-row"
+            >
+              <Form.Item
+                label="Payment Gateway"
+                name="paymentGatewayId"
+                style={{
+                  marginBottom: 0,
+                  fontWeight: "bold"
+                }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select!"
+                  }
+                ]}
+              >
+                <Space style={{ width: "100%" }} direction="vertical">
+                  <Select
+                    allowClear
+                    style={{ width: "100%", textAlign: "start" }}
+                    placeholder="Please select"
+                    onChange={handlePaymentGatewayChange}
+                    options={paymentGateways}
+                    value={selectedPaymentGateway}
+                  />
+                </Space>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row justify="center" gutter={[16, 16]} className="mt-5">
+            <Col
+              xs={12}
+              sm={12}
+              md={12}
+              lg={12}
+              xl={12}
+              xxl={12}
+              className="gutter-row"
+            >
+              <Form.Item>
+                {/* wrapperCol={{ ...layout.wrapperCol, offset: 4 }} */}
+                <Button
+                  // type="primary"
+                  htmlType="submit"
+                  shape="round"
                   style={{
-                    marginBottom: 0,
+                    backgroundColor: "#F15F22",
+                    color: "#FFFFFF",
                     fontWeight: "bold"
                   }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Amount!"
-                    }
-                  ]}
-                  hasFeedback
+                  loading={loading}
+                  disabled={loading}
                 >
-                  <Input placeholder="Amount" style={{ padding: "6px" }} />
-                </Form.Item>
-              </Col>
-
-              <Col
-                xs={24}
-                sm={24}
-                md={24}
-                lg={24}
-                xl={24}
-                xxl={24}
-                className="gutter-row"
-              >
-                <Form.Item
-                  label="Payment Gateway"
-                  name="paymentGatewayId"
-                  style={{
-                    marginBottom: 0,
-                    fontWeight: "bold"
-                  }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please select!"
-                    }
-                  ]}
-                >
-                  <Space style={{ width: "100%" }} direction="vertical">
-                    <Select
-                      allowClear
-                      style={{ width: "100%", textAlign: "start" }}
-                      placeholder="Please select"
-                      onChange={handlePaymentGatewayChange}
-                      options={paymentGateways}
-                      value={selectedPaymentGateway}
-                    />
-                  </Space>
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row justify="center" gutter={[16, 16]} className="mt-5">
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                lg={12}
-                xl={12}
-                xxl={12}
-                className="gutter-row"
-              >
-                <Form.Item>
-                  {/* wrapperCol={{ ...layout.wrapperCol, offset: 4 }} */}
-                  <Button
-                    // type="primary"
-                    htmlType="submit"
-                    shape="round"
-                    style={{
-                      backgroundColor: "#F15F22",
-                      color: "#FFFFFF",
-                      fontWeight: "bold"
-                    }}
-                    loading={loading}
-                    disabled={loading}
-                  >
-                    Top Up
-                  </Button>
-                </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-        </div>
-      )}
+                  {loading ? "Pay Now..." : "Pay Now"}
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
+        </Form>
+      </div>
+      {/* )} */}
     </>
   );
 };

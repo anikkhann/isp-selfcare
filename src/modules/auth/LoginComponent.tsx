@@ -108,8 +108,8 @@ const LoginComponent = () => {
           layout="vertical"
           initialValues={{
             remember: true,
-            email: "talib",
-            password: "123456"
+            email: "",
+            password: ""
           }}
           onFinish={signInUser}
           onFinishFailed={onFinishFailed}
@@ -131,7 +131,7 @@ const LoginComponent = () => {
               }
             ]}
           >
-            <Input placeholder="Username" maxLength={32} />
+            <Input placeholder="Enter Your Username" maxLength={32} />
           </Form.Item>
 
           <Form.Item
@@ -150,7 +150,7 @@ const LoginComponent = () => {
               }
             ]}
           >
-            <Input.Password placeholder="Password" maxLength={32} />
+            <Input.Password placeholder="Enter Your Password" maxLength={32} />
           </Form.Item>
 
           <div className="form-btn-field">

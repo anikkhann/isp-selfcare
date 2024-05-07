@@ -15,6 +15,7 @@ const Success = () => {
           clip-rule="evenodd"
         />
       </svg>
+
       <h1 className="text-2xl font-bold text-secondary mb-4">
         Payment Successful
       </h1>
@@ -22,7 +23,7 @@ const Success = () => {
         onClick={() => {
           window.location.href = "/";
         }}
-        className="bg-secondary cursor-pointer hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="bg-primary cursor-pointer text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
         Go Dashboard
       </button>

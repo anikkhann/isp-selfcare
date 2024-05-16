@@ -135,10 +135,10 @@ const ChangePasswordForm = () => {
                       required: true,
                       message: "Please input your Current Password!"
                     },
-                    {
-                      min: 6,
-                      message: "Password must be minimum 6 characters."
-                    },
+                    // {
+                    //   min: 2,
+                    //   message: "Password must be minimum 2 characters."
+                    // },
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
                       message:
@@ -281,8 +281,9 @@ const ChangePasswordForm = () => {
               <div className="col-span-11 xl:-ml-5">
                 <p className="text-blue-600 font-semibold text-left text-lg">
                   <span className="text-danger">
-                    * Password should be at least 6 digit and Only letters,
-                    numbers, underscores and hyphens allowed (0-9,a-z,A-Z,_,-)
+                    * Password should be at least 6 characters and Only letters,
+                    numbers, underscores, @ and hyphens allowed
+                    (0-9,a-z,A-Z,_,-, @)
                   </span>
                 </p>
               </div>

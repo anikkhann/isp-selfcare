@@ -142,7 +142,7 @@ const ChangePasswordForm = () => {
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
                       message:
-                        "Only letters, numbers, underscores and hyphens allowed"
+                        "Only letters, numbers, underscores, @ and hyphens allowed"
                     }
                   ]}
                   hasFeedback
@@ -186,7 +186,7 @@ const ChangePasswordForm = () => {
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
                       message:
-                        "Only letters, numbers, underscores and hyphens allowed"
+                        "Only letters, numbers, underscores, @ and hyphens allowed"
                     }
                   ]}
                 >
@@ -229,7 +229,7 @@ const ChangePasswordForm = () => {
                     {
                       pattern: new RegExp(/^[A-Za-z0-9_\-@.]+$/),
                       message:
-                        "Only letters, numbers, underscores and hyphens allowed"
+                        "Only letters, numbers, underscores, @ and hyphens allowed"
                     },
                     ({ getFieldValue }) => ({
                       validator(_, value) {

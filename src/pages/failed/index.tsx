@@ -1,5 +1,5 @@
 import AppLoader from "@/lib/AppLoader";
-import UnSuccess from "@/modules/unsuccess/UnSuccess";
+import Failed from "@/modules/failed/Failed";
 
 import { useAppSelector } from "@/store/hooks";
 
@@ -9,7 +9,7 @@ const Index = () => {
   return (
     <>
       {auth.isLoading && <AppLoader />}
-      {!auth.isLoading && auth.isLoggedIn && <UnSuccess />}
+      {!auth.isLoading && auth.isLoggedIn && <Failed />}
     </>
   );
 };

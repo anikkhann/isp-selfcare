@@ -1,6 +1,6 @@
 import React from "react";
 
-const UnSuccess = () => {
+const Failed = () => {
   return (
     <div className="max-w-md mx-auto bg-white p-8 rounded shadow-lg text-center relative">
       <svg
@@ -32,4 +32,4 @@ const UnSuccess = () => {
   );
 };
 
-export default UnSuccess;
+export default Failed;
